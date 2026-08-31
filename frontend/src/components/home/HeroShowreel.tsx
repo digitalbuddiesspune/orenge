@@ -25,36 +25,49 @@ export const HeroShowreel: React.FC = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen pt-32 pb-20 flex flex-col justify-center overflow-hidden bg-radial-gradient">
-      
-      {/* Background Tech Grids & Ambient Glows */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-[#FF5B14]/12 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-[#F59E0B]/10 rounded-full blur-[110px] pointer-events-none" />
+    <section className="relative overflow-x-hidden bg-[#0B0D13]">
+      {/* Native 1672×941 — never crop, stretch, or enlarge past original size */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1672px]">
+        <img
+          src="/assets/heroBg.png"
+          alt=""
+          aria-hidden="true"
+          width={1672}
+          height={941}
+          className="block w-full h-auto pointer-events-none select-none"
+        />
+        <div className="absolute inset-0 bg-[#0B0D13]/35 pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(8,9,14,0.82)_0%,rgba(8,9,14,0.5)_38%,rgba(8,9,14,0.18)_68%,transparent_82%)] pointer-events-none" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-32 pb-20 min-h-[941px]">
         
         {/* Top Announcement Pill */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs sm:text-sm text-gray-300">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/65 border border-white/15 backdrop-blur-md text-xs sm:text-sm text-white shadow-[0_8px_30px_rgba(0,0,0,0.55)]">
             <span className="flex h-2 w-2 relative">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5B14] opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF5B14]" />
             </span>
-            <span className="font-mono text-gray-400">B2B Game Studio:</span>
+            <span className="font-mono text-white/70">B2B Game Studio:</span>
             <span className="text-white font-medium">Custom Real-Time Multiplayer, Card Engines &amp; Casino Tech</span>
             <ChevronRight className="w-3.5 h-3.5 text-[#FF782D]" />
           </div>
         </div>
 
         {/* Main Headline */}
-        <div className="text-center max-w-4xl mx-auto mb-8">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-white leading-[1.08]">
+        <div className="relative text-center max-w-4xl mx-auto mb-8">
+          <div
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[135%] h-[140%] bg-[radial-gradient(ellipse_at_center,rgba(8,9,14,0.9)_0%,rgba(8,9,14,0.62)_42%,transparent_72%)] pointer-events-none"
+          />
+          <div className="relative">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-white leading-[1.08] drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
             Build Games Your Platform <br className="hidden sm:inline" />
             <span className="text-gradient-orange">Can Own.</span>
           </h1>
           
-          <p className="mt-6 text-lg sm:text-xl text-gray-300 font-normal leading-relaxed max-w-3xl mx-auto">
+          <p className="mt-6 text-lg sm:text-xl text-white font-medium leading-relaxed max-w-3xl mx-auto drop-shadow-[0_2px_16px_rgba(0,0,0,0.95)]">
             Custom game development for gaming platforms, publishers, and businesses. 
             From concept and 3D UI/UX to low-latency real-time servers, wallet APIs, and cloud scaling — 
             we build games that drive player retention.
@@ -72,16 +85,17 @@ export const HeroShowreel: React.FC = () => {
 
             <button
               onClick={() => navigate('games')}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-white/5 border border-white/10 text-white font-semibold text-base hover:bg-white/10 transition cursor-pointer flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-black/55 border border-white/25 text-white font-semibold text-base hover:bg-black/70 transition cursor-pointer flex items-center justify-center gap-2 backdrop-blur-sm"
             >
               <Gamepad2 className="w-5 h-5 text-[#FF782D]" />
               <span>Explore Game Suite</span>
             </button>
           </div>
 
-          <p className="mt-4 text-xs font-mono text-gray-400">
+          <p className="mt-5 text-xs sm:text-sm font-medium text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)]">
             ✓ 100% Source Code Ownership &nbsp;•&nbsp; ✓ Sub-40ms WebSocket Sync &nbsp;•&nbsp; ✓ Certified RNG &amp; Provable Fairness
           </p>
+          </div>
         </div>
 
         {/* Hero Interactive Showreel with REAL 3D Game Graphics */}
