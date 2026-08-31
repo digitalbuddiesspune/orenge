@@ -4,7 +4,7 @@ export const initialGames: Game[] = [
   {
     id: 'game-ludo-3d',
     slug: 'ludo',
-    title: 'Multiplayer 3D Ludo Engine',
+    title: 'Ludo 3D',
     tagline: 'Sub-45ms real-time 4-player Ludo with 3D dice physics, customizable tokens, private room lobbies & anti-fraud server state.',
     category: 'Board Games',
     thumbnail: '/assets/ludo_3d_gameplay.jpg',
@@ -56,7 +56,7 @@ export const initialGames: Game[] = [
   {
     id: 'game-poker-rummy-cards',
     slug: 'multiplayer-cards',
-    title: 'Multi-Table Card & Rummy Suite (Poker / Teen Patti Core)',
+    title: 'Cards & Rummy',
     tagline: 'Ultra-low-latency card room engine with cryptographic Fisher-Yates shuffle, multi-seat lobbies & certified RNG mathematics.',
     category: 'Card Games',
     thumbnail: '/assets/poker_table_gameplay.jpg',
@@ -107,7 +107,7 @@ export const initialGames: Game[] = [
   {
     id: 'game-live-roulette',
     slug: 'roulette-casino-engine',
-    title: 'European Live Roulette & Casino Wheel Engine',
+    title: 'Live Roulette',
     tagline: 'High-definition 3D physics roulette simulator with multi-tier betting tables, live dealer feeds, and instant round payouts.',
     category: 'Game Engines',
     thumbnail: '/assets/roulette_engine.jpg',
@@ -156,7 +156,7 @@ export const initialGames: Game[] = [
   {
     id: 'game-crash-arena',
     slug: 'crash-multiplier',
-    title: 'High-Concurrency Multiplier Crash Engine',
+    title: 'Crash Aviator',
     tagline: 'High-velocity multiplier curve simulator with instant sub-10ms cashout triggers and mass spectator broadcast.',
     category: 'Game Engines',
     thumbnail: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80',
@@ -204,7 +204,7 @@ export const initialGames: Game[] = [
   {
     id: 'game-strategy-dice',
     slug: 'strategy-dice-arena',
-    title: '3D Dice Battle & Casual Strategy Arena',
+    title: 'Dice Battle',
     tagline: 'Engaging turn-based casual strategy mechanics built for mobile retention and viral platform engagement.',
     category: 'Casual Games',
     thumbnail: 'https://images.unsplash.com/photo-1585504198199-20277593b94f?auto=format&fit=crop&w=800&q=80',
@@ -247,7 +247,7 @@ export const initialGames: Game[] = [
   {
     id: 'game-custom-engine',
     slug: 'proprietary-custom-game',
-    title: 'Custom Proprietary Game Concepts',
+    title: 'Custom Concepts',
     tagline: 'Bespoke game development tailored from napkin sketch to production-grade deployment on your platform.',
     category: 'Custom Games',
     thumbnail: '/assets/casino_studio_hero.jpg',

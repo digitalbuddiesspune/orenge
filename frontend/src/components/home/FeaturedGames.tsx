@@ -1,155 +1,213 @@
 import React from 'react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { useAppState } from '../../contexts/AppStateContext';
-import { 
-  ArrowRight, 
-  CheckCircle2, 
-  Zap 
-} from 'lucide-react';
+import type { Game } from '../../types';
+import { CardSuitPattern, GamingDecor, SuitStrip } from './GamingDecor';
+import { BgAccentImage, HOME_BG_IMAGES, SectionBgImage } from './SectionBgImage';
 
 export const FeaturedGames: React.FC = () => {
-  const { games, navigate } = useAppState();
+  const { games, navigate, openConsultationModal } = useAppState();
+  const featured = games.filter((g) => g.isFeatured);
+  const hero = featured[0];
+  const rest = featured.slice(1, 4);
 
-  const featuredList = games.filter((g) => g.isFeatured).slice(0, 3);
+  if (!hero) return null;
 
   return (
-    <section className="py-24 bg-[#080A10] border-t border-white/5 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5B14]/10 border border-[#FF5B14]/30 text-[#FF782D] text-xs font-mono mb-3">
-            <span>TECHNICAL PORTFOLIO SHOWCASE</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white tracking-tight">
-            See What We've Built.
-          </h2>
-          <p className="text-gray-400 mt-3 text-base leading-relaxed">
-            Real games engineered for high-concurrency platforms. Examine our architecture, turn synchronization models, and back-office admin capabilities.
+    <section className="py-20 sm:py-28 border-t border-white/[0.06] relative z-10 overflow-hidden">
+      <SectionBgImage src={HOME_BG_IMAGES.roulette} opacity={0.12} overlay="bottom" />
+      <BgAccentImage
+        src={HOME_BG_IMAGES.ludo}
+        className="top-20 -left-20 w-96 h-56 hidden xl:block"
+        opacity={0.08}
+      />
+      <BgAccentImage
+        src={HOME_BG_IMAGES.poker}
+        className="bottom-10 -right-16 w-80 h-48 hidden xl:block rotate-[-4deg]"
+        opacity={0.09}
+      />
+      <CardSuitPattern className="opacity-[0.025]" />
+      <GamingDecor variant="cards" className="absolute inset-0" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_50%,rgba(255,91,20,0.06)_0%,transparent_55%)] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-emerald-950/20 to-transparent pointer-events-none" />
+
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 relative">
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
+          <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[#FF5B14] mb-3">
+            Portfolio
           </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight">
+            See what we've built.
+          </h2>
+          <p className="mt-4 text-[15px] text-neutral-400 leading-relaxed">
+            Real games, real engines — Ludo, Rummy, Roulette &amp; more — ready for your platform.
+          </p>
+          <div className="mt-5 opacity-50">
+            <SuitStrip />
+          </div>
         </div>
 
-        {/* Featured Game Deep Dive Cards */}
-        <div className="space-y-12">
-          {featuredList.map((game, index) => {
-            const isReversed = index % 2 === 1;
-            return (
-              <div
-                key={game.id}
-                className="rounded-3xl bg-[#101420] border border-white/10 p-6 sm:p-8 lg:p-10 shadow-2xl hover:border-[#FF5B14]/40 transition-all duration-300 relative overflow-hidden"
-              >
-                <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${isReversed ? 'lg:flex-row-reverse' : ''}`}>
-                  
-                  {/* Visual Preview / Thumbnail Banner */}
-                  <div className={`lg:col-span-5 ${isReversed ? 'lg:order-2' : ''}`}>
-                    <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl group">
-                      <img
-                        src={game.bannerImage}
-                        alt={game.title}
-                        className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D13] via-black/40 to-transparent" />
-                      
-                      {/* Floating Badges */}
-                      <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                        <span className="px-3 py-1 rounded-full bg-[#FF5B14] text-white text-xs font-mono font-bold shadow-lg">
-                          {game.category}
-                        </span>
-                        <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white text-xs font-mono">
-                          {game.status}
-                        </span>
-                      </div>
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 auto-rows-[220px] lg:auto-rows-[200px]">
+          <BentoTile
+            game={hero}
+            variant="hero"
+            className="md:col-span-2 lg:col-span-7 lg:row-span-2 min-h-[320px] lg:min-h-[416px]"
+            onView={() => navigate('game-detail', hero.slug)}
+            onDemo={() => openConsultationModal(`Demo: ${hero.title}`)}
+          />
 
-                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono text-gray-300">
-                        <span className="flex items-center gap-1.5 text-emerald-400">
-                          <Zap className="w-3.5 h-3.5" />
-                          <span>{game.syncLatency}</span>
-                        </span>
-                        <span>{game.maxPlayers}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Details and Technical Highlights */}
-                  <div className={`lg:col-span-7 space-y-6 ${isReversed ? 'lg:order-1' : ''}`}>
-                    <div>
-                      <h3 className="text-2xl sm:text-3xl font-display font-bold text-white tracking-tight">
-                        {game.title}
-                      </h3>
-                      <p className="text-sm font-mono text-[#FF782D] mt-1">
-                        {game.tagline}
-                      </p>
-                      <p className="text-sm text-gray-300 mt-3 leading-relaxed">
-                        {game.shortDescription}
-                      </p>
-                    </div>
-
-                    {/* Features Checklist */}
-                    <div>
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-3">
-                        Key Capabilities &amp; Architecture:
-                      </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                        {game.features.slice(0, 4).map((feat, fIdx) => (
-                          <div key={fIdx} className="flex items-start gap-2 text-xs text-gray-300">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                            <span>{feat}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Supported Platforms */}
-                    <div className="pt-2">
-                      <h4 className="text-xs font-mono uppercase tracking-wider text-gray-400 mb-2">
-                        Supported Platforms:
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {game.platforms.map((plat, pIdx) => (
-                          <span key={pIdx} className="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-xs font-mono text-gray-300">
-                            {plat}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* CTA Actions */}
-                    <div className="flex flex-wrap items-center gap-4 pt-4 border-t border-white/10">
-                      <button
-                        onClick={() => navigate('game-detail', game.slug)}
-                        className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white font-semibold text-xs sm:text-sm shadow-lg shadow-[#FF5B14]/25 hover:opacity-95 transition flex items-center gap-2 cursor-pointer"
-                      >
-                        <span>View Game Architecture</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </button>
-
-                      <button
-                        onClick={() => navigate('request-demo')}
-                        className="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-gray-200 font-medium text-xs sm:text-sm hover:bg-white/10 transition cursor-pointer"
-                      >
-                        Request Demo Access
-                      </button>
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>
-            );
-          })}
+          {rest.map((game, i) => (
+            <BentoTile
+              key={game.id}
+              game={game}
+              variant="compact"
+              className={`lg:col-span-5 ${i === 0 ? 'lg:row-start-1 lg:col-start-8' : 'lg:row-start-2 lg:col-start-8'}`}
+              onView={() => navigate('game-detail', game.slug)}
+              onDemo={() => openConsultationModal(`Demo: ${game.title}`)}
+            />
+          ))}
         </div>
 
-        {/* Bottom Link to Full Catalog */}
-        <div className="text-center mt-12">
+        {/* Bottom CTA bar */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 p-5 sm:px-8 rounded-2xl border border-white/[0.08] bg-white/[0.02]">
+          <p className="text-sm text-neutral-400 text-center sm:text-left">
+            {featured.length}+ production-ready titles · Custom branding · Full source code
+          </p>
           <button
+            type="button"
             onClick={() => navigate('games')}
-            className="inline-flex items-center gap-2 text-sm font-semibold text-white px-6 py-3 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white text-sm font-bold shadow-lg shadow-[#FF5B14]/25 hover:opacity-95 transition cursor-pointer shrink-0"
           >
-            <span>View All Available Games &amp; SDKs</span>
-            <ArrowRight className="w-4 h-4 text-[#FF782D]" />
+            <span>Explore all games</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
         </div>
-
       </div>
     </section>
   );
 };
+
+function BentoTile({
+  game,
+  variant,
+  className = '',
+  onView,
+  onDemo,
+}: {
+  game: Game;
+  variant: 'hero' | 'compact';
+  className?: string;
+  onView: () => void;
+  onDemo: () => void;
+}) {
+  const isHero = variant === 'hero';
+  const isCardGame = game.category.toLowerCase().includes('card');
+
+  return (
+    <article
+      className={`group relative rounded-2xl overflow-hidden border transition-all duration-500 hover:shadow-[0_0_50px_-12px_rgba(255,91,20,0.35)] ${className} ${
+        isCardGame
+          ? 'border-emerald-500/20 hover:border-emerald-400/50'
+          : 'border-white/10 hover:border-[#FF5B14]/40'
+      }`}
+    >
+      <img
+        src={game.bannerImage}
+        alt={game.title}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#080B13] via-[#080B13]/55 to-[#080B13]/15" />
+      {isCardGame && (
+        <div className="absolute inset-0 bg-felt-surface opacity-60 pointer-events-none mix-blend-overlay" />
+      )}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#FF5B14]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      {isHero && (
+        <span className="absolute top-5 left-5 px-3 py-1 rounded-full bg-[#FF5B14] text-white text-[10px] font-bold uppercase tracking-wider shadow-lg">
+          🎲 Flagship
+        </span>
+      )}
+      {isCardGame && !isHero && (
+        <span className="absolute top-4 left-4 text-lg opacity-60">♠</span>
+      )}
+
+      <div className={`absolute inset-0 flex flex-col justify-end ${isHero ? 'p-7 sm:p-9' : 'p-5 sm:p-6'}`}>
+        <p className="text-[10px] sm:text-[11px] font-medium tracking-[0.18em] uppercase text-[#FF782D]">
+          {game.category}
+          {game.multiplayer && ' · Multiplayer'}
+        </p>
+        <h3
+          className={`font-display font-extrabold text-white tracking-tight leading-tight ${
+            isHero ? 'mt-2 text-3xl sm:text-4xl' : 'mt-1.5 text-xl sm:text-2xl'
+          }`}
+        >
+          {game.title}
+        </h3>
+        {isHero && (
+          <p className="mt-2 text-sm text-neutral-300 leading-relaxed line-clamp-2 max-w-md">
+            {game.shortDescription}
+          </p>
+        )}
+
+        <div
+          className={`flex items-center gap-4 transition-all duration-300 ${
+            isHero ? 'mt-5 opacity-100' : 'mt-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0'
+          }`}
+        >
+          <button
+            type="button"
+            onClick={onView}
+            className={`inline-flex items-center gap-1.5 font-semibold text-white hover:text-[#FF782D] transition cursor-pointer ${
+              isHero ? 'text-sm' : 'text-xs'
+            }`}
+          >
+            <span>View game</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
+          {!isHero && (
+            <button
+              type="button"
+              onClick={onDemo}
+              className="text-xs text-neutral-400 hover:text-white transition cursor-pointer"
+            >
+              Demo
+            </button>
+          )}
+        </div>
+
+        {isHero && (
+          <div className="mt-4 flex flex-wrap gap-3">
+            <button
+              type="button"
+              onClick={onView}
+              className="px-5 py-2.5 rounded-xl bg-white text-[#080B13] text-sm font-bold hover:bg-neutral-100 transition cursor-pointer"
+            >
+              View details
+            </button>
+            <button
+              type="button"
+              onClick={onDemo}
+              className="px-5 py-2.5 rounded-xl border border-white/25 text-white text-sm font-medium hover:bg-white/10 transition cursor-pointer"
+            >
+              Request demo
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Corner arrow — compact tiles */}
+      {!isHero && (
+        <button
+          type="button"
+          onClick={onView}
+          aria-label={`View ${game.title}`}
+          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/50 border border-white/15 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer hover:bg-[#FF5B14] hover:border-[#FF5B14]"
+        >
+          <ArrowUpRight className="w-4 h-4" />
+        </button>
+      )}
+    </article>
+  );
+}

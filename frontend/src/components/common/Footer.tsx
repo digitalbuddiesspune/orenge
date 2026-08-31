@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mail } from 'lucide-react';
 import { useAppState } from '../../contexts/AppStateContext';
+import orengLogo from '../../assets/orengelogo.png';
 
 const FooterLink: React.FC<{ onClick: () => void; children: React.ReactNode }> = ({
   onClick,
@@ -75,14 +76,13 @@ export const Footer: React.FC = () => {
             <button
               type="button"
               onClick={() => navigate('home')}
-              className="flex items-center gap-2.5 text-left cursor-pointer focus:outline-none group"
+              className="inline-flex cursor-pointer focus:outline-none group"
             >
-              <div className="w-9 h-9 rounded-[10px] bg-[#FF5B14] flex items-center justify-center shadow-lg shadow-[#FF5B14]/25">
-                <span className="text-white font-display font-bold text-[22px] leading-none -mt-0.5">o</span>
-              </div>
-              <span className="font-display font-semibold text-[22px] tracking-tight text-white">
-                Oreng<span className="text-[#FF5B14]">.</span>
-              </span>
+              <img
+                src={orengLogo}
+                alt="Oreng"
+                className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+              />
             </button>
 
             <p className="text-[13px] leading-relaxed text-neutral-500 max-w-[220px]">

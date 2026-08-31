@@ -1,51 +1,114 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { SeoMeta } from '../components/common/SeoMeta';
 import { HeroShowreel } from '../components/home/HeroShowreel';
-import { TrustCapabilityStrip } from '../components/home/TrustCapabilityStrip';
-import { InteractivePlayground } from '../components/home/InteractivePlayground';
-import { WhatWeBuildGrid } from '../components/home/WhatWeBuildGrid';
+import { HomeWhatWeBuild } from '../components/home/HomeWhatWeBuild';
 import { FeaturedGames } from '../components/home/FeaturedGames';
 import { WhyOreng } from '../components/home/WhyOreng';
 import { InteractiveArchitecture } from '../components/home/InteractiveArchitecture';
-import { StudioBehindTheScenes } from '../components/home/StudioBehindTheScenes';
 import { TargetIndustries } from '../components/home/TargetIndustries';
+import { TrustCapabilityStrip } from '../components/home/TrustCapabilityStrip';
+import { BgAccentImage, HOME_BG_IMAGES } from '../components/home/SectionBgImage';
+import { HomeInterconnect } from '../components/home/HomeInterconnect';
 
 export const HomePage: React.FC = () => {
+  const pageRef = useRef<HTMLDivElement>(null);
+
   return (
     <>
       <SeoMeta
         title="Oreng — B2B Custom Game Development Company"
-        description="Oreng develops custom multiplayer games, card engines, 3D board games, live roulette & crash multipliers for gaming platforms, publishers, and businesses worldwide."
-        keywords="B2B Game Development, Custom Game Engine, Multiplayer Ludo, Rummy Engine, Real-time Gaming Backend, Casino Game Studio"
+        description="Oreng develops custom multiplayer games, card engines, 3D board games, and backend systems for gaming platforms, publishers, and businesses worldwide."
+        keywords="B2B Game Development, Custom Game Engine, Multiplayer Ludo, Rummy Engine, Real-time Gaming Backend, Game Development Studio"
       />
 
-      <div className="bg-[#0B0D13] text-white">
-        {/* 1. Hero Section with Live Simulator & Studio Displays */}
-        <HeroShowreel />
+      <div ref={pageRef} className="bg-[#07090F] text-white relative overflow-hidden">
+        <HomeInterconnect containerRef={pageRef} />
 
-        {/* 2. Trust & Capability Strip */}
-        <TrustCapabilityStrip />
+        {/* Ambient background */}
+        <div className="absolute top-[18%] left-1/2 -translate-x-1/2 w-[1200px] h-[800px] bg-gradient-to-b from-[#FF5B14]/8 via-[#FF782D]/4 to-transparent rounded-full blur-[170px] pointer-events-none" />
+        <div className="absolute top-[42%] left-[-10%] w-[800px] h-[800px] bg-blue-500/[0.04] rounded-full blur-[160px] pointer-events-none" />
+        <div className="absolute top-[65%] right-[-10%] w-[900px] h-[900px] bg-[#FF5B14]/[0.06] rounded-full blur-[180px] pointer-events-none" />
+        <div className="absolute top-[85%] left-1/3 w-[800px] h-[700px] bg-emerald-500/[0.03] rounded-full blur-[160px] pointer-events-none" />
 
-        {/* 3. Live Playable Engine Playground (Dice, Cards, Crash, Roulette) */}
-        <InteractivePlayground />
+        <div
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{
+            backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+            backgroundSize: '80px 80px',
+          }}
+        />
 
-        {/* 4. What We Build Category Matrix */}
-        <WhatWeBuildGrid />
+        <div aria-hidden="true" className="pointer-events-none select-none overflow-hidden absolute inset-0 z-0">
+          <BgAccentImage
+            src={HOME_BG_IMAGES.ludo}
+            className="top-[55vh] -right-24 w-[520px] h-[300px] hidden md:block"
+            opacity={0.07}
+          />
+          <BgAccentImage
+            src={HOME_BG_IMAGES.poker}
+            className="top-[95vh] -left-20 w-[480px] h-[280px] hidden md:block rotate-[5deg]"
+            opacity={0.06}
+          />
+          <BgAccentImage
+            src={HOME_BG_IMAGES.roulette}
+            className="top-[145vh] right-0 w-[440px] h-[260px] hidden lg:block rotate-[-3deg]"
+            opacity={0.06}
+          />
+          <BgAccentImage
+            src={HOME_BG_IMAGES.casino}
+            className="top-[200vh] -left-16 w-[500px] h-[290px] hidden lg:block"
+            opacity={0.05}
+          />
 
-        {/* 5. Featured Production Games Showcase */}
-        <FeaturedGames />
+          <div className="absolute top-[38%] left-1/2 -translate-x-1/2 w-full text-center">
+            <p className="font-display font-black uppercase tracking-[-0.04em] text-white/[0.018] text-[clamp(6rem,22vw,17rem)] leading-none">
+              MULTIPLAYER
+            </p>
+          </div>
+          <div className="absolute top-[58%] left-1/2 -translate-x-1/2 w-full text-center">
+            <p className="font-display font-black uppercase tracking-[-0.04em] text-white/[0.022] text-[clamp(6rem,22vw,18rem)] leading-none">
+              ORENG CORE
+            </p>
+          </div>
+          <div className="absolute top-[75%] left-1/2 -translate-x-1/2 w-full text-center">
+            <p className="font-display font-black uppercase tracking-[-0.04em] text-white/[0.018] text-[clamp(6rem,20vw,16rem)] leading-none">
+              ARCHITECTURE
+            </p>
+          </div>
+          <div className="absolute top-[90%] left-1/2 -translate-x-1/2 w-full text-center">
+            <p className="font-display font-black uppercase tracking-[-0.04em] text-white/[0.02] text-[clamp(6rem,22vw,18rem)] leading-none">
+              ENTERPRISE
+            </p>
+          </div>
+        </div>
 
-        {/* 6. Human Studio Behind The Scenes, Team Pods & Verified Reviews */}
-        <StudioBehindTheScenes />
+        <div data-home-section="hero">
+          <HeroShowreel />
+        </div>
 
-        {/* 7. Why Oreng Value Pillars */}
-        <WhyOreng />
+        <div className="relative z-10" data-home-section="build">
+          <HomeWhatWeBuild />
+        </div>
 
-        {/* 8. Interactive Architecture Pipeline */}
-        <InteractiveArchitecture />
+        <div data-home-section="portfolio">
+          <FeaturedGames />
+        </div>
 
-        {/* 9. Target Industries & Platforms */}
-        <TargetIndustries />
+        <div data-home-section="why">
+          <WhyOreng />
+        </div>
+
+        <div data-home-section="architecture">
+          <InteractiveArchitecture />
+        </div>
+
+        <div data-home-section="industries">
+          <TargetIndustries />
+        </div>
+
+        <div className="pb-20 relative z-10" data-home-section="trust">
+          <TrustCapabilityStrip />
+        </div>
       </div>
     </>
   );

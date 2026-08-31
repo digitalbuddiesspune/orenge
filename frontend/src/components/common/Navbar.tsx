@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAppState } from '../../contexts/AppStateContext';
+import orengLogo from '../../assets/orengelogo.png';
 import { 
-  Flame, 
   Menu, 
   X, 
   ChevronRight, 
@@ -81,24 +81,13 @@ export const Navbar: React.FC = () => {
               <button
                 type="button"
                 onClick={() => goTo('home')}
-                className="flex items-center gap-3 group text-left cursor-pointer focus:outline-none"
+                className="flex items-center group text-left cursor-pointer focus:outline-none"
               >
-                <div className="relative w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF5B14] to-[#F59E0B] p-0.5 shadow-lg shadow-[#FF5B14]/30 transition-transform group-hover:scale-105">
-                  <div className="w-full h-full bg-[#0B0D13] rounded-[10px] flex items-center justify-center">
-                    <Flame className="w-5 h-5 text-[#FF782D] group-hover:animate-pulse" />
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="font-display font-extrabold text-2xl tracking-wider text-white">
-                      ORENG
-                    </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF5B14] animate-ping" />
-                  </div>
-                  <span className="text-[10px] tracking-widest uppercase font-mono text-gray-400 block -mt-1">
-                    Game Systems Studio
-                  </span>
-                </div>
+                <img
+                  src={orengLogo}
+                  alt="Oreng"
+                  className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+                />
               </button>
 
               <div className="hidden lg:block">

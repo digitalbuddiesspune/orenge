@@ -68,9 +68,8 @@ export const HeroShowreel: React.FC = () => {
           </h1>
           
           <p className="mt-6 text-lg sm:text-xl text-white font-medium leading-relaxed max-w-3xl mx-auto drop-shadow-[0_2px_16px_rgba(0,0,0,0.95)]">
-            Custom game development for gaming platforms, publishers, and businesses. 
-            From concept and 3D UI/UX to low-latency real-time servers, wallet APIs, and cloud scaling — 
-            we build games that drive player retention.
+            Custom multiplayer game development for gaming platforms, publishers and businesses. 
+            From concept and UI/UX to backend, real-time multiplayer, APIs and deployment — Oreng provides end-to-end game development.
           </p>
 
           {/* Action CTAs */}
@@ -88,7 +87,7 @@ export const HeroShowreel: React.FC = () => {
               className="w-full sm:w-auto px-8 py-4 rounded-xl bg-black/55 border border-white/25 text-white font-semibold text-base hover:bg-black/70 transition cursor-pointer flex items-center justify-center gap-2 backdrop-blur-sm"
             >
               <Gamepad2 className="w-5 h-5 text-[#FF782D]" />
-              <span>Explore Game Suite</span>
+              <span>Explore Our Games</span>
             </button>
           </div>
 
