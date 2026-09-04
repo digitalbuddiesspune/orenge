@@ -263,11 +263,16 @@ export const AdminDashboardPage: React.FC = () => {
     void loadAll();
   }, [loadAll]);
 
-  const demoLeads = useMemo(() => leads.filter((l) => l.type === 'demo'), [leads]);
-  const contactLeads = useMemo(() => leads.filter((l) => l.type !== 'demo'), [leads]);
+  const isDemoLead = (l: ApiLead) =>
+    l.type === 'demo' ||
+    l.lookingFor?.toLowerCase().includes('demo') ||
+    l.source?.toLowerCase().includes('demo');
+
+  const demoLeads = useMemo(() => leads.filter(isDemoLead), [leads]);
+  const contactLeads = useMemo(() => leads.filter((l) => !isDemoLead(l)), [leads]);
 
   const filteredLeads = useMemo(() => {
-    const source = activeTab === 'demos' ? demoLeads : contactLeads.length ? contactLeads : leads;
+    const source = activeTab === 'demos' ? demoLeads : contactLeads;
     return source.filter((lead) => {
       const matchesStatus = statusFilter === 'All' || lead.status === statusFilter;
       const q = searchQuery.toLowerCase();

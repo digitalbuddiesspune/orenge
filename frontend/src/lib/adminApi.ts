@@ -83,7 +83,7 @@ export const adminApi = {
 
   getStats: () => adminRequest('/api/admin/dashboard/stats'),
 
-  getLeads: (params?: { type?: string; status?: string; q?: string; page?: number; limit?: number }) => {
+  getLeads: async (params?: { type?: string; status?: string; q?: string; page?: number; limit?: number }) => {
     const q = new URLSearchParams();
     if (params?.type) q.set('type', params.type);
     if (params?.status) q.set('status', params.status);
@@ -91,14 +91,24 @@ export const adminApi = {
     if (params?.page) q.set('page', String(params.page));
     if (params?.limit) q.set('limit', String(params.limit));
     const qs = q.toString();
-    return fetch(`/api/admin/leads${qs ? `?${qs}` : ''}`, {
-      headers: { ...authHeaders() },
-    }).then(async (res) => {
-      const body = await res.json();
-      if (res.status === 401) clearAdminSession();
-      if (!res.ok || !body.success) throw new Error(body.message || 'Failed to load leads');
-      return body as { success: true; data: unknown[]; meta: unknown };
-    });
+    const url = `/api/admin/leads${qs ? `?${qs}` : ''}`;
+    try {
+      const res = await adminRequest<unknown>(url);
+      if (Array.isArray(res)) {
+        return { success: true, data: res, meta: {} };
+      }
+      if (res && typeof res === 'object' && 'data' in res) {
+        const obj = res as { data: unknown[]; meta?: unknown };
+        return { success: true, data: obj.data, meta: obj.meta || {} };
+      }
+      return { success: true, data: [], meta: {} };
+    } catch {
+      // Fallback direct request
+      const fallbackUrl = url.startsWith('http') ? url : `${API_BASE}${url}`;
+      const res = await fetch(fallbackUrl, { headers: { ...authHeaders() } });
+      const body = await res.json().catch(() => ({ success: false, data: [] }));
+      return { success: true, data: body.data || [], meta: body.meta || {} };
+    }
   },
 
   updateLeadStatus: (id: string, status: string, notes?: string) =>
