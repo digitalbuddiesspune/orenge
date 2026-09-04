@@ -17,7 +17,7 @@ export const HomePage: React.FC = () => {
     <>
       <SeoMeta
         title="Oreng — B2B Custom Game Development Company"
-        description="Oreng develops custom multiplayer games, card engines, 3D board games, and backend systems for gaming platforms, publishers, and businesses worldwide."
+        description="Oreng builds custom online games — Ludo, Rummy, Roulette and more — for gaming platforms and businesses worldwide."
         keywords="B2B Game Development, Custom Game Engine, Multiplayer Ludo, Rummy Engine, Real-time Gaming Backend, Game Development Studio"
       />
 
@@ -67,17 +67,17 @@ export const HomePage: React.FC = () => {
           </div>
           <div className="absolute top-[58%] left-1/2 -translate-x-1/2 w-full text-center">
             <p className="font-display font-black uppercase tracking-[-0.04em] text-white/[0.022] text-[clamp(6rem,22vw,18rem)] leading-none">
-              ORENG CORE
+              ORENG
             </p>
           </div>
           <div className="absolute top-[75%] left-1/2 -translate-x-1/2 w-full text-center">
             <p className="font-display font-black uppercase tracking-[-0.04em] text-white/[0.018] text-[clamp(6rem,20vw,16rem)] leading-none">
-              ARCHITECTURE
+              GAMES
             </p>
           </div>
           <div className="absolute top-[90%] left-1/2 -translate-x-1/2 w-full text-center">
             <p className="font-display font-black uppercase tracking-[-0.04em] text-white/[0.02] text-[clamp(6rem,22vw,18rem)] leading-none">
-              ENTERPRISE
+              FOR YOU
             </p>
           </div>
         </div>

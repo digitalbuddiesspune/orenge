@@ -29,19 +29,23 @@ export const ContactPage: React.FC = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    setTimeout(() => {
-      addLead({
+    setSubmitError('');
+    try {
+      await addLead({
         ...formData,
-        source: 'Dedicated Contact Page'
+        source: 'Dedicated Contact Page',
       });
-      setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to submit. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -294,6 +298,9 @@ export const ContactPage: React.FC = () => {
                       )}
                     </button>
                   </div>
+                  {submitError && (
+                    <p className="text-sm text-red-400 font-mono">{submitError}</p>
+                  )}
                 </form>
               )}
             </div>

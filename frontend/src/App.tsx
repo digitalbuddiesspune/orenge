@@ -26,6 +26,15 @@ import { AdminDashboardPage } from './pages/admin/AdminDashboardPage';
 const AppContent: React.FC = () => {
   const { currentPage, isAdminLoggedIn } = useAppState();
 
+  // If on admin route, render clean Admin Portal without public Navbar, Footer, or WhatsApp button
+  if (currentPage === 'admin') {
+    return (
+      <div className="min-h-screen bg-[#0B0D13] text-gray-100 overflow-x-hidden selection:bg-[#FF5B14]/30 selection:text-[#FF782D]">
+        {isAdminLoggedIn ? <AdminDashboardPage /> : <AdminLoginPage />}
+      </div>
+    );
+  }
+
   const renderCurrentPage = () => {
     switch (currentPage) {
       case 'home':
@@ -56,17 +65,15 @@ const AppContent: React.FC = () => {
         return <BlogPostPage />;
       case 'legal':
         return <LegalPage />;
-      case 'admin':
-        return isAdminLoggedIn ? <AdminDashboardPage /> : <AdminLoginPage />;
       default:
         return <HomePage />;
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B0D13] text-gray-100 selection:bg-[#FF5B14]/30 selection:text-[#FF782D]">
+    <div className="min-h-screen flex flex-col bg-[#0B0D13] text-gray-100 overflow-x-hidden selection:bg-[#FF5B14]/30 selection:text-[#FF782D]">
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow overflow-x-hidden">
         {renderCurrentPage()}
       </main>
       <Footer />

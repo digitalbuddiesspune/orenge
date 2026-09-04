@@ -69,12 +69,21 @@ export const InsightsPage: React.FC = () => {
                 <div className="p-7 pt-0 border-t border-white/5 mt-4">
                   <div className="flex items-center justify-between pt-4">
                     <div className="flex items-center gap-2.5">
-                      <img
-                        src={post.author.avatar}
-                        alt={post.author.name}
-                        className="w-7 h-7 rounded-full object-cover border border-white/10"
-                      />
-                      <span className="text-xs text-gray-300 font-medium">{post.author.name}</span>
+                      {post.author?.avatar ? (
+                        <img
+                          src={post.author.avatar}
+                          alt={post.author.name}
+                          className="w-7 h-7 rounded-full object-cover border border-white/10"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <div className="w-7 h-7 rounded-full bg-[#FF5B14]/20 text-[#FF782D] border border-[#FF5B14]/30 flex items-center justify-center text-[10px] font-bold">
+                          {(post.author?.name || 'O').charAt(0)}
+                        </div>
+                      )}
+                      <span className="text-xs text-gray-300 font-medium">{post.author?.name || 'Oreng Engineering'}</span>
                     </div>
 
                     <button

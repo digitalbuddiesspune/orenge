@@ -40,19 +40,19 @@ export const FeaturedGames: React.FC = () => {
             See what we've built.
           </h2>
           <p className="mt-4 text-[15px] text-neutral-400 leading-relaxed">
-            Real games, real engines — Ludo, Rummy, Roulette &amp; more — ready for your platform.
+            Real games we have built — Ludo, Rummy, Roulette &amp; more — ready to add to your platform.
           </p>
           <div className="mt-5 opacity-50">
             <SuitStrip />
           </div>
         </div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 auto-rows-[220px] lg:auto-rows-[200px]">
+        {/* Bento grid — fixed row height only on lg desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 lg:auto-rows-[200px]">
           <BentoTile
             game={hero}
             variant="hero"
-            className="md:col-span-2 lg:col-span-7 lg:row-span-2 min-h-[320px] lg:min-h-[416px]"
+            className="md:col-span-2 lg:col-span-7 lg:row-span-2"
             onView={() => navigate('game-detail', hero.slug)}
             onDemo={() => openConsultationModal(`Demo: ${hero.title}`)}
           />
@@ -72,7 +72,7 @@ export const FeaturedGames: React.FC = () => {
         {/* Bottom CTA bar */}
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 p-5 sm:px-8 rounded-2xl border border-white/[0.08] bg-white/[0.02]">
           <p className="text-sm text-neutral-400 text-center sm:text-left">
-            {featured.length}+ production-ready titles · Custom branding · Full source code
+            {featured.length}+ ready games · Your branding · Full ownership
           </p>
           <button
             type="button"
@@ -106,41 +106,50 @@ function BentoTile({
 
   return (
     <article
-      className={`group relative rounded-2xl overflow-hidden border transition-all duration-500 hover:shadow-[0_0_50px_-12px_rgba(255,91,20,0.35)] ${className} ${
+      className={`group relative flex flex-col justify-end overflow-hidden rounded-2xl border transition-all duration-500 hover:shadow-[0_0_50px_-12px_rgba(255,91,20,0.35)] ${
+        isHero ? 'min-h-[420px] sm:min-h-[380px] lg:min-h-0' : 'min-h-[240px] lg:min-h-0'
+      } ${className} ${
         isCardGame
           ? 'border-emerald-500/20 hover:border-emerald-400/50'
           : 'border-white/10 hover:border-[#FF5B14]/40'
       }`}
     >
-      <img
-        src={game.bannerImage}
-        alt={game.title}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#080B13] via-[#080B13]/55 to-[#080B13]/15" />
-      {isCardGame && (
-        <div className="absolute inset-0 bg-felt-surface opacity-60 pointer-events-none mix-blend-overlay" />
-      )}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#FF5B14]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 pointer-events-none">
+        <img
+          src={game.bannerImage || game.thumbnail || '/assets/ludo_3d_gameplay.jpg'}
+          alt={game.title}
+          aria-hidden
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/assets/ludo_3d_gameplay.jpg';
+          }}
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080B13] via-[#080B13]/55 to-[#080B13]/15" />
+        {isCardGame && (
+          <div className="absolute inset-0 bg-felt-surface opacity-60 mix-blend-overlay" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FF5B14]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      </div>
 
       {isHero && (
-        <span className="absolute top-5 left-5 px-3 py-1 rounded-full bg-[#FF5B14] text-white text-[10px] font-bold uppercase tracking-wider shadow-lg">
+        <span className="absolute top-5 left-5 z-10 px-3 py-1 rounded-full bg-[#FF5B14] text-white text-[10px] font-bold uppercase tracking-wider shadow-lg">
           🎲 Flagship
         </span>
       )}
       {isCardGame && !isHero && (
-        <span className="absolute top-4 left-4 text-lg opacity-60">♠</span>
+        <span className="absolute top-4 left-4 z-10 text-lg opacity-60">♠</span>
       )}
 
-      <div className={`absolute inset-0 flex flex-col justify-end ${isHero ? 'p-7 sm:p-9' : 'p-5 sm:p-6'}`}>
+      <div className={`relative z-10 ${isHero ? 'p-5 sm:p-7 lg:p-9' : 'p-4 sm:p-6'}`}>
         <p className="text-[10px] sm:text-[11px] font-medium tracking-[0.18em] uppercase text-[#FF782D]">
           {game.category}
           {game.multiplayer && ' · Multiplayer'}
         </p>
         <h3
           className={`font-display font-extrabold text-white tracking-tight leading-tight ${
-            isHero ? 'mt-2 text-3xl sm:text-4xl' : 'mt-1.5 text-xl sm:text-2xl'
+            isHero ? 'mt-2 text-2xl sm:text-3xl lg:text-4xl' : 'mt-1.5 text-xl sm:text-2xl'
           }`}
         >
           {game.title}
@@ -153,7 +162,9 @@ function BentoTile({
 
         <div
           className={`flex items-center gap-4 transition-all duration-300 ${
-            isHero ? 'mt-5 opacity-100' : 'mt-3 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0'
+            isHero
+              ? 'mt-4 sm:mt-5 opacity-100'
+              : 'mt-3 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0'
           }`}
         >
           <button
@@ -178,18 +189,18 @@ function BentoTile({
         </div>
 
         {isHero && (
-          <div className="mt-4 flex flex-wrap gap-3">
+          <div className="mt-4 flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-3">
             <button
               type="button"
               onClick={onView}
-              className="px-5 py-2.5 rounded-xl bg-white text-[#080B13] text-sm font-bold hover:bg-neutral-100 transition cursor-pointer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-white text-[#080B13] text-sm font-bold hover:bg-neutral-100 transition cursor-pointer text-center"
             >
               View details
             </button>
             <button
               type="button"
               onClick={onDemo}
-              className="px-5 py-2.5 rounded-xl border border-white/25 text-white text-sm font-medium hover:bg-white/10 transition cursor-pointer"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl border border-white/25 text-white text-sm font-medium hover:bg-white/10 transition cursor-pointer text-center"
             >
               Request demo
             </button>
@@ -203,7 +214,7 @@ function BentoTile({
           type="button"
           onClick={onView}
           aria-label={`View ${game.title}`}
-          className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/50 border border-white/15 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-all duration-300 cursor-pointer hover:bg-[#FF5B14] hover:border-[#FF5B14]"
+          className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/50 border border-white/15 flex items-center justify-center text-white opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 cursor-pointer hover:bg-[#FF5B14] hover:border-[#FF5B14]"
         >
           <ArrowUpRight className="w-4 h-4" />
         </button>

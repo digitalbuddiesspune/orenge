@@ -27,16 +27,18 @@ export const RequestDemoPage: React.FC = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError('');
 
     const selectedGame = games.find((g) => g.slug === formData.gameSlug);
     const gameTitle = selectedGame ? selectedGame.title : 'General Game Suite';
 
-    setTimeout(() => {
-      addDemoRequest({
+    try {
+      await addDemoRequest({
         fullName: formData.fullName,
         companyName: formData.companyName,
         businessEmail: formData.businessEmail,
@@ -46,11 +48,14 @@ export const RequestDemoPage: React.FC = () => {
         gameSlug: formData.gameSlug,
         gameTitle,
         preferredDate: formData.preferredDate,
-        message: formData.message
+        message: formData.message,
       });
-      setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to submit. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -262,6 +267,9 @@ export const RequestDemoPage: React.FC = () => {
                       )}
                     </button>
                   </div>
+                  {submitError && (
+                    <p className="text-sm text-red-400 font-mono">{submitError}</p>
+                  )}
                 </form>
               )}
             </div>

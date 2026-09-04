@@ -20,9 +20,9 @@ export const WhatsAppButton: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-40">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 safe-bottom">
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-80 sm:w-96 bg-[#121622] border border-white/10 rounded-2xl shadow-2xl p-5 mb-2 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-3 duration-200">
+        <div className="absolute bottom-14 sm:bottom-16 right-0 w-[calc(100vw-2rem)] max-w-sm sm:w-96 bg-[#121622] border border-white/10 rounded-2xl shadow-2xl p-5 mb-2 backdrop-blur-xl animate-in fade-in slide-in-from-bottom-3 duration-200">
           <div className="flex items-start justify-between pb-3 border-b border-white/10">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
@@ -69,11 +69,12 @@ export const WhatsAppButton: React.FC = () => {
           setIsOpen(!isOpen);
           trackEvent('WhatsApp Widget Toggled', { state: !isOpen });
         }}
-        className="flex items-center gap-2 pl-3.5 pr-4 py-2.5 rounded-full bg-[#1B8A5A] hover:bg-[#1fa366] text-white text-sm font-medium shadow-lg shadow-black/40 transition cursor-pointer"
+        className="flex items-center gap-2 pl-3 pr-3.5 sm:pl-3.5 sm:pr-4 py-2.5 rounded-full bg-[#1B8A5A] hover:bg-[#1fa366] text-white text-sm font-medium shadow-lg shadow-black/40 transition cursor-pointer"
         aria-label="Chat on WhatsApp"
       >
-        <WhatsAppIcon className="w-5 h-5" />
-        <span>Chat on WhatsApp</span>
+        <WhatsAppIcon className="w-5 h-5 shrink-0" />
+        <span className="sm:hidden text-xs font-semibold">WhatsApp</span>
+        <span className="hidden sm:inline">Chat on WhatsApp</span>
       </button>
     </div>
   );

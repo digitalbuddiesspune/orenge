@@ -171,7 +171,7 @@ export const HomeInterconnect: React.FC<{
   if (width < 1 || height < 1 || nodes.length < 2) return null;
 
   return (
-    <div aria-hidden className="pointer-events-none select-none absolute inset-0 z-[5] overflow-hidden">
+    <div aria-hidden className="pointer-events-none select-none absolute inset-0 z-[5] overflow-hidden hidden md:block">
       {/* Scroll-following ambient beam */}
       <div
         className="absolute left-1/2 -translate-x-1/2 w-[min(90vw,700px)] h-[420px] rounded-full blur-[120px] transition-[top] duration-300 ease-out home-flow-beam"

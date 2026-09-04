@@ -70,9 +70,9 @@ export const Footer: React.FC = () => {
       <div className="absolute top-0 left-0 w-[420px] h-[280px] bg-[#FF5B14]/[0.07] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 pt-20 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 sm:gap-8">
           {/* Brand */}
-          <div className="col-span-2 md:col-span-1 space-y-5">
+          <div className="space-y-5">
             <button
               type="button"
               onClick={() => navigate('home')}
@@ -81,11 +81,11 @@ export const Footer: React.FC = () => {
               <img
                 src={orengLogo}
                 alt="Oreng"
-                className="h-9 w-auto object-contain transition-transform group-hover:scale-105"
+                className="h-10 sm:h-12 w-auto max-w-[160px] object-contain transition-transform group-hover:scale-105"
               />
             </button>
 
-            <p className="text-[13px] leading-relaxed text-neutral-500 max-w-[220px]">
+            <p className="text-[13px] leading-relaxed text-neutral-500 max-w-sm">
               Custom game development for gaming platforms, publishers and businesses.
             </p>
 
@@ -124,6 +124,7 @@ export const Footer: React.FC = () => {
               <FooterLink onClick={() => navigate('technology')}>Technology</FooterLink>
               <FooterLink onClick={() => navigate('insights')}>Insights</FooterLink>
               <FooterLink onClick={() => navigate('contact')}>Contact</FooterLink>
+              <FooterLink onClick={() => navigate('admin')}>Admin Portal</FooterLink>
             </ul>
           </div>
 

@@ -8,43 +8,43 @@ const pillars = [
   {
     num: '01',
     title: 'Built for Your Brand',
-    description: 'Custom UI, branding, animations and sound — shaped around your platform identity.',
-    tags: ['White-Label', 'Custom UI', 'Your Identity'],
+    description: 'Your logo, colours, and style on every screen — the game looks like it belongs to your company.',
+    tags: ['Your Logo', 'Custom Design', 'Your Identity'],
     vibe: 'brand' as const,
   },
   {
     num: '02',
-    title: 'Custom Game Logic',
-    description: 'Rules, mechanics and math models built to your exact product requirements.',
-    tags: ['RTP Models', 'Card Rules', 'Provably Fair'],
+    title: 'Custom Game Rules',
+    description: 'Game rules and how it works — built exactly the way you want for your players.',
+    tags: ['Your Rules', 'Fair Play', 'Trusted Results'],
     vibe: 'casino' as const,
   },
   {
     num: '03',
-    title: 'Real-Time Multiplayer',
-    description: 'Synchronized rooms, matchmaking and server-authoritative game state.',
-    tags: ['WebSocket', 'Matchmaking', 'Live Rooms'],
+    title: 'Play Together Online',
+    description: 'Friends and players can join the same game room and play together in real time.',
+    tags: ['Online Rooms', 'Quick Matching', 'Live Play'],
     vibe: 'multiplayer' as const,
   },
   {
     num: '04',
-    title: 'API Ready',
-    description: 'Drop into your existing platform with auth, wallet and webhook integration.',
-    tags: ['Wallet API', 'JWT SSO', 'Webhooks'],
+    title: 'Easy to Connect',
+    description: 'Plugs into your existing app or website — login, payments, and user accounts work smoothly.',
+    tags: ['User Login', 'Payments', 'Easy Setup'],
     vibe: 'tech' as const,
   },
   {
     num: '05',
-    title: 'Scalable Backend',
-    description: 'Game servers, databases and caching architected for your expected scale.',
-    tags: ['Cloud', 'Redis', 'Auto-Scale'],
+    title: 'Handles Many Players',
+    description: 'Built to support lots of players at the same time without slowing down or crashing.',
+    tags: ['Fast Server', 'Many Players', 'Always On'],
     vibe: 'tech' as const,
   },
   {
     num: '06',
-    title: 'Complete Development Partner',
-    description: 'From concept and UI/UX to deployment, QA and post-launch support.',
-    tags: ['Ludo · Cards · Roulette', 'QA', '24/7 Support'],
+    title: 'Complete Partner',
+    description: 'From your idea to launch and after — we help at every step including testing and support.',
+    tags: ['Ludo · Cards · Roulette', 'Testing', 'Support'],
     vibe: 'studio' as const,
   },
 ];
@@ -168,7 +168,7 @@ export const WhyOreng: React.FC = () => {
               <span className="text-white/60">♠</span>
               <span className="text-red-400">♦</span>
               <span className="text-white/60">♣</span>
-              <span className="ml-1 text-neutral-500">· Gaming &amp; Casino Tech Studio</span>
+              <span className="ml-1 text-neutral-500">· Game Making Studio</span>
             </div>
 
             <p className="text-[11px] font-medium tracking-[0.22em] uppercase text-[#FF5B14] mb-3">
@@ -226,7 +226,7 @@ export const WhyOreng: React.FC = () => {
 
             <button
               type="button"
-              onClick={() => openConsultationModal('Custom Architecture Discussion')}
+              onClick={() => openConsultationModal('Game Development Discussion')}
               className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white text-sm font-bold shadow-lg shadow-[#FF5B14]/20 hover:opacity-95 transition cursor-pointer"
             >
               <span>Talk to our team</span>

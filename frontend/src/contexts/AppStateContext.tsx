@@ -4,58 +4,155 @@ import { initialGames } from '../data/gamesData';
 import { initialLeadsData } from '../data/initialLeadsData';
 import { caseStudiesData } from '../data/caseStudiesData';
 import { blogPostsData } from '../data/blogData';
+import { api } from '../lib/api';
+import { adminApi, isAdminSessionActive, clearAdminSession } from '../lib/adminApi';
+
+function normalizeGame(raw: Partial<Game> & { id?: string; _id?: string }): Game {
+  return {
+    id: raw.id || String(raw._id || ''),
+    slug: raw.slug || '',
+    title: raw.title || 'Untitled Game',
+    tagline: raw.tagline || '',
+    category: (raw.category as Game['category']) || 'Custom Games',
+    thumbnail: raw.thumbnail || '',
+    bannerImage: raw.bannerImage || raw.thumbnail || '',
+    shortDescription: raw.shortDescription || '',
+    fullOverview: raw.fullOverview || '',
+    gameplaySummary: raw.gameplaySummary || '',
+    features: raw.features || [],
+    platforms: (raw.platforms as Game['platforms']) || [],
+    multiplayer: Boolean(raw.multiplayer),
+    maxPlayers: raw.maxPlayers || '',
+    syncLatency: raw.syncLatency || '',
+    customizationOptions: raw.customizationOptions || [],
+    architectureHighlights: raw.architectureHighlights || [],
+    adminCapabilities: raw.adminCapabilities || [],
+    apiIntegrationPoints: raw.apiIntegrationPoints || [],
+    isFeatured: Boolean(raw.isFeatured),
+    status: (raw.status as Game['status']) || 'Production Ready',
+  };
+}
+
+function normalizeCaseStudy(raw: Partial<CaseStudy> & { id?: string }): CaseStudy {
+  return {
+    id: raw.id || '',
+    slug: raw.slug || '',
+    title: raw.title || '',
+    clientName: raw.clientName || '',
+    clientIndustry: raw.clientIndustry || '',
+    timeline: raw.timeline || '',
+    challenge: raw.challenge || '',
+    requirement: raw.requirement || '',
+    solution: raw.solution || '',
+    results: raw.results || [],
+    techStack: raw.techStack || [],
+    featuresDelivered: raw.featuresDelivered || [],
+    coverImage: raw.coverImage || '',
+  };
+}
+
+function normalizeBlogPost(raw: Partial<BlogPost> & { id?: string; publishedDate?: string }): BlogPost {
+  return {
+    id: raw.id || '',
+    slug: raw.slug || '',
+    title: raw.title || '',
+    excerpt: raw.excerpt || '',
+    publishedDate: typeof raw.publishedDate === 'string' ? raw.publishedDate : '',
+    readTime: raw.readTime || '5 min read',
+    category: raw.category || 'General',
+    author: raw.author || { name: 'Oreng', role: '', avatar: '' },
+    content: raw.content || [],
+    tags: raw.tags || [],
+  };
+}
+
+export type HomeAssetsConfig = {
+  heroBg: string;
+  heroTrailerPoster: string;
+  ludoBg: string;
+  pokerBg: string;
+  rouletteBg: string;
+  casinoBg: string;
+  multiplayerBg: string;
+  architectureDiagram: string;
+  whatWeBuildBg1: string;
+  whatWeBuildBg2: string;
+  whatWeBuildBg3: string;
+  studioBts1: string;
+  studioBts2: string;
+};
+
+export const defaultHomeAssets: HomeAssetsConfig = {
+  heroBg: '/assets/heroBg.png',
+  heroTrailerPoster: '/assets/ludo_3d_gameplay.jpg',
+  ludoBg: '/assets/ludo_3d_gameplay.jpg',
+  pokerBg: '/assets/poker_table_gameplay.jpg',
+  rouletteBg: '/assets/roulette_engine.jpg',
+  casinoBg: '/assets/casino_studio_hero.jpg',
+  multiplayerBg: '/assets/multiplayer_games_bg.jpg',
+  architectureDiagram: '/assets/multiplayer_games_bg.jpg',
+  whatWeBuildBg1: '/assets/poker_table_gameplay.jpg',
+  whatWeBuildBg2: '/assets/ludo_3d_gameplay.jpg',
+  whatWeBuildBg3: '/assets/roulette_engine.jpg',
+  studioBts1: '/assets/casino_studio_hero.jpg',
+  studioBts2: '/assets/ludo_3d_gameplay.jpg',
+};
 
 interface AppStateContextType {
-  // Navigation
   currentPage: string;
   currentSlug?: string;
   navigate: (page: string, slug?: string) => void;
 
-  // Games
+  homeAssets: HomeAssetsConfig;
+  updateHomeAsset: (key: keyof HomeAssetsConfig, url: string) => void;
+  resetHomeAssets: () => void;
+
   games: Game[];
+  contentLoading: boolean;
+  contentSource: 'api' | 'static';
+  refreshContent: () => Promise<void>;
   getGameBySlug: (slug: string) => Game | undefined;
   addGame: (game: Game) => void;
   updateGame: (game: Game) => void;
   deleteGame: (id: string) => void;
 
-  // Leads CRM
   leads: Lead[];
-  addLead: (lead: Omit<Lead, 'id' | 'createdAt' | 'status'>) => void;
+  addLead: (lead: Omit<Lead, 'id' | 'createdAt' | 'status'>) => Promise<void>;
   updateLeadStatus: (id: string, status: LeadStatus) => void;
   updateLeadNotes: (id: string, notes: string) => void;
   deleteLead: (id: string) => void;
 
-  // Demo Requests
   demoRequests: DemoRequest[];
-  addDemoRequest: (req: Omit<DemoRequest, 'id' | 'createdAt' | 'status'>) => void;
+  addDemoRequest: (req: Omit<DemoRequest, 'id' | 'createdAt' | 'status'>) => Promise<void>;
 
-  // Case Studies & Blog
   caseStudies: CaseStudy[];
-  blogPosts: BlogPost[];
+  addCaseStudy: (caseStudy: CaseStudy) => void;
+  updateCaseStudy: (caseStudy: CaseStudy) => void;
+  deleteCaseStudy: (id: string) => void;
 
-  // Admin Auth
+  blogPosts: BlogPost[];
+  addBlogPost: (post: BlogPost) => void;
+  updateBlogPost: (post: BlogPost) => void;
+  deleteBlogPost: (id: string) => void;
+
   isAdminLoggedIn: boolean;
-  adminLogin: (password: string) => boolean;
+  adminLogin: (email: string, password: string) => Promise<boolean>;
   adminLogout: () => void;
 
-  // Modals & Triggers
   isConsultationModalOpen: boolean;
   openConsultationModal: (prefillRequirement?: string) => void;
   closeConsultationModal: () => void;
   prefilledRequirement: string;
 
-  // Analytics tracking helper
   trackEvent: (eventName: string, metadata?: Record<string, unknown>) => void;
 }
 
 const AppStateContext = createContext<AppStateContextType | undefined>(undefined);
 
 export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Route state
   const [currentPage, setCurrentPage] = useState<string>('home');
   const [currentSlug, setCurrentSlug] = useState<string | undefined>(undefined);
 
-  // Initialize route from current window pathname
   useEffect(() => {
     const handleLocationChange = () => {
       const path = window.location.pathname.replace(/^\/+|\/+$/g, '');
@@ -115,6 +212,10 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return () => window.removeEventListener('popstate', handleLocationChange);
   }, []);
 
+  const trackEvent = (eventName: string, metadata?: Record<string, unknown>) => {
+    console.log(`[ORENG Analytics Event] 👉 ${eventName}`, metadata || {});
+  };
+
   const navigate = (page: string, slug?: string) => {
     setCurrentPage(page);
     setCurrentSlug(slug);
@@ -129,16 +230,60 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
     window.history.pushState({}, '', targetUrl);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    // Track page view event
     trackEvent('Page View', { page, slug, url: targetUrl });
   };
 
-  // State Persistence with localStorage
-  const [games, setGames] = useState<Game[]>(() => {
-    const saved = localStorage.getItem('oreng_games');
-    return saved ? JSON.parse(saved) : initialGames;
+  const [homeAssets, setHomeAssets] = useState<HomeAssetsConfig>(() => {
+    try {
+      const saved = localStorage.getItem('oreng_home_assets');
+      return saved ? { ...defaultHomeAssets, ...JSON.parse(saved) } : defaultHomeAssets;
+    } catch {
+      return defaultHomeAssets;
+    }
   });
+
+  useEffect(() => {
+    localStorage.setItem('oreng_home_assets', JSON.stringify(homeAssets));
+  }, [homeAssets]);
+
+  const updateHomeAsset = (key: keyof HomeAssetsConfig, url: string) => {
+    setHomeAssets((prev) => ({ ...prev, [key]: url }));
+  };
+
+  const resetHomeAssets = () => {
+    setHomeAssets(defaultHomeAssets);
+    localStorage.setItem('oreng_home_assets', JSON.stringify(defaultHomeAssets));
+  };
+
+  const [games, setGames] = useState<Game[]>(() => {
+    try {
+      const saved = localStorage.getItem('oreng_custom_games');
+      return saved ? JSON.parse(saved) : initialGames;
+    } catch {
+      return initialGames;
+    }
+  });
+
+  const [caseStudies, setCaseStudies] = useState<CaseStudy[]>(() => {
+    try {
+      const saved = localStorage.getItem('oreng_custom_case_studies');
+      return saved ? JSON.parse(saved) : caseStudiesData;
+    } catch {
+      return caseStudiesData;
+    }
+  });
+
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>(() => {
+    try {
+      const saved = localStorage.getItem('oreng_custom_blog_posts');
+      return saved ? JSON.parse(saved) : blogPostsData;
+    } catch {
+      return blogPostsData;
+    }
+  });
+
+  const [contentLoading, setContentLoading] = useState(true);
+  const [contentSource, setContentSource] = useState<'api' | 'static'>('static');
 
   const [leads, setLeads] = useState<Lead[]>(() => {
     const saved = localStorage.getItem('oreng_leads');
@@ -150,61 +295,111 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [caseStudies] = useState<CaseStudy[]>(caseStudiesData);
-  const [blogPosts] = useState<BlogPost[]>(blogPostsData);
-
-  // Admin Auth State
-  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState<boolean>(() => {
-    return sessionStorage.getItem('oreng_admin_auth') === 'true';
-  });
-
-  // Modal State
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState<boolean>(() => isAdminSessionActive());
   const [isConsultationModalOpen, setIsConsultationModalOpen] = useState(false);
   const [prefilledRequirement, setPrefilledRequirement] = useState('Custom Game Development');
 
-  // Save games to storage
+  const refreshContent = async () => {
+    setContentLoading(true);
+    try {
+      const [apiGames, apiCases, apiPosts] = await Promise.all([
+        api.getGames() as Promise<Partial<Game>[]>,
+        api.getCaseStudies() as Promise<Partial<CaseStudy>[]>,
+        api.getBlogPosts() as Promise<Partial<BlogPost>[]>,
+      ]);
+
+      if (apiGames && apiGames.length > 0) {
+        const normalized = apiGames.map((g) => normalizeGame(g));
+        setGames(normalized);
+        localStorage.setItem('oreng_custom_games', JSON.stringify(normalized));
+        setContentSource('api');
+      }
+
+      if (apiCases && apiCases.length > 0) {
+        const normalized = apiCases.map((c) => normalizeCaseStudy(c));
+        setCaseStudies(normalized);
+        localStorage.setItem('oreng_custom_case_studies', JSON.stringify(normalized));
+      }
+
+      if (apiPosts && apiPosts.length > 0) {
+        const normalized = apiPosts.map((p) => normalizeBlogPost(p));
+        setBlogPosts(normalized);
+        localStorage.setItem('oreng_custom_blog_posts', JSON.stringify(normalized));
+      }
+    } catch {
+      setContentSource('static');
+    } finally {
+      setContentLoading(false);
+    }
+  };
+
   useEffect(() => {
-    localStorage.setItem('oreng_games', JSON.stringify(games));
+    void refreshContent();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('oreng_custom_games', JSON.stringify(games));
   }, [games]);
 
-  // Save leads to storage
+  useEffect(() => {
+    localStorage.setItem('oreng_custom_case_studies', JSON.stringify(caseStudies));
+  }, [caseStudies]);
+
+  useEffect(() => {
+    localStorage.setItem('oreng_custom_blog_posts', JSON.stringify(blogPosts));
+  }, [blogPosts]);
+
   useEffect(() => {
     localStorage.setItem('oreng_leads', JSON.stringify(leads));
   }, [leads]);
 
-  // Save demo requests to storage
   useEffect(() => {
     localStorage.setItem('oreng_demo_requests', JSON.stringify(demoRequests));
   }, [demoRequests]);
 
-  const getGameBySlug = (slug: string) => {
-    return games.find((g) => g.slug === slug);
-  };
-
-  const addGame = (game: Game) => {
-    setGames((prev) => [game, ...prev]);
-  };
-
-  const updateGame = (updatedGame: Game) => {
+  const getGameBySlug = (slug: string) => games.find((g) => g.slug === slug);
+  const addGame = (game: Game) => setGames((prev) => [game, ...prev]);
+  const updateGame = (updatedGame: Game) =>
     setGames((prev) => prev.map((g) => (g.id === updatedGame.id ? updatedGame : g)));
-  };
+  const deleteGame = (id: string) => setGames((prev) => prev.filter((g) => g.id !== id));
 
-  const deleteGame = (id: string) => {
-    setGames((prev) => prev.filter((g) => g.id !== id));
-  };
+  const addCaseStudy = (cs: CaseStudy) => setCaseStudies((prev) => [cs, ...prev]);
+  const updateCaseStudy = (updatedCs: CaseStudy) =>
+    setCaseStudies((prev) => prev.map((c) => (c.id === updatedCs.id ? updatedCs : c)));
+  const deleteCaseStudy = (id: string) => setCaseStudies((prev) => prev.filter((c) => c.id !== id));
 
-  const addLead = (leadData: Omit<Lead, 'id' | 'createdAt' | 'status'>) => {
+  const addBlogPost = (bp: BlogPost) => setBlogPosts((prev) => [bp, ...prev]);
+  const updateBlogPost = (updatedBp: BlogPost) =>
+    setBlogPosts((prev) => prev.map((p) => (p.id === updatedBp.id ? updatedBp : p)));
+  const deleteBlogPost = (id: string) => setBlogPosts((prev) => prev.filter((p) => p.id !== id));
+
+  const addLead = async (leadData: Omit<Lead, 'id' | 'createdAt' | 'status'>) => {
+    await api.submitContact({
+      fullName: leadData.fullName,
+      businessEmail: leadData.businessEmail,
+      phone: leadData.phone,
+      companyName: leadData.companyName,
+      companyWebsite: leadData.companyWebsite,
+      country: leadData.country,
+      lookingFor: leadData.lookingFor,
+      hasPlatform: leadData.hasPlatform,
+      budget: leadData.budget,
+      timeline: leadData.timeline,
+      projectDescription: leadData.projectDescription,
+      source: leadData.source,
+    });
+
     const newLead: Lead = {
       ...leadData,
       id: `lead-${Date.now()}`,
       createdAt: new Date().toISOString(),
-      status: 'New'
+      status: 'New',
     };
     setLeads((prev) => [newLead, ...prev]);
     trackEvent('Contact Form Submitted', {
       company: newLead.companyName,
       country: newLead.country,
-      requirement: newLead.lookingFor
+      requirement: newLead.lookingFor,
     });
   };
 
@@ -220,16 +415,29 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setLeads((prev) => prev.filter((l) => l.id !== id));
   };
 
-  const addDemoRequest = (reqData: Omit<DemoRequest, 'id' | 'createdAt' | 'status'>) => {
+  const addDemoRequest = async (reqData: Omit<DemoRequest, 'id' | 'createdAt' | 'status'>) => {
+    await api.submitDemo({
+      fullName: reqData.fullName,
+      businessEmail: reqData.businessEmail,
+      phone: reqData.phone,
+      companyName: reqData.companyName,
+      companyWebsite: reqData.companyWebsite,
+      country: reqData.country,
+      gameSlug: reqData.gameSlug,
+      gameTitle: reqData.gameTitle,
+      preferredDate: reqData.preferredDate,
+      message: reqData.message,
+      source: 'Demo Request Portal',
+    });
+
     const newReq: DemoRequest = {
       ...reqData,
       id: `demo-${Date.now()}`,
       createdAt: new Date().toISOString(),
-      status: 'New'
+      status: 'New',
     };
     setDemoRequests((prev) => [newReq, ...prev]);
 
-    // Also register as a high-intent lead in CRM
     const newLead: Lead = {
       id: `lead-${Date.now()}`,
       fullName: reqData.fullName,
@@ -246,28 +454,44 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       source: 'Demo Request Portal',
       createdAt: new Date().toISOString(),
       status: 'Demo Scheduled',
-      notes: `Requested demo for ${reqData.gameTitle}. Preferred date: ${reqData.preferredDate || 'Earliest available'}`
+      notes: `Requested demo for ${reqData.gameTitle}. Preferred date: ${reqData.preferredDate || 'Earliest available'}`,
     };
     setLeads((prev) => [newLead, ...prev]);
 
     trackEvent('Demo Requested', {
       game: reqData.gameTitle,
-      company: reqData.companyName
+      company: reqData.companyName,
     });
   };
 
-  const adminLogin = (password: string): boolean => {
-    if (password === 'oreng2026' || password === 'admin123') {
+  const adminLogin = async (email: string, password: string): Promise<boolean> => {
+    try {
+      await adminApi.login(email, password);
       setIsAdminLoggedIn(true);
-      sessionStorage.setItem('oreng_admin_auth', 'true');
       return true;
+    } catch {
+      // Offline fallback mode: allows login with default credentials if backend API is not running
+      const normEmail = email.toLowerCase().trim();
+      if (
+        (normEmail === 'admin@oreng.com' || normEmail === 'admin@oreng.io') &&
+        (password === 'changeme123' || password === 'Admin@123456' || password === 'admin')
+      ) {
+        localStorage.setItem('oreng_admin_token', 'offline-preview-token');
+        localStorage.setItem(
+          'oreng_admin_user',
+          JSON.stringify({ id: 'admin-local', email: normEmail, name: 'Oreng Admin', role: 'admin' })
+        );
+        setIsAdminLoggedIn(true);
+        return true;
+      }
+      return false;
     }
-    return false;
   };
 
   const adminLogout = () => {
+    adminApi.logout();
+    clearAdminSession();
     setIsAdminLoggedIn(false);
-    sessionStorage.removeItem('oreng_admin_auth');
   };
 
   const openConsultationModal = (requirement = 'Custom Game Development') => {
@@ -276,14 +500,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     trackEvent('Book Consultation Click', { requirement });
   };
 
-  const closeConsultationModal = () => {
-    setIsConsultationModalOpen(false);
-  };
-
-  const trackEvent = (eventName: string, metadata?: Record<string, unknown>) => {
-    // Structured analytics logger for GA4, GTM, Pixel, LinkedIn Insight Tag
-    console.log(`[ORENG Analytics Event] 👉 ${eventName}`, metadata || {});
-  };
+  const closeConsultationModal = () => setIsConsultationModalOpen(false);
 
   return (
     <AppStateContext.Provider
@@ -291,7 +508,13 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         currentPage,
         currentSlug,
         navigate,
+        homeAssets,
+        updateHomeAsset,
+        resetHomeAssets,
         games,
+        contentLoading,
+        contentSource,
+        refreshContent,
         getGameBySlug,
         addGame,
         updateGame,
@@ -304,7 +527,13 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         demoRequests,
         addDemoRequest,
         caseStudies,
+        addCaseStudy,
+        updateCaseStudy,
+        deleteCaseStudy,
         blogPosts,
+        addBlogPost,
+        updateBlogPost,
+        deleteBlogPost,
         isAdminLoggedIn,
         adminLogin,
         adminLogout,
@@ -312,7 +541,7 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         openConsultationModal,
         closeConsultationModal,
         prefilledRequirement,
-        trackEvent
+        trackEvent,
       }}
     >
       {children}

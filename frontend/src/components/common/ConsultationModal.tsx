@@ -21,15 +21,16 @@ export const ConsultationModal: React.FC = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   if (!isConsultationModalOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    setTimeout(() => {
-      addLead({
+    setSubmitError('');
+    try {
+      await addLead({
         fullName: formData.fullName,
         businessEmail: formData.businessEmail,
         phone: formData.phone,
@@ -41,11 +42,14 @@ export const ConsultationModal: React.FC = () => {
         budget: formData.budget,
         timeline: formData.timeline,
         projectDescription: formData.projectDescription,
-        source: 'Quick Consultation Modal'
+        source: 'Quick Consultation Modal',
       });
-      setIsSubmitting(false);
       setIsSubmitted(true);
-    }, 600);
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Failed to submit. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleClose = () => {
@@ -280,6 +284,9 @@ export const ConsultationModal: React.FC = () => {
                   )}
                 </button>
               </div>
+              {submitError && (
+                <p className="text-sm text-red-400 font-mono mt-2">{submitError}</p>
+              )}
             </form>
           )}
         </div>

@@ -13,18 +13,18 @@ import {
 export const TrustCapabilityStrip: React.FC = () => {
   const capabilities = [
     { label: 'Custom Games', icon: Gamepad2, color: 'text-[#FF782D]' },
-    { label: 'Multiplayer Rooms', icon: Users, color: 'text-amber-400' },
-    { label: 'Stateful Backend', icon: Server, color: 'text-emerald-400' },
-    { label: 'Unified Game APIs', icon: Code2, color: 'text-sky-400' },
-    { label: 'Admin Telemetry', icon: ShieldCheck, color: 'text-purple-400' },
-    { label: 'Platform Integration', icon: Layers, color: 'text-pink-400' },
+    { label: 'Online Multiplayer', icon: Users, color: 'text-amber-400' },
+    { label: 'Game Server', icon: Server, color: 'text-emerald-400' },
+    { label: 'Easy Connection', icon: Code2, color: 'text-sky-400' },
+    { label: 'Admin Panel', icon: ShieldCheck, color: 'text-purple-400' },
+    { label: 'Platform Setup', icon: Layers, color: 'text-pink-400' },
   ];
 
   const verifiedMetrics = [
-    { value: '15+', label: 'Custom Game Engines Built', icon: Gamepad2 },
-    { value: '100k+', label: 'Peak CCU Tested & Sustained', icon: Users },
-    { value: '< 40ms', label: 'Average Turn Latency', icon: Activity },
-    { value: '99.99%', label: 'Production Uptime SLA', icon: ShieldCheck },
+    { value: '15+', label: 'Games Built', icon: Gamepad2 },
+    { value: '100k+', label: 'Players Tested', icon: Users },
+    { value: 'Fast', label: 'Smooth Gameplay', icon: Activity },
+    { value: '99.99%', label: 'Always Running', icon: ShieldCheck },
   ];
 
   return (
@@ -38,7 +38,7 @@ export const TrustCapabilityStrip: React.FC = () => {
         <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 pb-6 border-b border-white/10">
           <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF5B14]/15 border border-[#FF5B14]/30 text-[11px] font-mono text-[#FF782D]">
             <Sparkles className="w-3 h-3" />
-            <span className="font-bold">END-TO-END CAPABILITIES</span>
+            <span className="font-bold">WHAT WE OFFER</span>
           </div>
 
           {capabilities.map((cap, idx) => {

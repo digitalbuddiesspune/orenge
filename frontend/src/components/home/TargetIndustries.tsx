@@ -19,39 +19,39 @@ export const TargetIndustries: React.FC = () => {
   const industries = [
     {
       icon: Building2,
-      title: 'Gaming Platform Operators',
-      description: 'Established platforms looking to expand player lifetime value by launching custom proprietary games they own directly.',
-      highlights: ['Custom White-Label Engines', 'SSO & Wallet API Drops', 'Anti-Collusion & Telemetry']
+      title: 'Gaming Platform Owners',
+      description: 'Already running a gaming platform? We help you add your own custom games that you fully own and control.',
+      highlights: ['Your Own Games', 'Easy to Add', 'Safe & Fair Play']
     },
     {
       icon: Rocket,
       title: 'Gaming Startups',
-      description: 'Founders seeking an elite technical studio to architect their core game loops, mathematics, backend, and launch strategy.',
-      highlights: ['Rapid Prototype to Store', 'Deterministic Math & RNG', '100% IP & Code Handover']
+      description: 'Starting a new gaming business? We build your game, server, and everything you need to launch successfully.',
+      highlights: ['Idea to Launch', 'Fair Game Results', 'You Own Everything']
     },
     {
       icon: Briefcase,
       title: 'Game Publishers',
-      description: 'Publishers requiring dedicated game development pods to build, optimize, and port high-retention titles to new markets.',
-      highlights: ['Dedicated Studio Pods', 'Cross-Platform WebGL/Mobile', 'LiveOps Architecture']
+      description: 'Need new games for your portfolio? We build high-quality games that keep players coming back.',
+      highlights: ['Dedicated Team', 'Phone & Web Games', 'Easy Updates']
     },
     {
       icon: Tv,
-      title: 'Entertainment & Media Apps',
-      description: 'Consumer apps and media platforms introducing gamified reward loops, live competitions, and multiplayer interactions.',
-      highlights: ['Engagement Mini-Games', 'Instant WebGL Embeds', 'Daily Tournaments']
+      title: 'Entertainment Apps',
+      description: 'Want to add fun games to your app? We create engaging mini-games and live competitions for your users.',
+      highlights: ['Fun Mini-Games', 'Works in Any App', 'Daily Events']
     },
     {
       icon: Code2,
       title: 'Technology Companies',
-      description: 'Tech firms requiring specialized outsourced game engineering, WebGL rendering, and low-latency networking capabilities.',
-      highlights: ['WebSocket Networking', 'Microservices Backend', 'High-Load Scale Testing']
+      description: 'Need game development help? We provide expert game building, online play, and server setup.',
+      highlights: ['Online Multiplayer', 'Strong Server', 'Tested for Scale']
     },
     {
       icon: Globe2,
-      title: 'International Gaming Businesses',
-      description: 'Global operators seeking an agile, high-caliber development studio capable of delivering certified multi-currency gaming software.',
-      highlights: ['Multi-Language & Currency', 'GLI-19 Certified Logic', 'Single-Tenant Deployment']
+      title: 'International Businesses',
+      description: 'Running a gaming business globally? We deliver trusted games with multiple languages and currencies.',
+      highlights: ['Many Languages', 'Fair & Certified', 'Your Own Setup']
     }
   ];
 
@@ -62,25 +62,22 @@ export const TargetIndustries: React.FC = () => {
     <section className="py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Asymmetrical 2-Column Ecosystem Layout - NO Repetitive Boxes */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* Left Column: Heading & Selected Industry Deep-Dive */}
           <div className="lg:col-span-5 space-y-6">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5B14]/10 border border-[#FF5B14]/30 text-[#FF782D] text-xs font-mono mb-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5B14]/10 border border-[#FF5B14]/30 text-[#FF782D] text-xs mb-3">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>BUILT FOR GAMING BUSINESSES</span>
+                <span>WHO WE WORK WITH</span>
               </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight leading-tight">
-                Engineering for Every Stage of Scale.
+                Built for Gaming Businesses.
               </h2>
               <p className="text-gray-400 mt-4 text-sm sm:text-base leading-relaxed font-sans">
-                Whether you operate an established enterprise platform with millions of active users or are launching a new entertainment venture, Oreng is your dedicated technical partner.
+                Whether you are a big gaming company or just starting out, Oreng is your trusted partner to build great games.
               </p>
             </div>
 
-            {/* Dynamic Active Segment Highlight Stage */}
             <div className="pt-6 border-t border-white/10 space-y-4">
               <div className="flex items-center gap-3">
                 <div className="w-11 h-11 rounded-2xl bg-[#FF5B14]/15 border border-[#FF5B14]/30 flex items-center justify-center text-[#FF782D]">
@@ -97,7 +94,7 @@ export const TargetIndustries: React.FC = () => {
 
               <div className="space-y-2 pt-2">
                 {current.highlights.map((h, hIdx) => (
-                  <div key={hIdx} className="flex items-center gap-2.5 text-xs font-mono text-gray-300">
+                  <div key={hIdx} className="flex items-center gap-2.5 text-xs text-gray-300">
                     <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                     <span>{h}</span>
                   </div>
@@ -114,7 +111,6 @@ export const TargetIndustries: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Borderless Segment Selector Rows */}
           <div className="lg:col-span-7 space-y-2.5">
             {industries.map((ind, idx) => {
               const Icon = ind.icon;
@@ -150,7 +146,7 @@ export const TargetIndustries: React.FC = () => {
                     </div>
                   </div>
 
-                  <span className={`text-xs font-mono font-bold transition ${
+                  <span className={`text-xs font-bold transition ${
                     isSelected ? 'text-[#FF782D]' : 'text-gray-500'
                   }`}>
                     0{idx + 1}

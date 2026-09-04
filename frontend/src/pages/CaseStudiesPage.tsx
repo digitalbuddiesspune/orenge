@@ -112,9 +112,14 @@ export const CaseStudiesPage: React.FC = () => {
                   <div className="lg:col-span-5">
                     <div className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl relative aspect-[4/3] group">
                       <img
-                        src={study.coverImage}
+                        src={study.coverImage || '/assets/casino_studio_hero.jpg'}
                         alt={study.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        onError={(e) => {
+                          e.currentTarget.onerror = null;
+                          e.currentTarget.src = '/assets/casino_studio_hero.jpg';
+                        }}
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0B0D13] via-transparent to-transparent" />
                       <div className="absolute bottom-4 left-4 right-4 bg-black/60 backdrop-blur-md p-3 rounded-xl border border-white/10 text-xs font-mono text-gray-300">

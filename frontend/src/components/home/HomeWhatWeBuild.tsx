@@ -6,21 +6,21 @@ import { BgAccentImage, HOME_BG_IMAGES, SectionBgImage } from './SectionBgImage'
 const offerings = [
   {
     title: 'Multiplayer Games',
-    description: 'Real-time Ludo, pool, and arena games with room systems, matchmaking, and server-authoritative sync.',
+    description: 'Online games like Ludo where friends play together in real time. Private rooms, quick matching, and smooth gameplay.',
     image: '/assets/multiplayer_games_bg.jpg',
-    tags: ['WebSocket', 'Room Lobbies', '2–4 Players'],
+    tags: ['Online Play', 'Private Rooms', '2–4 Players'],
   },
   {
     title: 'Card & Table Games',
-    description: 'Poker, Rummy, and Teen Patti engines with table UI, game logic, and wallet-ready APIs.',
+    description: 'Poker, Rummy, and Teen Patti games with beautiful tables, fair card dealing, and easy setup for your platform.',
     image: '/assets/poker_table_gameplay.jpg',
-    tags: ['Multi-Table', 'Game Logic', '2–6 Seats'],
+    tags: ['Multiple Tables', 'Fair Cards', '2–6 Players'],
   },
   {
     title: 'Board & Casual Games',
-    description: 'Branded board-game experiences and lightweight casual titles for mobile and web platforms.',
+    description: 'Fun board games and simple mobile games with your brand name, colours, and custom rules.',
     image: '/assets/ludo_3d_gameplay.jpg',
-    tags: ['Custom Rules', 'White-Label UI', 'Mobile + Web'],
+    tags: ['Your Branding', 'Custom Rules', 'Mobile + Web'],
   },
 ];
 
@@ -50,8 +50,8 @@ export const HomeWhatWeBuild: React.FC = () => {
             Games built around your platform.
           </h2>
           <p className="mt-4 text-[15px] text-neutral-400 leading-relaxed">
-            Oreng is a B2B game development studio. We design, build, and deploy custom games and
-            gaming technology that your business can own — not rent.
+            Oreng is a game-making company for businesses. We design, build, and launch custom games
+            that your company can fully own — not just rent.
           </p>
         </div>
 
