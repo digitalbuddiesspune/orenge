@@ -15,8 +15,11 @@ function authHeaders(): HeadersInit {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+
 async function adminRequest<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(path, {
+  const url = path.startsWith('http') ? path : `${API_BASE}${path}`;
+  const res = await fetch(url, {
     ...init,
     headers: {
       'Content-Type': 'application/json',
@@ -147,7 +150,7 @@ export const adminApi = {
       const form = new FormData();
       form.append('file', file);
       const token = localStorage.getItem(TOKEN_KEY);
-      const res = await fetch('/api/admin/uploads', {
+      const res = await fetch(`${API_BASE}/api/admin/uploads`, {
         method: 'POST',
         headers: token ? { Authorization: `Bearer ${token}` } : {},
         body: form,

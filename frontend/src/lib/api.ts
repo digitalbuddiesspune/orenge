@@ -1,8 +1,11 @@
 type ApiOk<T> = { success: true; data: T; meta?: unknown };
 type ApiErr = { success: false; message: string; errors?: unknown };
 
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || '').replace(/\/$/, '');
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(path, {
+  const url = path.startsWith('http') ? path : `${API_BASE}${path}`;
+  const res = await fetch(url, {
     headers: {
       'Content-Type': 'application/json',
       ...(init?.headers || {}),
