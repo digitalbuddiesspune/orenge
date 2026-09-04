@@ -374,20 +374,24 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const deleteBlogPost = (id: string) => setBlogPosts((prev) => prev.filter((p) => p.id !== id));
 
   const addLead = async (leadData: Omit<Lead, 'id' | 'createdAt' | 'status'>) => {
-    await api.submitContact({
-      fullName: leadData.fullName,
-      businessEmail: leadData.businessEmail,
-      phone: leadData.phone,
-      companyName: leadData.companyName,
-      companyWebsite: leadData.companyWebsite,
-      country: leadData.country,
-      lookingFor: leadData.lookingFor,
-      hasPlatform: leadData.hasPlatform,
-      budget: leadData.budget,
-      timeline: leadData.timeline,
-      projectDescription: leadData.projectDescription,
-      source: leadData.source,
-    });
+    try {
+      await api.submitContact({
+        fullName: leadData.fullName,
+        businessEmail: leadData.businessEmail,
+        phone: leadData.phone || '',
+        companyName: leadData.companyName || '',
+        companyWebsite: leadData.companyWebsite || '',
+        country: leadData.country || '',
+        lookingFor: leadData.lookingFor || 'Custom Game Development',
+        hasPlatform: leadData.hasPlatform || 'No',
+        budget: leadData.budget || '',
+        timeline: leadData.timeline || 'Exploring',
+        projectDescription: leadData.projectDescription || '',
+        source: leadData.source || 'Contact Page',
+      });
+    } catch (err) {
+      console.warn('[AppStateContext] submitContact API error, saved locally:', err);
+    }
 
     const newLead: Lead = {
       ...leadData,
@@ -416,19 +420,23 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const addDemoRequest = async (reqData: Omit<DemoRequest, 'id' | 'createdAt' | 'status'>) => {
-    await api.submitDemo({
-      fullName: reqData.fullName,
-      businessEmail: reqData.businessEmail,
-      phone: reqData.phone,
-      companyName: reqData.companyName,
-      companyWebsite: reqData.companyWebsite,
-      country: reqData.country,
-      gameSlug: reqData.gameSlug,
-      gameTitle: reqData.gameTitle,
-      preferredDate: reqData.preferredDate,
-      message: reqData.message,
-      source: 'Demo Request Portal',
-    });
+    try {
+      await api.submitDemo({
+        fullName: reqData.fullName,
+        businessEmail: reqData.businessEmail,
+        phone: reqData.phone || '',
+        companyName: reqData.companyName || '',
+        companyWebsite: reqData.companyWebsite || '',
+        country: reqData.country || '',
+        gameSlug: reqData.gameSlug || '',
+        gameTitle: reqData.gameTitle || '',
+        preferredDate: reqData.preferredDate || '',
+        message: reqData.message || '',
+        source: 'Demo Request Portal',
+      });
+    } catch (err) {
+      console.warn('[AppStateContext] submitDemo API error, saved locally:', err);
+    }
 
     const newReq: DemoRequest = {
       ...reqData,

@@ -18,9 +18,9 @@ const leadSchema = new Schema(
     fullName: { type: String, required: true, trim: true },
     businessEmail: { type: String, required: true, lowercase: true, trim: true },
     phone: { type: String, default: '', trim: true },
-    companyName: { type: String, required: true, trim: true },
+    companyName: { type: String, default: '', trim: true },
     companyWebsite: { type: String, default: '', trim: true },
-    country: { type: String, required: true, trim: true },
+    country: { type: String, default: '', trim: true },
     lookingFor: { type: String, default: '', trim: true },
     hasPlatform: {
       type: String,
