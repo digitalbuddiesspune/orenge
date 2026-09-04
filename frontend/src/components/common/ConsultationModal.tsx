@@ -1,22 +1,18 @@
 import React, { useState } from 'react';
 import { useAppState } from '../../contexts/AppStateContext';
-import { X, CheckCircle2, Send, Flame } from 'lucide-react';
+import { X, CheckCircle2, Send, Sparkles, Phone, Mail, User, Building, MessageSquare } from 'lucide-react';
 
 export const ConsultationModal: React.FC = () => {
   const { isConsultationModalOpen, closeConsultationModal, prefilledRequirement, addLead } = useAppState();
-  
+
   const [formData, setFormData] = useState({
     fullName: '',
     businessEmail: '',
     phone: '',
     companyName: '',
-    companyWebsite: '',
-    country: '',
     lookingFor: prefilledRequirement || 'Custom Game Development',
-    hasPlatform: 'Yes' as 'Yes' | 'No' | 'Under Development',
-    budget: '$30,000 – $60,000',
-    timeline: '1–3 Months' as 'Immediately' | '1–3 Months' | '3–6 Months' | '6+ Months' | 'Exploring',
-    projectDescription: ''
+    budget: '$15,000 – $30,000',
+    projectDescription: '',
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -34,13 +30,13 @@ export const ConsultationModal: React.FC = () => {
         fullName: formData.fullName,
         businessEmail: formData.businessEmail,
         phone: formData.phone,
-        companyName: formData.companyName,
-        companyWebsite: formData.companyWebsite,
-        country: formData.country,
+        companyName: formData.companyName || 'Not Specified',
+        companyWebsite: '',
+        country: 'Global / Online',
         lookingFor: formData.lookingFor,
-        hasPlatform: formData.hasPlatform,
+        hasPlatform: 'No',
         budget: formData.budget,
-        timeline: formData.timeline,
+        timeline: 'Exploring',
         projectDescription: formData.projectDescription,
         source: 'Quick Consultation Modal',
       });
@@ -59,19 +55,19 @@ export const ConsultationModal: React.FC = () => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#121622] border border-white/10 rounded-2xl shadow-2xl overflow-hidden my-8 animate-in fade-in zoom-in-95 duration-200">
+      <div className="relative w-full max-w-xl bg-[#121622] border border-white/10 rounded-2xl shadow-2xl overflow-hidden my-6 animate-in fade-in zoom-in-95 duration-200">
         
         {/* Modal Header */}
-        <div className="flex items-center justify-between p-6 border-b border-white/10 bg-[#0E111B]">
+        <div className="flex items-center justify-between p-5 border-b border-white/10 bg-[#0E111B]">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#FF5B14] to-[#F59E0B] p-0.5">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF5B14] to-[#F59E0B] p-0.5">
               <div className="w-full h-full bg-[#0B0D13] rounded-[10px] flex items-center justify-center">
-                <Flame className="w-4 h-4 text-[#FF782D]" />
+                <Sparkles className="w-5 h-5 text-[#FF782D]" />
               </div>
             </div>
             <div>
-              <h3 className="font-display font-bold text-lg text-white">Discuss Your Game Project</h3>
-              <p className="text-xs text-gray-400">Connect directly with Oreng's game architects & engineering leads</p>
+              <h3 className="font-display font-bold text-lg text-white">Book Free Consultation</h3>
+              <p className="text-xs text-gray-400">Discuss your game project & get quick cost & timeline estimates</p>
             </div>
           </div>
           <button
@@ -83,209 +79,172 @@ export const ConsultationModal: React.FC = () => {
         </div>
 
         {/* Modal Body */}
-        <div className="p-6 max-h-[75vh] overflow-y-auto">
+        <div className="p-5 max-h-[78vh] overflow-y-auto">
           {isSubmitted ? (
-            <div className="py-12 text-center space-y-4">
+            <div className="py-10 text-center space-y-4">
               <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto animate-bounce">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
               <h4 className="font-display text-2xl font-bold text-white">Thank You, {formData.fullName}!</h4>
               <p className="text-gray-300 text-sm max-w-md mx-auto leading-relaxed">
-                Your technical requirements have been received. An Oreng solutions architect will review your project and email you within 24 hours.
+                Your request has been received. Our team will contact you shortly via email or WhatsApp.
               </p>
-              <div className="p-4 bg-white/5 rounded-xl border border-white/5 max-w-md mx-auto text-left text-xs space-y-1 font-mono text-gray-400">
-                <p>Company: <span className="text-white">{formData.companyName}</span></p>
-                <p>Requirement: <span className="text-[#FF782D]">{formData.lookingFor}</span></p>
-                <p>Status: <span className="text-emerald-400">In Review by Oreng Team</span></p>
+              <div className="p-4 bg-white/5 rounded-xl border border-white/5 max-w-md mx-auto text-left text-xs space-y-1.5 text-gray-300">
+                <p><span className="text-gray-500">Service:</span> <span className="text-[#FF782D] font-medium">{formData.lookingFor}</span></p>
+                <p><span className="text-gray-500">Contact:</span> <span className="text-white font-medium">{formData.businessEmail || formData.phone}</span></p>
+                <p><span className="text-gray-500">Status:</span> <span className="text-emerald-400 font-medium">● We will reply within 24 Hours</span></p>
               </div>
               <button
                 onClick={handleClose}
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white text-sm font-semibold hover:opacity-95 transition mt-4 cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white text-sm font-semibold hover:opacity-95 transition mt-2 cursor-pointer shadow-lg shadow-[#FF5B14]/20"
               >
-                Close Window
+                Done
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                
-                {/* Full Name */}
+              
+              {/* Row 1: Name & Phone */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Full Name *</label>
+                  <label className="flex items-center gap-1.5 text-xs font-medium text-gray-300 mb-1.5">
+                    <User className="w-3.5 h-3.5 text-[#FF782D]" />
+                    Your Name <span className="text-[#FF5B14]">*</span>
+                  </label>
                   <input
                     type="text"
                     required
-                    placeholder="e.g. John Doe"
+                    placeholder="e.g. Rahul Sharma"
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14]"
+                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14] transition"
                   />
                 </div>
 
-                {/* Business Email */}
                 <div>
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Business Email *</label>
+                  <label className="flex items-center gap-1.5 text-xs font-medium text-gray-300 mb-1.5">
+                    <Phone className="w-3.5 h-3.5 text-[#FF782D]" />
+                    Phone / WhatsApp <span className="text-[#FF5B14]">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="+91 98765 43210"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14] transition"
+                  />
+                </div>
+              </div>
+
+              {/* Row 2: Email & Company */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div>
+                  <label className="flex items-center gap-1.5 text-xs font-medium text-gray-300 mb-1.5">
+                    <Mail className="w-3.5 h-3.5 text-[#FF782D]" />
+                    Email Address <span className="text-[#FF5B14]">*</span>
+                  </label>
                   <input
                     type="email"
                     required
-                    placeholder="name@company.com"
+                    placeholder="name@gmail.com"
                     value={formData.businessEmail}
                     onChange={(e) => setFormData({ ...formData, businessEmail: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14]"
+                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14] transition"
                   />
                 </div>
 
-                {/* Phone / WhatsApp */}
                 <div>
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Phone / WhatsApp</label>
+                  <label className="flex items-center gap-1.5 text-xs font-medium text-gray-300 mb-1.5">
+                    <Building className="w-3.5 h-3.5 text-gray-400" />
+                    Company / Brand Name <span className="text-gray-500 text-[11px]">(Optional)</span>
+                  </label>
                   <input
                     type="text"
-                    placeholder="+1 (555) 000-0000"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14]"
-                  />
-                </div>
-
-                {/* Company Name */}
-                <div>
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Company Name *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Acme Gaming Corp"
+                    placeholder="e.g. My Brand / Studio"
                     value={formData.companyName}
                     onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14]"
+                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14] transition"
                   />
                 </div>
+              </div>
 
-                {/* Company Website */}
+              {/* Row 3: Requirement & Budget */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                 <div>
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Company Website</label>
-                  <input
-                    type="url"
-                    placeholder="https://acmegaming.com"
-                    value={formData.companyWebsite}
-                    onChange={(e) => setFormData({ ...formData, companyWebsite: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14]"
-                  />
-                </div>
-
-                {/* Country */}
-                <div>
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Country / Region *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. India, UK, USA, Singapore"
-                    value={formData.country}
-                    onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14]"
-                  />
-                </div>
-
-                {/* What are you looking for? */}
-                <div className="sm:col-span-2">
-                  <label className="block text-xs font-mono text-gray-300 mb-1">What Are You Looking For? *</label>
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    What are you looking for? <span className="text-[#FF5B14]">*</span>
+                  </label>
                   <select
                     value={formData.lookingFor}
                     onChange={(e) => setFormData({ ...formData, lookingFor: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#FF5B14]"
+                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#FF5B14] transition"
                   >
-                    <option value="Custom Game Development">Custom Game Development</option>
-                    <option value="Multiplayer Game (Ludo / Board)">Multiplayer Game (Ludo / Board)</option>
-                    <option value="Card Game (Rummy / Teen Patti Core)">Card Game (Rummy / Teen Patti Core)</option>
-                    <option value="Multiplier / Crash Game Engine">Multiplier / Crash Game Engine</option>
-                    <option value="Casual & Strategy Games">Casual & Strategy Games</option>
-                    <option value="White-Label Game Solutions">White-Label Game Solutions</option>
-                    <option value="Game API Integration">Game API Integration</option>
-                    <option value="Existing Game Customization">Existing Game Customization</option>
-                    <option value="Other Bespoke Project">Other Bespoke Project</option>
+                    <option value="Custom Game Development">🎲 Custom Game Development</option>
+                    <option value="Multiplayer Game (Ludo / Board)">🎯 Ludo / Board Games</option>
+                    <option value="Card Game (Rummy / Teen Patti)">🃏 Card Games (Rummy / Teen Patti)</option>
+                    <option value="Multiplier / Crash Game Engine">🚀 Crash / Multiplier Game</option>
+                    <option value="White-Label Game Solutions">📦 Ready White-Label Game</option>
+                    <option value="Game API Integration">🔌 Game API Integration</option>
+                    <option value="Other Bespoke Project">💡 Other / New Game Idea</option>
                   </select>
                 </div>
 
-                {/* Platform Status */}
                 <div>
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Do you have a live platform?</label>
-                  <select
-                    value={formData.hasPlatform}
-                    onChange={(e) => setFormData({ ...formData, hasPlatform: e.target.value as any })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#FF5B14]"
-                  >
-                    <option value="Yes">Yes, live platform in production</option>
-                    <option value="Under Development">Under Development / Pre-launch</option>
-                    <option value="No">No, starting from scratch</option>
-                  </select>
-                </div>
-
-                {/* Timeline */}
-                <div>
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Expected Timeline</label>
-                  <select
-                    value={formData.timeline}
-                    onChange={(e) => setFormData({ ...formData, timeline: e.target.value as any })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#FF5B14]"
-                  >
-                    <option value="Immediately">Immediately (Urgent)</option>
-                    <option value="1–3 Months">1–3 Months</option>
-                    <option value="3–6 Months">3–6 Months</option>
-                    <option value="6+ Months">6+ Months</option>
-                    <option value="Exploring">Exploring / Budgeting</option>
-                  </select>
-                </div>
-
-                {/* Budget Range */}
-                <div className="sm:col-span-2">
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Estimated Budget Range</label>
+                  <label className="block text-xs font-medium text-gray-300 mb-1.5">
+                    Estimated Budget <span className="text-gray-500 text-[11px]">(Optional)</span>
+                  </label>
                   <select
                     value={formData.budget}
                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#FF5B14]"
+                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white focus:outline-none focus:border-[#FF5B14] transition"
                   >
-                    <option value="$15,000 – $30,000">$15,000 – $30,000 (Entry White-Label / Prototype)</option>
-                    <option value="$30,000 – $60,000">$30,000 – $60,000 (Standard Custom Game + Server)</option>
-                    <option value="$60,000 – $100,000">$60,000 – $100,000 (Multi-Table Engine + Full Suite)</option>
-                    <option value="$100,000+">$100,000+ (Enterprise Multi-Game Platform SDK)</option>
+                    <option value="$15,000 – $30,000">Flexible / Starter ($15k - $30k)</option>
+                    <option value="$30,000 – $60,000">Standard Project ($30k - $60k)</option>
+                    <option value="$60,000 – $100,000">Advanced / Multi-Game ($60k - $100k)</option>
+                    <option value="$100,000+">Enterprise Platform ($100k+)</option>
                   </select>
                 </div>
-
-                {/* Project Description */}
-                <div className="sm:col-span-2">
-                  <label className="block text-xs font-mono text-gray-300 mb-1">Project Description *</label>
-                  <textarea
-                    required
-                    rows={3}
-                    placeholder="Tell us about the game mechanics, target platforms (Web, iOS, Android), expected player concurrency, or specific integrations required..."
-                    value={formData.projectDescription}
-                    onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
-                    className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14]"
-                  />
-                </div>
-
               </div>
 
-              <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                <span className="text-[11px] text-gray-500 font-mono">
-                  🔒 Strictly Confidential B2B Consultation
+              {/* Message / Details */}
+              <div>
+                <label className="flex items-center gap-1.5 text-xs font-medium text-gray-300 mb-1.5">
+                  <MessageSquare className="w-3.5 h-3.5 text-gray-400" />
+                  Tell us a bit about your idea <span className="text-gray-500 text-[11px]">(Optional)</span>
+                </label>
+                <textarea
+                  rows={2}
+                  placeholder="Share any details, reference games, or specific features you need..."
+                  value={formData.projectDescription}
+                  onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14] transition resize-none"
+                />
+              </div>
+
+              {/* Footer / Submit */}
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <span className="text-xs text-gray-400 flex items-center gap-1.5">
+                  🔒 100% Free & Confidential Consultation
                 </span>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-[#FF5B14]/30 hover:opacity-95 transition disabled:opacity-50 cursor-pointer"
+                  className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#FF5B14]/30 hover:opacity-95 transition disabled:opacity-50 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <span>Submitting...</span>
                   ) : (
                     <>
-                      <span>Request Consultation</span>
+                      <span>Get Free Consultation</span>
                       <Send className="w-4 h-4" />
                     </>
                   )}
                 </button>
               </div>
+
               {submitError && (
-                <p className="text-sm text-red-400 font-mono mt-2">{submitError}</p>
+                <p className="text-xs text-red-400 font-mono mt-1 text-center">{submitError}</p>
               )}
             </form>
           )}
@@ -295,3 +254,4 @@ export const ConsultationModal: React.FC = () => {
     </div>
   );
 };
+
