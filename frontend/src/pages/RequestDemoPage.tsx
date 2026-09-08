@@ -66,29 +66,29 @@ export const RequestDemoPage: React.FC = () => {
         keywords="Game Demo Request, Test Game Engine, Ludo Demo, Rummy Engine Demo"
       />
 
-      <div className="pt-32 pb-24 min-h-screen bg-[#0B0D13]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="pt-28 sm:pt-36 pb-24 min-h-screen bg-[#07090E] text-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5B14]/10 border border-[#FF5B14]/30 text-[#FF782D] text-xs font-mono mb-3">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF5B14]/10 border border-[#FF5B14]/30 text-[#FF782D] text-xs font-bold uppercase tracking-wider">
               <Gamepad2 className="w-3.5 h-3.5" />
               <span>LIVE TECHNICAL DEMONSTRATION</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
+            <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight leading-tight">
               Request a Live Game Demo.
             </h1>
-            <p className="text-gray-400 mt-3 text-base sm:text-lg leading-relaxed">
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               Experience our live room synchronization, inspect anti-cheat server telemetry, and test our unified platform APIs in a dedicated sandbox environment.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Left Column: Demo Booking Form */}
-            <div className="lg:col-span-8 bg-[#121622] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl">
+            <div className="lg:col-span-8 bg-[#101420] border border-white/10 rounded-3xl p-5 sm:p-10 shadow-2xl">
               {isSubmitted ? (
-                <div className="py-16 text-center space-y-4">
+                <div className="py-12 sm:py-16 text-center space-y-4">
                   <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto animate-bounce">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>

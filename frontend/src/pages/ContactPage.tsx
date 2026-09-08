@@ -56,29 +56,29 @@ export const ContactPage: React.FC = () => {
         keywords="Contact Game Developers, Game Consultation, Hire Game Studio, B2B Game Inquiry"
       />
 
-      <div className="pt-32 pb-24 min-h-screen bg-[#0B0D13]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="pt-28 sm:pt-36 pb-24 min-h-screen bg-[#07090E] text-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           
           {/* Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF5B14]/10 border border-[#FF5B14]/30 text-[#FF782D] text-xs font-mono mb-3">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF5B14]/10 border border-[#FF5B14]/30 text-[#FF782D] text-xs font-bold uppercase tracking-wider">
               <Mail className="w-3.5 h-3.5" />
               <span>DIRECT TECHNICAL INQUIRY</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
+            <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight leading-tight">
               Let's Build Your Next Game.
             </h1>
-            <p className="text-gray-400 mt-3 text-base sm:text-lg leading-relaxed">
+            <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
               Tell us what you're building and our team will discuss the technical requirements, architecture design, and commercial terms with you.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             
             {/* Left Column: Form */}
-            <div className="lg:col-span-8 bg-[#121622] border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl">
+            <div className="lg:col-span-8 bg-[#101420] border border-white/10 rounded-3xl p-5 sm:p-10 shadow-2xl">
               {isSubmitted ? (
-                <div className="py-16 text-center space-y-4">
+                <div className="py-12 sm:py-16 text-center space-y-4">
                   <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto animate-bounce">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
@@ -88,7 +88,7 @@ export const ContactPage: React.FC = () => {
                   <p className="text-gray-300 text-sm max-w-md mx-auto leading-relaxed">
                     Thank you for sharing your project requirements. An Oreng solutions architect has been assigned to your inquiry and will reach out via <strong className="text-white">{formData.businessEmail}</strong> within 24 business hours.
                   </p>
-                  <div className="p-4 bg-white/5 rounded-xl border border-white/5 max-w-md mx-auto text-left text-xs font-mono text-gray-400 space-y-1">
+                  <div className="p-4 bg-white/5 rounded-xl border border-white/5 max-w-md mx-auto text-left text-xs text-gray-300 space-y-1">
                     <p>Company: <span className="text-white">{formData.companyName}</span></p>
                     <p>Requirement: <span className="text-[#FF782D]">{formData.lookingFor}</span></p>
                     <p>Timeline: <span className="text-white">{formData.timeline}</span></p>
@@ -111,7 +111,7 @@ export const ContactPage: React.FC = () => {
                         projectDescription: ''
                       });
                     }}
-                    className="px-6 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-xs font-semibold transition"
+                    className="px-6 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-gray-300 hover:text-white text-xs font-semibold transition cursor-pointer"
                   >
                     Submit Another Inquiry
                   </button>
@@ -122,23 +122,23 @@ export const ContactPage: React.FC = () => {
                     Project Specifications Form
                   </h3>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     {/* Full Name */}
                     <div>
-                      <label className="block text-xs font-mono text-gray-300 mb-1.5">Full Name *</label>
+                      <label className="block text-xs font-medium text-gray-300 mb-1.5">Full Name *</label>
                       <input
                         type="text"
                         required
-                        placeholder="Johnathan Doe"
+                        placeholder="e.g. Johnathan Doe"
                         value={formData.fullName}
                         onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14]"
+                        className="w-full px-4 py-3 bg-black/40 border border-white/10 rounded-xl text-sm text-white placeholder-gray-500 focus:outline-none focus:border-[#FF5B14] transition"
                       />
                     </div>
 
                     {/* Business Email */}
                     <div>
-                      <label className="block text-xs font-mono text-gray-300 mb-1.5">Business Email *</label>
+                      <label className="block text-xs font-medium text-gray-300 mb-1.5">Business Email *</label>
                       <input
                         type="email"
                         required
