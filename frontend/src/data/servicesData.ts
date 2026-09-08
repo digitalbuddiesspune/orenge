@@ -5,160 +5,160 @@ export const servicesData: ServiceItem[] = [
     id: 'srv-custom-game-dev',
     slug: 'custom-game-development',
     title: 'Custom Game Development',
-    tagline: 'End-to-end bespoke game engineering engineered to your exact product specs.',
-    description: 'We develop custom 2D/3D games from original concepts or licensed IP. Our multidisciplinary engineering team delivers client-side rendering, game loop optimization, mathematics, sound design, and full source code handover.',
+    tagline: 'Turn your unique game idea into a complete, ready-to-play mobile & web game.',
+    description: 'Have an original game idea? We design the rules, draw all characters and screens, add fun sound effects, and build the entire game from scratch. You get 100% full ownership of the complete code and design.',
     iconName: 'Gamepad2',
     deliverables: [
-      'Game Design Document (GDD) & Math Specification',
-      'Production-ready Game Client (Web HTML5/Canvas/WebGL & Native)',
-      'Custom Sound Effects, FX Particles & Visual Assets',
-      'Full Source Code Handover & IP Rights'
+      'Complete Ready-to-Play Game (Android, iPhone & Web)',
+      'Eye-Catching Graphics, Characters & Sound FX',
+      'Clear Game Rules & Fair Winning Logic',
+      '100% Full Code & Design Ownership'
     ],
-    technicalSpecs: ['PixiJS / Phaser / Canvas 2D', '60 FPS Mobile Optimization', 'Responsive Dynamic Viewports', 'Asset Bundle Compression < 5MB'],
-    businessBenefits: ['100% Proprietary IP ownership', 'Differentiate from generic white-label competitors', 'Full freedom to iterate game mechanics']
+    technicalSpecs: ['Smooth on all Mobile Phones', 'Eye-Catching Graphics & Sound', 'Play on App or Browser', 'Quick Loading under 5MB'],
+    businessBenefits: ['100% Full Ownership of your game', 'Unique game that stands out from competitors', 'Freedom to add new features anytime']
   },
   {
     id: 'srv-multiplayer',
     slug: 'multiplayer-game-development',
     title: 'Real-Time Multiplayer Systems',
-    tagline: 'Sub-50ms synchronized room engines capable of scaling to hundreds of thousands of concurrent users.',
-    description: 'Specialized multiplayer architecture using authoritative server logic, deterministic state interpolation, and binary WebSocket protocols. Protect your games from client tampering while guaranteeing flawless peer synchronization.',
+    tagline: 'Connect thousands of online players with zero lag and zero cheating.',
+    description: 'We create fast online multiplayer rooms where friends or players across the world can play together in real-time. Turns happen instantly with no lag, and automatic anti-cheat ensures 100% fair play.',
     iconName: 'Users',
     deliverables: [
-      'Stateful Game Room Servers (Go / Node.js / Rust)',
-      'Dynamic Matchmaking & ELO Rating Microservices',
-      'Private Custom Rooms with Shareable Passcodes',
-      'Auto-Reconnect Buffering & Disconnection Guards'
+      'Instant Online Matchmaking with Real Players',
+      'Private Rooms with Shareable 6-Digit Codes',
+      'Built-in Anti-Cheat & 100% Fair Play Protection',
+      'Auto-Reconnect if Player’s Internet drops'
     ],
-    technicalSpecs: ['WebSockets & Protobuf binary encoding', 'Redis Cluster pub/sub synchronization', 'Low-latency global edge routing', 'Sub-50ms turn synchronization'],
-    businessBenefits: ['Eliminates player sync lag & drops', 'Ensures provably fair cheating-free gameplay', 'Seamlessly handles massive traffic spikes']
+    technicalSpecs: ['Instant Turn Reactions (< 40ms)', 'Play with Friends or Online', 'Handles 50,000+ Live Players', 'Works on Weak Internet'],
+    businessBenefits: ['Zero lag keeps players happy', 'Fair gameplay builds player trust', 'Easily handles huge tournament crowds']
   },
   {
     id: 'srv-ui-ux',
     slug: 'game-ui-ux-design',
     title: 'Game UI/UX & Motion Design',
-    tagline: 'Modern, high-conversion game interfaces and kinetic motion graphics tailored for maximum engagement.',
-    description: 'We craft intuitive player onboarding, frictionless betting or turn controls, captivating particle animations, and tactile haptic feedback designed to maximize player retention and session length.',
+    tagline: 'Simple, beautiful screens and exciting animations that players love.',
+    description: 'We design clean, easy-to-use game screens so any player can start playing in 5 seconds without feeling confused. Includes exciting coin animations, celebration effects, and large, clear buttons.',
     iconName: 'Sparkles',
     deliverables: [
-      'Interactive Figma Prototypes & Design Systems',
-      'Motion Spritesheets, Spine 2D Animations & Lottie FX',
-      'Responsive Mobile-First HUD & Table Layouts',
-      'Localized Multi-Language Typography & Layouts'
+      'Simple Menus & Big, Easy-to-Tap Buttons',
+      'Exciting Winning & Coin Flying Animations',
+      'Perfect Look on Small, Medium & Big Phones',
+      'Multi-Language Support (Hindi, English & Regional)'
     ],
-    technicalSpecs: ['Spine 2D / DragonBones integration', 'High DPI Retina vector rendering', 'CSS3 & Canvas shader lighting effects'],
-    businessBenefits: ['Higher player retention & lower bounce rates', 'Effortless navigation on low-end mobile devices', 'Polished international studio aesthetic']
+    technicalSpecs: ['1-Tap Easy Controls', 'Smooth 60 FPS Animations', 'Clear Hindi & English Text', 'Modern Vibrant Visuals'],
+    businessBenefits: ['Players understand the game instantly', 'Exciting win celebrations increase playtime', 'Works smoothly on budget mobile phones']
   },
   {
     id: 'srv-backend-dev',
     slug: 'backend-development',
     title: 'Game Backend & Engine Logic',
-    tagline: 'Robust, distributed server architectures with bulletproof state persistence and security.',
-    description: 'Game logic belongs on the server. We engineer fault-tolerant backend infrastructures that process millions of game turns, handle player wallets, validate game rules, and maintain rock-solid uptime.',
+    tagline: 'Rock-solid cloud servers that handle millions of game turns safely.',
+    description: 'The secure brain behind your game. Our cloud servers calculate every move, dice roll, score, and wallet balance instantly without errors, crashes, or data loss.',
     iconName: 'Server',
     deliverables: [
-      'Deterministic Game State Engines',
-      'Distributed Session Managers & Microservices',
-      'High-throughput Transactional Databases',
-      'Automated Disaster Recovery & Data Replication'
+      '100% Accurate Score & Balance Calculations',
+      'Zero-Crash 24/7 Server Reliability',
+      'Instant Wallet Deposit & Win Payout Updates',
+      'Automatic Daily Data Backup & Top Security'
     ],
-    technicalSpecs: ['Go / Node.js / Rust backend daemons', 'PostgreSQL / MongoDB / Redis clusters', 'Docker / Kubernetes containerization'],
-    businessBenefits: ['Zero financial discrepancies', '99.99% server uptime SLA', 'Horizontal scaling without downtime']
+    technicalSpecs: ['99.99% Guaranteed Server Uptime', '100% Safe & Encrypted Data', 'Instant Balance Updates', 'Automated Daily Backups'],
+    businessBenefits: ['Zero money calculation mistakes', 'Game never crashes during peak hours', 'Safe from server overloads']
   },
   {
     id: 'srv-api-integration',
     slug: 'api-development-integration',
     title: 'Game API & Platform Integration',
-    tagline: 'Seamlessly plug our games into your existing platform, user database, and wallet systems.',
-    description: 'We provide modular REST, GraphQL, and Webhook APIs that allow you to drop Oreng games directly into your existing web, iOS, or Android gaming platform in days rather than months.',
+    tagline: 'Easily connect our games into your existing website, app, or wallet in days.',
+    description: 'Already have a website or mobile app? We make it super easy to drop our games right into your platform. Players can use their existing login, and money/points connect automatically.',
     iconName: 'Code2',
     deliverables: [
-      'Single Sign-On (SSO) & JWT Token Integration',
-      'Seamless Wallet / Credit Hooks (Debit, Credit, Rollback)',
-      'Real-Time Webhook Notification Streams',
-      'Comprehensive Interactive Postman & OpenAPI Docs'
+      '1-Click Login using your existing User Accounts',
+      'Automatic Wallet Deposit & Withdrawal Sync',
+      'Instant Match Result & Winner Alerts',
+      'Full Setup & Testing completed in under 7 Days'
     ],
-    technicalSpecs: ['HMAC SHA-256 Signature Verification', 'Idempotent Transaction Endpoints', 'Sub-100ms API Response Times'],
-    businessBenefits: ['Fast time-to-market (integrate in < 1 week)', 'No need to rewrite your existing platform auth', 'Zero-leak financial reconciliation']
+    technicalSpecs: ['Quick 7-Day Fast Setup', 'Works with UPI & Payment Gateways', 'Simple Plug & Play Connection', 'Instant Match Alerts'],
+    businessBenefits: ['Launch fast without rebuilding your app', 'Seamless experience for your existing users', 'Safe and verified wallet transactions']
   },
   {
     id: 'srv-admin-panel',
     slug: 'game-admin-panel',
     title: 'Game Admin & Telemetry Systems',
-    tagline: 'Comprehensive real-time command center for telemetry, RTP tweaking, player management, and fraud detection.',
-    description: 'Gain total control over your game operations with a dedicated admin portal. Monitor active rooms, configure game parameters on the fly, inspect suspicious behavior, and generate financial reports.',
+    tagline: 'Your master control dashboard to see live players, earnings, and game rules.',
+    description: 'Manage your entire gaming business from a simple dashboard on your phone or laptop. See how many players are online, check daily revenue, change winning rates, and block fraudsters with one click.',
     iconName: 'ShieldAlert',
     deliverables: [
-      'Real-Time Match & Player Inspector Dashboard',
-      'Live Parameter & Rule Configuration Editor',
-      'Suspicious Activity & Anti-Collusion Flagging',
-      'Automated Financial, Rake & Retention Reports'
+      'Live Screen showing Active Players & Rooms',
+      '1-Click Game Rules & Winning Rate Adjuster',
+      'Daily Revenue & Player Activity Reports',
+      'Anti-Fraud & Suspicious Player Blocker'
     ],
-    technicalSpecs: ['React / Vite Admin Interface', 'Role-Based Access Control (RBAC)', 'Audit Log Tracing & Replay Player'],
-    businessBenefits: ['Empower operations without engineer dependency', 'Instant dispute resolution with replay verification', 'Complete operational transparency']
+    technicalSpecs: ['No Coding Knowledge Required', 'Live Real-Time Earnings', 'Works on Mobile & Laptop', 'Manager & Staff Access Roles'],
+    businessBenefits: ['Control your entire game without developers', 'Instantly check profits and player counts', 'Stop cheaters and fraudsters immediately']
   },
   {
     id: 'srv-white-label',
     slug: 'white-label-game-solutions',
     title: 'White-Label Game Solutions',
-    tagline: 'Production-ready game titles customized with your branding, colors, and platform rules.',
-    description: 'Accelerate your go-to-market with battle-tested game engines. We rebrand our proven titles (Ludo, Card Engines, Dice, Casual) to match your visual identity, configure your custom rules, and deploy onto your servers.',
+    tagline: 'Ready-to-launch games customized with your brand logo and colors in 2 weeks.',
+    description: 'Want to launch quickly? Choose from our proven, ready-made games (Ludo, Rummy, Teen Patti, Roulette, Crash). We add your company logo, customize colors, set your rules, and launch it for you.',
     iconName: 'Layers',
     deliverables: [
-      'Custom Theming & Brand Assets Integration',
-      'Configured House Commission & Table Tiers',
-      'White-label Mobile App Builds (Android/iOS)',
-      'Direct Cloud Staging & Production Deployment'
+      'Customized with Your Logo, Brand Colors & Name',
+      'Ready Android App, iPhone App & Web Link',
+      'Your Custom Table Limits & Commission Rates',
+      'Complete Setup & Launch in under 14 Days'
     ],
-    technicalSpecs: ['Pre-certified RNG logic', 'Automated build pipeline (CI/CD)', 'Turnkey multi-currency support'],
-    businessBenefits: ['Launch in under 2 weeks', 'Significantly lower upfront capital investment', 'Battle-tested stability under heavy load']
+    technicalSpecs: ['Fast 2-Week Launch', 'Certified Fair Random Dice/Cards', 'Multiple Language & Currency Options', 'Ready App Store Builds'],
+    businessBenefits: ['Start earning in under 2 weeks', 'Much lower upfront development cost', 'Battle-tested games with zero bugs']
   },
   {
     id: 'srv-qa-testing',
     slug: 'game-testing-qa',
     title: 'Game QA & Load Testing',
-    tagline: 'Exhaustive functional, edge-case, and high-concurrency stress testing before public launch.',
-    description: 'Our QA engineers subject every game build to rigorous headless bot simulations, packet-loss testing, device fragmentation verification, and automated security penetration tests.',
+    tagline: 'Rigorous testing on 100+ phone models so your game never crashes.',
+    description: 'Before your real players join, we test your game with 100,000 automated virtual players, weak 2G/3G internet simulations, and budget smartphones to ensure a 100% bug-free experience.',
     iconName: 'CheckCircle2',
     deliverables: [
-      'Automated Headless Bot Simulation up to 100k Users',
-      'Network Chaos & Packet-Loss Tolerance Tests',
-      'Cross-Device & Cross-Browser Verification Matrices',
-      'Comprehensive Security & Penetration Audit Reports'
+      'Tested with 100,000 Virtual Online Players',
+      'Tested on Cheap Androids, iPhones & Tablets',
+      'Tested on Weak & Slow Internet Connections',
+      'Complete Bug-Free Quality Guarantee'
     ],
-    technicalSpecs: ['K6 & Artillery load testing engines', 'Device farm automation', 'WebSocket stress benchmarks'],
-    businessBenefits: ['Zero launch-day crashes or server meltdowns', 'Flawless performance across tier-2/3 network connections', 'Confidence in critical financial state logic']
+    technicalSpecs: ['Tested up to 100,000 Live Players', 'Tested on Budget & High-End Phones', 'Slow Internet Resilience Test', '100% Bug-Free Report'],
+    businessBenefits: ['Zero embarrassing crashes on launch day', 'Smooth gameplay even on cheap mobile phones', 'Complete confidence in game stability']
   },
   {
     id: 'srv-deployment',
     slug: 'cloud-deployment-devops',
     title: 'Cloud Deployment & DevOps',
-    tagline: 'Enterprise cloud infrastructure designed for automatic horizontal scaling and global edge delivery.',
-    description: 'We architect and provision production environments on AWS, Google Cloud, or your private servers using infrastructure-as-code, automatic cluster autoscaling, and global CDN caching.',
+    tagline: 'Fast and secure cloud hosting that automatically expands with player growth.',
+    description: 'We set up and host your game on world-class cloud platforms (AWS / Google Cloud). When player traffic surges during weekends or festivals, the servers automatically expand so the game never slows down.',
     iconName: 'Cloud',
     deliverables: [
-      'Terraform / Kubernetes Infrastructure Scripts',
-      'Auto-scaling Server Clusters with Zero Downtime',
-      'Global Cloudflare / CloudFront CDN Configuration',
-      'Continuous Integration & Continuous Delivery (CI/CD)'
+      'Complete Cloud Server Setup (AWS or Google Cloud)',
+      'Automatic Server Expansion during Festival Traffic',
+      'High-Speed Global Loading across India & Worldwide',
+      '24/7 Auto-Restart Protection against Downtime'
     ],
-    technicalSpecs: ['AWS ECS / EKS / Fargate', 'Prometheus & Grafana Monitoring', 'Automated Health Checks & Self-Healing'],
-    businessBenefits: ['Optimized cloud costs (scale on demand)', 'Low latency for players across the globe', 'Zero-downtime rolling updates']
+    technicalSpecs: ['Fast 1-Second Game Load Time', 'Auto-Scales for Any Traffic Spike', 'Low Monthly Cloud Server Cost', 'Global High-Speed Servers'],
+    businessBenefits: ['Players enjoy instant, lag-free loading', 'Never worry about server crashes during big events', 'Optimized monthly hosting bills']
   },
   {
     id: 'srv-maintenance',
     slug: 'maintenance-support',
     title: '24/7 SLA Maintenance & Support',
-    tagline: 'Dedicated engineering support, proactive monitoring, and continuous game feature upgrades.',
-    description: 'We don’t abandon you post-launch. Our team provides dedicated SLA support packages, real-time alert monitoring, security patches, OS compatibility updates, and ongoing feature enhancements.',
+    tagline: 'Round-the-clock technical support team always reachable on WhatsApp & call.',
+    description: 'We stand by you after launch. Our technical team monitors your servers 24/7, fixes any urgent issues within minutes, and provides regular updates to keep your game running smoothly on new phone models.',
     iconName: 'LifeBuoy',
     deliverables: [
-      'Dedicated Engineering Response Channels (Slack / WhatsApp / Jira)',
-      '24/7 Server Alert Monitoring & Incident Response',
-      'Quarterly Performance & Engine Optimization Reviews',
-      'Regular Android/iOS OS Compatibility Upgrades'
+      'Direct WhatsApp & Phone Line to Senior Engineers',
+      '24/7 Continuous Server Health Monitoring',
+      'Urgent Issues Fixed within 15 Minutes',
+      'Regular Updates for New Android & iOS Versions'
     ],
-    technicalSpecs: ['Tier-1 Priority SLA (< 15 min response for critical)', 'Automated Error Reporting Sentry Integration'],
-    businessBenefits: ['Total peace of mind for your executive team', 'Continuous product improvements and longevity', 'Consistent player satisfaction']
+    technicalSpecs: ['Guaranteed < 15 Min Urgent Response', '24/7 Live Server Monitoring', 'Direct WhatsApp & Phone Channel', 'Free Security Updates'],
+    businessBenefits: ['Complete peace of mind for your business', 'Zero downtime means zero loss of revenue', 'Friendly technical experts always ready to help']
   }
 ];

@@ -56,47 +56,60 @@ const categoryMap: Record<string, CategoryFilter> = {
 };
 
 const categoryLabels: Record<CategoryFilter, { label: string; count: number; desc: string }> = {
-  all: { label: 'All Services', count: 10, desc: 'Complete end-to-end B2B game engineering suite' },
-  'game-dev': { label: '🎮 Full-Cycle Game Dev', count: 3, desc: 'Custom 2D/3D games, white-label engines & UI/UX motion' },
-  multiplayer: { label: '⚡ Multiplayer & Backend', count: 2, desc: 'Sub-50ms synchronized room engines & authoritative servers' },
-  api: { label: '🔌 APIs & Platform Tools', count: 2, desc: 'Wallet hooks, SSO auth, telemetry & real-time admin portal' },
-  devops: { label: '🚀 DevOps, QA & SLA', count: 3, desc: 'Cloud infrastructure, 100k CCU stress testing & 24/7 SLA' },
+  all: { label: 'All Services', count: 10, desc: 'Everything you need to build, launch, and run successful games' },
+  'game-dev': { label: '🎮 Game Creation & Design', count: 3, desc: 'Custom games, ready-to-launch titles & easy-to-use screens' },
+  multiplayer: { label: '⚡ Multiplayer & Servers', count: 2, desc: 'Fast online multiplayer rooms & crash-proof game servers' },
+  api: { label: '🔌 Easy Integration & Admin', count: 2, desc: 'Connect with existing apps, wallets & real-time control dashboard' },
+  devops: { label: '🚀 Testing, Cloud & Support', count: 3, desc: 'Heavy stress testing, automatic cloud scaling & 24/7 technical support' },
+};
+
+const friendlyCategoryNames: Record<string, string> = {
+  'srv-custom-game-dev': 'Game Dev',
+  'srv-multiplayer': 'Multiplayer',
+  'srv-ui-ux': 'Game Design',
+  'srv-backend-dev': 'Game Servers',
+  'srv-api-integration': 'Platform Connect',
+  'srv-admin-panel': 'Admin Control',
+  'srv-white-label': 'Ready Games',
+  'srv-qa-testing': 'Quality Check',
+  'srv-deployment': 'Cloud Setup',
+  'srv-maintenance': '24/7 Support',
 };
 
 const lifecycleSteps = [
   {
     step: '01',
-    title: 'GDD & Math Specs',
-    subtitle: 'Architecture & Modeling',
-    desc: 'We define the Game Design Document, RTP math models, RNG certification blueprints, and interactive UI/UX wireframes.',
+    title: 'Game Idea & Rules',
+    subtitle: 'Concept & Logic Design',
+    desc: 'We define the game concept, winning rules, fair scoring, and sketch simple, attractive screens for players.',
     icon: <Sparkles className="w-5 h-5 text-[#FF782D]" />,
   },
   {
     step: '02',
-    title: 'Engine & Client Build',
-    subtitle: 'WebGL & Canvas 2D/3D',
-    desc: 'High-performance rendering client built for 60 FPS on low-end mobile devices with asset bundles under 5MB.',
+    title: 'Graphics & App Coding',
+    subtitle: 'Visuals & Mobile App',
+    desc: 'We create colorful graphics, exciting animations, sound effects, and fast mobile code that runs smoothly on any phone.',
     icon: <Gamepad2 className="w-5 h-5 text-cyan-400" />,
   },
   {
     step: '03',
-    title: 'Authoritative Multiplayer',
-    subtitle: 'Deterministic State Netcode',
-    desc: 'WebSocket room servers with Protobuf encoding, anti-cheat validation, and sub-50ms global turn synchronization.',
+    title: 'Multiplayer & Anti-Cheat',
+    subtitle: 'Real-Time Online Rooms',
+    desc: 'We connect real-time online rooms so players can play against each other with zero lag and 100% fair play protection.',
     icon: <Users className="w-5 h-5 text-emerald-400" />,
   },
   {
     step: '04',
-    title: 'Wallet & API Integration',
-    subtitle: 'Seamless Platform Hooks',
-    desc: 'Zero-leak debit/credit wallet webhooks, SSO authentication, and real-time telemetry admin panel configured.',
+    title: 'Wallet & Login Connect',
+    subtitle: 'Plug into your Platform',
+    desc: 'We connect your user login, wallet deposit/withdrawal systems, and give you a master admin control dashboard.',
     icon: <Code2 className="w-5 h-5 text-purple-400" />,
   },
   {
     step: '05',
-    title: 'Load Testing & Go-Live',
-    subtitle: '100k CCU & 24/7 SLA',
-    desc: 'Exhaustive bot simulations, automated cluster autoscaling, and dedicated 24/7 SLA engineering support.',
+    title: 'Testing & Launch',
+    subtitle: '100% Bug-Free & 24/7 Live',
+    desc: 'We test with 100,000 virtual players to ensure zero crashes, launch your game, and provide 24/7 technical support.',
     icon: <ShieldCheck className="w-5 h-5 text-[#FF782D]" />,
   },
 ];
@@ -273,7 +286,6 @@ export const ServicesPage: React.FC = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredServices.map((service, idx) => {
                 const Icon = iconMap[service.iconName] || Gamepad2;
-                const category = categoryMap[service.id] || 'game-dev';
 
                 return (
                   <div
@@ -289,8 +301,8 @@ export const ServicesPage: React.FC = () => {
                         <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#FF782D] group-hover:bg-gradient-to-br group-hover:from-[#FF5B14] group-hover:to-[#FF782D] group-hover:text-white transition duration-300 shadow-md">
                           <Icon className="w-6 h-6" />
                         </div>
-                        <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-white/5 border border-white/10 text-gray-400">
-                          0{idx + 1} • {category}
+                        <span className="px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-white/5 border border-white/10 text-[#FF782D]">
+                          0{idx + 1} • {friendlyCategoryNames[service.id] || 'Game Dev'}
                         </span>
                       </div>
 
@@ -299,24 +311,24 @@ export const ServicesPage: React.FC = () => {
                         <h3 className="text-xl font-display font-bold text-white group-hover:text-[#FF782D] transition tracking-tight">
                           {service.title}
                         </h3>
-                        <p className="text-xs font-mono text-[#FF782D] mt-1 line-clamp-1">
+                        <p className="text-xs font-sans text-amber-400/90 mt-1 font-medium leading-normal">
                           {service.tagline}
                         </p>
                       </div>
 
                       {/* Description */}
-                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-gray-300 leading-relaxed font-sans">
                         {service.description}
                       </p>
 
                       {/* Deliverables */}
                       <div className="pt-3 border-t border-white/5 space-y-2">
                         <span className="text-[11px] font-mono text-gray-400 uppercase tracking-wider block font-semibold">
-                          Key Deliverables:
+                          What You Get:
                         </span>
                         <div className="space-y-1.5">
-                          {service.deliverables.slice(0, 3).map((item, dIdx) => (
-                            <div key={dIdx} className="flex items-start gap-2 text-xs text-gray-300">
+                          {service.deliverables.map((item, dIdx) => (
+                            <div key={dIdx} className="flex items-start gap-2 text-xs text-gray-200">
                               <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
                               <span>{item}</span>
                             </div>
@@ -324,13 +336,13 @@ export const ServicesPage: React.FC = () => {
                         </div>
                       </div>
 
-                      {/* Technical Specs Tags */}
+                      {/* Key Highlights / Feature Pills */}
                       {service.technicalSpecs && service.technicalSpecs.length > 0 && (
                         <div className="pt-2 flex flex-wrap gap-1.5">
-                          {service.technicalSpecs.slice(0, 3).map((spec, sIdx) => (
+                          {service.technicalSpecs.map((spec, sIdx) => (
                             <span
                               key={sIdx}
-                              className="px-2 py-0.5 rounded-md bg-white/5 border border-white/5 text-[10px] font-mono text-gray-300"
+                              className="px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-[10px] font-mono text-gray-300 group-hover:border-[#FF5B14]/30 transition"
                             >
                               {spec}
                             </span>
