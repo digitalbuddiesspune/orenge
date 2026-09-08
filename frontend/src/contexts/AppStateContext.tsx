@@ -242,17 +242,23 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     }
   });
 
-  useEffect(() => {
-    localStorage.setItem('oreng_home_assets', JSON.stringify(homeAssets));
-  }, [homeAssets]);
-
   const updateHomeAsset = (key: keyof HomeAssetsConfig, url: string) => {
-    setHomeAssets((prev) => ({ ...prev, [key]: url }));
+    setHomeAssets((prev) => {
+      const next = { ...prev, [key]: url };
+      localStorage.setItem('oreng_home_assets', JSON.stringify(next));
+      if (isAdminSessionActive()) {
+        adminApi.updateHomeAssets(next).catch((err) => console.warn('[settings] sync failed', err));
+      }
+      return next;
+    });
   };
 
   const resetHomeAssets = () => {
     setHomeAssets(defaultHomeAssets);
     localStorage.setItem('oreng_home_assets', JSON.stringify(defaultHomeAssets));
+    if (isAdminSessionActive()) {
+      adminApi.updateHomeAssets(defaultHomeAssets).catch((err) => console.warn('[settings] reset sync failed', err));
+    }
   };
 
   const [games, setGames] = useState<Game[]>(() => {
@@ -302,11 +308,18 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const refreshContent = async () => {
     setContentLoading(true);
     try {
-      const [apiGames, apiCases, apiPosts] = await Promise.all([
+      const [apiGames, apiCases, apiPosts, apiSettings] = await Promise.all([
         api.getGames() as Promise<Partial<Game>[]>,
         api.getCaseStudies() as Promise<Partial<CaseStudy>[]>,
         api.getBlogPosts() as Promise<Partial<BlogPost>[]>,
+        api.getHomeAssets().catch(() => null),
       ]);
+
+      if (apiSettings && typeof apiSettings === 'object') {
+        const merged = { ...defaultHomeAssets, ...apiSettings } as HomeAssetsConfig;
+        setHomeAssets(merged);
+        localStorage.setItem('oreng_home_assets', JSON.stringify(merged));
+      }
 
       if (apiGames && apiGames.length > 0) {
         const normalized = apiGames.map((g) => normalizeGame(g));

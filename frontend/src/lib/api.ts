@@ -82,4 +82,6 @@ export const api = {
   getBlogPosts: () => request<unknown[]>('/api/blog'),
 
   getBlogPost: (slug: string) => request(`/api/blog/${encodeURIComponent(slug)}`),
+
+  getHomeAssets: () => request<Record<string, string> | null>('/api/settings/home-assets'),
 };

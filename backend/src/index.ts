@@ -7,6 +7,7 @@ import { leadsRouter } from './routes/leads.js';
 import { gamesPublicRouter } from './routes/games.js';
 import { caseStudiesPublicRouter } from './routes/caseStudies.js';
 import { blogPublicRouter } from './routes/blog.js';
+import { settingsPublicRouter } from './routes/settings.js';
 import { adminRouter } from './routes/admin/index.js';
 import { uploadsDir } from './routes/admin/uploads.js';
 
@@ -52,6 +53,7 @@ async function main() {
   app.use('/api/games', gamesPublicRouter);
   app.use('/api/case-studies', caseStudiesPublicRouter);
   app.use('/api/blog', blogPublicRouter);
+  app.use('/api/settings', settingsPublicRouter);
   app.use('/api/admin', adminRouter);
 
   app.use((_req, res) => {

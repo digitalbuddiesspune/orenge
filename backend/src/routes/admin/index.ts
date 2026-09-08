@@ -7,6 +7,7 @@ import { adminGamesRouter } from './games.js';
 import { adminCaseStudiesRouter } from './caseStudies.js';
 import { adminBlogRouter } from './blog.js';
 import { adminUploadsRouter } from './uploads.js';
+import { adminSettingsRouter } from './settings.js';
 
 export const adminRouter = Router();
 
@@ -19,3 +20,4 @@ adminRouter.use('/games', adminGamesRouter);
 adminRouter.use('/case-studies', adminCaseStudiesRouter);
 adminRouter.use('/blog', adminBlogRouter);
 adminRouter.use('/uploads', adminUploadsRouter);
+adminRouter.use('/settings', adminSettingsRouter);

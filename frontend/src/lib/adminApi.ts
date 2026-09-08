@@ -144,6 +144,10 @@ export const adminApi = {
   deleteBlogPost: (id: string) =>
     adminRequest(`/api/admin/blog/${id}`, { method: 'DELETE' }),
 
+  getHomeAssets: () => adminRequest<Record<string, string> | null>('/api/admin/settings/home-assets'),
+  updateHomeAssets: (payload: Record<string, string>) =>
+    adminRequest('/api/admin/settings/home-assets', { method: 'PUT', body: JSON.stringify(payload) }),
+
   uploadImage: async (file: File, onProgress?: (percent: number) => void) => {
     try {
       // Primary: Direct Cloudinary CDN Upload
