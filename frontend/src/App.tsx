@@ -4,6 +4,7 @@ import { Navbar } from './components/common/Navbar';
 import { Footer } from './components/common/Footer';
 import { WhatsAppButton } from './components/common/WhatsAppButton';
 import { ConsultationModal } from './components/common/ConsultationModal';
+import { CursorGlowEffect } from './components/common/CursorGlowEffect';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -72,6 +73,7 @@ const AppContent: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#0B0D13] text-gray-100 overflow-x-hidden selection:bg-[#FF5B14]/30 selection:text-[#FF782D]">
+      <CursorGlowEffect />
       <Navbar />
       <main className="flex-grow overflow-x-hidden">
         {renderCurrentPage()}
