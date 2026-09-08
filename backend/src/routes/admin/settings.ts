@@ -43,3 +43,18 @@ adminSettingsRouter.put('/home-assets', async (req: Request, res: Response) => {
     });
   }
 });
+
+adminSettingsRouter.delete('/home-assets', async (_req: Request, res: Response) => {
+  try {
+    await SiteSetting.deleteOne({ key: 'homeAssets' });
+    res.json({
+      success: true,
+      message: 'Home assets reset to defaults',
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err instanceof Error ? err.message : 'Failed to reset settings',
+    });
+  }
+});

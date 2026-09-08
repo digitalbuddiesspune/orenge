@@ -147,6 +147,8 @@ export const adminApi = {
   getHomeAssets: () => adminRequest<Record<string, string> | null>('/api/admin/settings/home-assets'),
   updateHomeAssets: (payload: Record<string, string>) =>
     adminRequest('/api/admin/settings/home-assets', { method: 'PUT', body: JSON.stringify(payload) }),
+  resetHomeAssets: () =>
+    adminRequest('/api/admin/settings/home-assets', { method: 'DELETE' }),
 
   uploadImage: async (file: File, onProgress?: (percent: number) => void) => {
     try {

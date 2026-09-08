@@ -257,7 +257,9 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setHomeAssets(defaultHomeAssets);
     localStorage.setItem('oreng_home_assets', JSON.stringify(defaultHomeAssets));
     if (isAdminSessionActive()) {
-      adminApi.updateHomeAssets(defaultHomeAssets).catch((err) => console.warn('[settings] reset sync failed', err));
+      adminApi.resetHomeAssets().catch(() => {
+        adminApi.updateHomeAssets(defaultHomeAssets).catch((err) => console.warn('[settings] reset sync failed', err));
+      });
     }
   };
 
