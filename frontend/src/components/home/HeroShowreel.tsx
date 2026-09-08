@@ -71,20 +71,20 @@ export const HeroShowreel: React.FC = () => {
           </p>
 
           {/* Action CTAs */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 max-w-xs sm:max-w-none mx-auto">
             <button
               onClick={() => openConsultationModal('Custom Game Development')}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white font-bold text-base shadow-xl shadow-[#FF5B14]/30 hover:opacity-95 transition cursor-pointer flex items-center justify-center gap-2.5"
+              className="w-full sm:w-auto px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white font-bold text-sm sm:text-base shadow-lg shadow-[#FF5B14]/30 hover:opacity-95 transition cursor-pointer flex items-center justify-center gap-2"
             >
               <span>Discuss Your Project</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
             <button
               onClick={() => navigate('games')}
-              className="w-full sm:w-auto px-8 py-4 rounded-xl bg-black/55 border border-white/25 text-white font-semibold text-base hover:bg-black/70 transition cursor-pointer flex items-center justify-center gap-2 backdrop-blur-sm"
+              className="w-full sm:w-auto px-5 sm:px-8 py-2.5 sm:py-3.5 rounded-xl bg-black/55 border border-white/25 text-white font-semibold text-sm sm:text-base hover:bg-black/70 transition cursor-pointer flex items-center justify-center gap-2 backdrop-blur-sm"
             >
-              <Gamepad2 className="w-5 h-5 text-[#FF782D]" />
+              <Gamepad2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF782D]" />
               <span>Explore Our Games</span>
             </button>
           </div>
