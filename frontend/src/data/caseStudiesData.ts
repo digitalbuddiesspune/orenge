@@ -4,74 +4,74 @@ export const caseStudiesData: CaseStudy[] = [
   {
     id: 'case-study-ludo',
     slug: 'scaling-multiplayer-ludo-100k-ccu',
-    title: 'Architecting a 100k CCU Real-Time Ludo Platform',
-    clientName: 'Confidential Enterprise Gaming Platform',
-    clientIndustry: 'Real-Money & Casual Gaming Publisher (India & SEA)',
-    timeline: '6 Weeks Concept to Production',
-    challenge: 'The client’s legacy Node.js/Socket.IO game room servers were crashing at 12,000 concurrent connections during peak evening tournaments. Frequent disconnects and packet loss led to high customer refund disputes.',
-    requirement: 'Develop a high-throughput, low-latency Ludo multiplayer engine capable of sustaining 100,000+ simultaneous players with sub-50ms turn delivery and deterministic server-side state enforcement.',
-    solution: 'Oreng re-engineered the game room core into a lightweight compiled Go daemon using binary Protobuf payloads over WebSockets. Integrated Redis cluster for instantaneous room state locks and built an authoritative dice verification engine.',
+    title: 'High-Speed Multiplayer Ludo (100,000+ Live Players)',
+    clientName: 'Major Gaming Platform',
+    clientIndustry: 'Online Gaming Publisher (India & South-East Asia)',
+    timeline: '6 Weeks from Concept to Launch',
+    challenge: 'The client’s old game server kept crashing whenever more than 12,000 players played at the same time during evening tournaments. Frequent disconnections and lag caused player complaints and refund requests.',
+    requirement: 'Build a fast, stable multiplayer Ludo game that can easily support 100,000+ players playing together with zero lag, instant turns, and cheat-proof dice rolls.',
+    solution: 'Oreng rebuilt the game server using ultra-fast Go technology and lightweight real-time communication. We added automatic reconnection for players on slow 4G internet and verified server-side dice rolls.',
     results: [
-      { metric: '100k+ CCU', label: 'Sustained Peak Load' },
-      { metric: '< 38ms', label: 'Average Turn Latency' },
-      { metric: '99.99%', label: 'Uptime SLA' },
-      { metric: '84%', label: 'Dispute Reduction' }
+      { metric: '100k+', label: 'Simultaneous Players' },
+      { metric: '< 38ms', label: 'Super Fast Turn Speed' },
+      { metric: '99.99%', label: 'Game Uptime' },
+      { metric: '84%', label: 'Fewer Complaints' }
     ],
-    techStack: ['Go (Golang)', 'WebSockets (Protobuf)', 'Redis Cluster', 'PixiJS WebGL', 'AWS ECS Fargate', 'PostgreSQL'],
+    techStack: ['Go (Golang)', 'Fast WebSockets', 'Redis Memory Cache', 'PixiJS 60 FPS Canvas', 'AWS Cloud Scaling', 'PostgreSQL'],
     featuresDelivered: [
-      'Authoritative server-side turn validation eliminating cheat modifications',
-      'Instant 2-player & 4-player matchmaking queues with bot fallback buffers',
-      'Real-time admin room telemetry and disputed match replay inspector',
-      'Automated wallet debit/credit settlement via idempotent webhooks'
+      'Cheat-proof dice rolls calculated securely on the server',
+      'Instant 2-player & 4-player matching with smart bot backup',
+      'Live admin dashboard to monitor all active game rooms',
+      'Safe, instant wallet balance updates with zero double-charge errors'
     ],
     coverImage: 'https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=1200&q=80'
   },
   {
     id: 'case-study-card-rooms',
     slug: 'multi-table-card-engine-integration',
-    title: 'Turnkey Multi-Table Card & Rummy Engine Deployment',
+    title: 'Multi-Table Card & Rummy Suite (2.4M+ Monthly Games)',
     clientName: 'International Gaming Operator',
-    clientIndustry: 'Global Entertainment & Sports Gaming Operator',
-    timeline: '8 Weeks End-to-End',
-    challenge: 'The operator needed to expand their gaming catalog with card games tailored for international markets with multi-currency wallets, localized table themes, and certified RNG compliance.',
-    requirement: 'Deliver a custom card room suite with 2 to 6 player table lobbies, anti-collusion seat algorithms, smooth mobile gestures, and zero-leak API wallet integration.',
-    solution: 'Oreng delivered a customized White-Label Card Engine featuring responsive Canvas UI, cryptographic Fisher-Yates server shuffle, multi-language localization (EN, HI, AR, ES), and high-security HMAC API hooks.',
+    clientIndustry: 'Global Entertainment & Gaming Platform',
+    timeline: '8 Weeks Complete Delivery',
+    challenge: 'The operator wanted to add popular card games (Rummy, Teen Patti, Poker) to their existing app with multi-currency support, smooth mobile gestures, and certified 100% fair card shuffling.',
+    requirement: 'Create a complete card room suite for 2 to 6 players per table, anti-cheating player protection, smooth touch controls, and seamless 1-click wallet connection.',
+    solution: 'Oreng delivered a ready-to-launch Card Game Suite with silky smooth animations, certified random card shuffling, multi-language support (English, Hindi, Arabic, Spanish), and bank-grade secure wallet APIs.',
     results: [
-      { metric: '2.4M+', label: 'Monthly Active Games' },
-      { metric: '14 Days', label: 'API Integration Time' },
-      { metric: 'Zero', label: 'Financial Settlement Errors' },
-      { metric: '+42%', label: 'Player Session Length' }
+      { metric: '2.4M+', label: 'Monthly Games Played' },
+      { metric: '14 Days', label: 'Fast Platform Setup' },
+      { metric: 'Zero', label: 'Payment or Wallet Errors' },
+      { metric: '+42%', label: 'Longer Player Playtime' }
     ],
-    techStack: ['TypeScript', 'Node.js Cluster', 'Redis Pub/Sub', 'PixiJS', 'Docker', 'Cloudflare CDN'],
+    techStack: ['TypeScript', 'Node.js Cluster', 'Redis Pub/Sub', 'PixiJS Smooth Canvas', 'Docker', 'Cloudflare Protection'],
     featuresDelivered: [
-      'Multi-currency and points table configurations with automated rake calculation',
-      'Anti-collusion IP, GPS and betting behavior anomaly detectors',
-      'Dynamic table skinning and animated emotes system',
-      'Comprehensive back-office hand history auditing tools'
+      '2 to 6 player table lobbies with automatic entry-fee calculations',
+      'Smart anti-cheating system that blocks unfair group play',
+      'Customizable table themes, card designs, and player chat emotes',
+      'Detailed match history and round replay tools for platform owners'
     ],
     coverImage: 'https://images.unsplash.com/photo-1511193311914-0346f16efe90?auto=format&fit=crop&w=1200&q=80'
   },
   {
     id: 'case-study-multiplier-engine',
     slug: 'high-velocity-multiplier-curve-engine',
-    title: 'High-Velocity Multiplier Curve Engine with Sub-10ms Cashout',
-    clientName: 'Next-Gen Gaming Startup',
-    clientIndustry: 'Social Gaming & High-Velocity Entertainment Platform',
+    title: 'Instant-Cashout Multiplier & Crash Game (30,000+ Players)',
+    clientName: 'Fast-Growing Gaming Startup',
+    clientIndustry: 'Social & Instant-Win Gaming Platform',
     timeline: '5 Weeks Rapid Delivery',
-    challenge: 'Building a multiplayer multiplier curve game where thousands of simultaneous spectators must receive identical curve frames every 50ms and execute instant cashouts without server queuing lag.',
-    requirement: 'Sub-10ms cashout execution timestamping, SHA-256 verifiable fairness hash chains, and automated round scheduling.',
-    solution: 'Engineered a Rust-based ticker engine broadcasting binary broadcast ticks to 30,000+ simultaneous connected clients per room via Redis in-memory sorted sets.',
+    challenge: 'Building a multiplayer crash game where tens of thousands of players watch the multiplier rocket rise together and need their cashout button to respond in under 10 milliseconds without server lag.',
+    requirement: 'Instant button response under 10 milliseconds, 100% provably fair random multiplier curves, and automated fast rounds every 15 seconds.',
+    solution: 'Oreng created a high-speed game engine that broadcasts multiplier numbers to over 30,000 players at the exact same millisecond with certified random math outcomes.',
     results: [
-      { metric: '30,000+', label: 'Concurrent Spectators' },
-      { metric: '< 8ms', label: 'Cashout Processing' },
-      { metric: '100%', label: 'Verifiable Hash Audits' },
-      { metric: '3.8x', label: 'DAU Growth in Q1' }
+      { metric: '30,000+', label: 'Live Players Per Room' },
+      { metric: '< 8ms', label: 'Instant Cashout Time' },
+      { metric: '100%', label: 'Fair & Verified Results' },
+      { metric: '3.8x', label: 'Player Growth in 90 Days' }
     ],
-    techStack: ['Rust', 'WebSockets', 'Redis Sorted Sets', 'HTML5 Canvas', 'AWS EKS'],
+    techStack: ['Rust & Go', 'High-Speed WebSockets', 'Redis Memory Streams', 'HTML5 60 FPS Canvas', 'AWS Cloud'],
     featuresDelivered: [
-      'Verifiable SHA-256 provably fair round seed validator',
-      'Live dual-bet action panels with customizable auto-cashout presets',
-      'Real-time global bet ticker stream and dynamic leaderboard'
+      '100% fair and verifiable round outcomes that players can trust',
+      'Dual-bet panel with automatic cashout settings for players',
+      'Real-time live bets ticker showing other players’ wins instantly'
     ],
     coverImage: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80'
   }
