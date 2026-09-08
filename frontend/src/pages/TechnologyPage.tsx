@@ -35,7 +35,7 @@ const simpleFaqs = [
 ];
 
 export const TechnologyPage: React.FC = () => {
-  const { openConsultationModal, navigate } = useAppState();
+  const { openConsultationModal, navigate, homeAssets } = useAppState();
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
 
   return (
@@ -302,6 +302,35 @@ export const TechnologyPage: React.FC = () => {
                 <p className="text-xs text-gray-300 leading-relaxed">
                   HMAC encrypted webhooks ensure zero double-debiting or payout mismatch when connecting to your platform wallet.
                 </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Visual Architecture Diagram Showcase */}
+          <div className="rounded-3xl bg-[#0D111A] border-2 border-white/10 overflow-hidden shadow-2xl relative group">
+            <div className="relative aspect-[21/9] sm:aspect-[24/9] w-full bg-black/80 overflow-hidden">
+              <img
+                src={homeAssets.architectureDiagram || '/assets/multiplayer_games_bg.jpg'}
+                alt="System Architecture Diagram"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/assets/multiplayer_games_bg.jpg';
+                }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07090F] via-[#07090F]/50 to-transparent" />
+              <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-8 right-4 sm:right-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div className="max-w-xl">
+                  <span className="px-2.5 py-1 rounded-full bg-[#FF5B14]/20 border border-[#FF5B14]/40 text-[#FF782D] text-[10px] font-mono font-bold uppercase tracking-wider">
+                    SYSTEM BLUEPRINT &amp; NETCODE
+                  </span>
+                  <h4 className="text-lg sm:text-2xl font-display font-extrabold text-white mt-1.5 tracking-tight">
+                    Sub-45ms Real-Time Authoritative Architecture
+                  </h4>
+                  <p className="text-xs sm:text-sm text-gray-300 font-sans mt-1">
+                    High-throughput Go netcode, real-time WebSocket synchronization, and Redis room manager.
+                  </p>
+                </div>
               </div>
             </div>
           </div>

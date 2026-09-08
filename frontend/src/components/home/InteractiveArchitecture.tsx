@@ -13,7 +13,7 @@ import {
 import { useAppState } from '../../contexts/AppStateContext';
 
 export const InteractiveArchitecture: React.FC = () => {
-  const { navigate } = useAppState();
+  const { navigate, homeAssets } = useAppState();
   const [activeStep, setActiveStep] = useState<number>(2);
 
   useEffect(() => {
@@ -238,6 +238,43 @@ export const InteractiveArchitecture: React.FC = () => {
               </button>
             </div>
 
+          </div>
+        </div>
+
+        {/* Visual System Architecture Diagram Banner (Managed via Admin Panel) */}
+        <div className="mt-10 rounded-3xl bg-[#0D111A] border-2 border-white/10 overflow-hidden shadow-2xl relative group">
+          <div className="relative aspect-[21/9] sm:aspect-[24/9] w-full bg-black/80 overflow-hidden">
+            <img
+              src={homeAssets.architectureDiagram || '/assets/multiplayer_games_bg.jpg'}
+              alt="System Architecture Diagram"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = '/assets/multiplayer_games_bg.jpg';
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#07090F] via-[#07090F]/50 to-transparent" />
+            <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-8 right-4 sm:right-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+              <div className="max-w-xl">
+                <span className="px-2.5 py-1 rounded-full bg-[#FF5B14]/20 border border-[#FF5B14]/40 text-[#FF782D] text-[10px] font-mono font-bold uppercase tracking-wider">
+                  SYSTEM BLUEPRINT &amp; NETCODE
+                </span>
+                <h4 className="text-lg sm:text-2xl font-display font-extrabold text-white mt-1.5 tracking-tight">
+                  Sub-45ms Real-Time Authoritative Architecture
+                </h4>
+                <p className="text-xs sm:text-sm text-gray-300 font-sans mt-1">
+                  High-throughput Go netcode, real-time WebSocket synchronization, and Redis room manager.
+                </p>
+              </div>
+
+              <button
+                onClick={() => navigate('technology')}
+                className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-[#FF5B14]/30 hover:opacity-95 transition cursor-pointer shrink-0"
+              >
+                <span>Explore Tech Stack</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
           </div>
         </div>
 
