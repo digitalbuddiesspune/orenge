@@ -9,9 +9,11 @@ import { TargetIndustries } from '../components/home/TargetIndustries';
 import { TrustCapabilityStrip } from '../components/home/TrustCapabilityStrip';
 import { BgAccentImage, HOME_BG_IMAGES } from '../components/home/SectionBgImage';
 import { HomeInterconnect } from '../components/home/HomeInterconnect';
+import { useAppState } from '../contexts/AppStateContext';
 
 export const HomePage: React.FC = () => {
   const pageRef = useRef<HTMLDivElement>(null);
+  const { homeAssets } = useAppState();
 
   return (
     <>
@@ -40,22 +42,22 @@ export const HomePage: React.FC = () => {
 
         <div aria-hidden="true" className="pointer-events-none select-none overflow-hidden absolute inset-0 z-0">
           <BgAccentImage
-            src={HOME_BG_IMAGES.ludo}
+            src={homeAssets.ludoBg || HOME_BG_IMAGES.ludo}
             className="top-[55vh] -right-24 w-[520px] h-[300px] hidden md:block"
             opacity={0.07}
           />
           <BgAccentImage
-            src={HOME_BG_IMAGES.poker}
+            src={homeAssets.pokerBg || HOME_BG_IMAGES.poker}
             className="top-[95vh] -left-20 w-[480px] h-[280px] hidden md:block rotate-[5deg]"
             opacity={0.06}
           />
           <BgAccentImage
-            src={HOME_BG_IMAGES.roulette}
+            src={homeAssets.rouletteBg || HOME_BG_IMAGES.roulette}
             className="top-[145vh] right-0 w-[440px] h-[260px] hidden lg:block rotate-[-3deg]"
             opacity={0.06}
           />
           <BgAccentImage
-            src={HOME_BG_IMAGES.casino}
+            src={homeAssets.casinoBg || HOME_BG_IMAGES.casino}
             className="top-[200vh] -left-16 w-[500px] h-[290px] hidden lg:block"
             opacity={0.05}
           />

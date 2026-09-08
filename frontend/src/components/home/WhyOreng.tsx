@@ -49,15 +49,6 @@ const pillars = [
   },
 ];
 
-const pillarBgs = [
-  HOME_BG_IMAGES.casino,
-  HOME_BG_IMAGES.poker,
-  HOME_BG_IMAGES.multiplayer,
-  HOME_BG_IMAGES.hero,
-  HOME_BG_IMAGES.ludo,
-  HOME_BG_IMAGES.roulette,
-];
-
 const vibeStyles = {
   brand: {
     panel: 'neon-casino-border border-[#FF5B14]/25',
@@ -94,11 +85,20 @@ const vibeStyles = {
 const AUTO_INTERVAL_MS = 5500;
 
 export const WhyOreng: React.FC = () => {
-  const { openConsultationModal } = useAppState();
+  const { openConsultationModal, homeAssets } = useAppState();
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const [animKey, setAnimKey] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const pillarBgs = [
+    homeAssets.casinoBg || HOME_BG_IMAGES.casino,
+    homeAssets.pokerBg || HOME_BG_IMAGES.poker,
+    homeAssets.multiplayerBg || HOME_BG_IMAGES.multiplayer,
+    homeAssets.heroBg || HOME_BG_IMAGES.hero,
+    homeAssets.ludoBg || HOME_BG_IMAGES.ludo,
+    homeAssets.rouletteBg || HOME_BG_IMAGES.roulette,
+  ];
 
   const current = pillars[active];
   const style = vibeStyles[current.vibe];
