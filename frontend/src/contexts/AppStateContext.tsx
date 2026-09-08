@@ -67,35 +67,103 @@ function normalizeBlogPost(raw: Partial<BlogPost> & { id?: string; publishedDate
 }
 
 export type HomeAssetsConfig = {
+  // 1. Hero Section
   heroBg: string;
   heroTrailerPoster: string;
+  heroLudo: string;
+  heroCards: string;
+  heroRoulette: string;
+  heroCrash: string;
   ludoBg: string;
   pokerBg: string;
   rouletteBg: string;
   casinoBg: string;
   multiplayerBg: string;
-  architectureDiagram: string;
+
+  // 2. What We Build Section
+  whatWeBuild1: string;
+  whatWeBuild2: string;
+  whatWeBuild3: string;
+  whatWeBuildBackdrop: string;
   whatWeBuildBg1: string;
   whatWeBuildBg2: string;
   whatWeBuildBg3: string;
+
+  // 3. Featured Games / Portfolio
+  portfolioLudo: string;
+  portfolioCards: string;
+  portfolioRoulette: string;
+  portfolioCrash: string;
+  portfolioBackdrop: string;
+
+  // 4. Why Oreng Pillars
+  whyOrengBg1: string;
+  whyOrengBg2: string;
+  whyOrengBg3: string;
+  whyOrengBg4: string;
+  whyOrengBg5: string;
+  whyOrengBg6: string;
+
+  // 5. System Architecture
+  architectureDiagram: string;
+
+  // 6. Studio BTS & Floating Decors
   studioBts1: string;
   studioBts2: string;
+  floatingDecor1: string;
+  floatingDecor2: string;
+  floatingDecor3: string;
+  floatingDecor4: string;
 };
 
 export const defaultHomeAssets: HomeAssetsConfig = {
+  // 1. Hero Section
   heroBg: '/assets/heroBg.png',
   heroTrailerPoster: '/assets/ludo_3d_gameplay.jpg',
+  heroLudo: '/assets/ludo_3d_gameplay.jpg',
+  heroCards: '/assets/poker_table_gameplay.jpg',
+  heroRoulette: '/assets/roulette_engine.jpg',
+  heroCrash: '/assets/multiplayer_games_bg.jpg',
   ludoBg: '/assets/ludo_3d_gameplay.jpg',
   pokerBg: '/assets/poker_table_gameplay.jpg',
   rouletteBg: '/assets/roulette_engine.jpg',
   casinoBg: '/assets/casino_studio_hero.jpg',
   multiplayerBg: '/assets/multiplayer_games_bg.jpg',
-  architectureDiagram: '/assets/multiplayer_games_bg.jpg',
+
+  // 2. What We Build Section
+  whatWeBuild1: '/assets/multiplayer_games_bg.jpg',
+  whatWeBuild2: '/assets/poker_table_gameplay.jpg',
+  whatWeBuild3: '/assets/ludo_3d_gameplay.jpg',
+  whatWeBuildBackdrop: '/assets/multiplayer_games_bg.jpg',
   whatWeBuildBg1: '/assets/poker_table_gameplay.jpg',
   whatWeBuildBg2: '/assets/ludo_3d_gameplay.jpg',
   whatWeBuildBg3: '/assets/roulette_engine.jpg',
+
+  // 3. Featured Games / Portfolio
+  portfolioLudo: '/assets/ludo_3d_gameplay.jpg',
+  portfolioCards: '/assets/poker_table_gameplay.jpg',
+  portfolioRoulette: '/assets/roulette_engine.jpg',
+  portfolioCrash: '/assets/multiplayer_games_bg.jpg',
+  portfolioBackdrop: '/assets/roulette_engine.jpg',
+
+  // 4. Why Oreng Pillars
+  whyOrengBg1: '/assets/casino_studio_hero.jpg',
+  whyOrengBg2: '/assets/poker_table_gameplay.jpg',
+  whyOrengBg3: '/assets/multiplayer_games_bg.jpg',
+  whyOrengBg4: '/assets/heroBg.png',
+  whyOrengBg5: '/assets/ludo_3d_gameplay.jpg',
+  whyOrengBg6: '/assets/roulette_engine.jpg',
+
+  // 5. System Architecture
+  architectureDiagram: '/assets/multiplayer_games_bg.jpg',
+
+  // 6. Studio BTS & Floating Decors
   studioBts1: '/assets/casino_studio_hero.jpg',
   studioBts2: '/assets/ludo_3d_gameplay.jpg',
+  floatingDecor1: '/assets/ludo_3d_gameplay.jpg',
+  floatingDecor2: '/assets/poker_table_gameplay.jpg',
+  floatingDecor3: '/assets/roulette_engine.jpg',
+  floatingDecor4: '/assets/casino_studio_hero.jpg',
 };
 
 interface AppStateContextType {

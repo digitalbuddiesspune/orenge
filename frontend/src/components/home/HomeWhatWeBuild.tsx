@@ -10,33 +10,33 @@ export const HomeWhatWeBuild: React.FC = () => {
     {
       title: 'Multiplayer Games',
       description: 'Online games like Ludo where friends play together in real time. Private rooms, quick matching, and smooth gameplay.',
-      image: homeAssets.multiplayerBg || '/assets/multiplayer_games_bg.jpg',
+      image: homeAssets.whatWeBuild1 || homeAssets.multiplayerBg || '/assets/multiplayer_games_bg.jpg',
       tags: ['Online Play', 'Private Rooms', '2–4 Players'],
     },
     {
       title: 'Card & Table Games',
       description: 'Poker, Rummy, and Teen Patti games with beautiful tables, fair card dealing, and easy setup for your platform.',
-      image: homeAssets.pokerBg || '/assets/poker_table_gameplay.jpg',
+      image: homeAssets.whatWeBuild2 || homeAssets.pokerBg || '/assets/poker_table_gameplay.jpg',
       tags: ['Multiple Tables', 'Fair Cards', '2–6 Players'],
     },
     {
       title: 'Board & Casual Games',
       description: 'Fun board games and simple mobile games with your brand name, colours, and custom rules.',
-      image: homeAssets.ludoBg || '/assets/ludo_3d_gameplay.jpg',
+      image: homeAssets.whatWeBuild3 || homeAssets.ludoBg || '/assets/ludo_3d_gameplay.jpg',
       tags: ['Your Branding', 'Custom Rules', 'Mobile + Web'],
     },
   ];
 
   return (
     <section className="py-20 sm:py-28 relative overflow-hidden">
-      <SectionBgImage src={homeAssets.multiplayerBg || HOME_BG_IMAGES.multiplayer} opacity={0.14} overlay="right" />
+      <SectionBgImage src={homeAssets.whatWeBuildBackdrop || homeAssets.multiplayerBg || HOME_BG_IMAGES.multiplayer} opacity={0.14} overlay="right" />
       <BgAccentImage
-        src={homeAssets.pokerBg || HOME_BG_IMAGES.poker}
+        src={homeAssets.whatWeBuildBg1 || homeAssets.pokerBg || HOME_BG_IMAGES.poker}
         className="top-10 -left-16 w-72 h-48 hidden lg:block rotate-[-8deg]"
         opacity={0.1}
       />
       <BgAccentImage
-        src={homeAssets.ludoBg || HOME_BG_IMAGES.ludo}
+        src={homeAssets.whatWeBuildBg2 || homeAssets.ludoBg || HOME_BG_IMAGES.ludo}
         className="bottom-16 -right-12 w-80 h-52 hidden lg:block rotate-[6deg]"
         opacity={0.1}
       />

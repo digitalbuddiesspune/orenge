@@ -11,82 +11,341 @@ import {
   Eye,
   Camera,
   CheckCircle2,
+  Layers,
+  Sparkles,
+  Gamepad2,
+  Shield,
+  Cpu,
+  Tv,
 } from 'lucide-react';
+
+type SectionCategory = 'all' | 'hero' | 'build' | 'portfolio' | 'why' | 'architecture' | 'decor';
 
 type SlotMeta = {
   key: keyof HomeAssetsConfig;
   title: string;
+  category: SectionCategory;
   section: string;
   recommendedSize: string;
+  description: string;
 };
 
-const SLOT_CONFIGS: Partial<Record<keyof HomeAssetsConfig, SlotMeta>> = {
+const SLOT_CONFIGS: Record<keyof HomeAssetsConfig, SlotMeta> = {
+  // 1. Hero Showreel
   heroBg: {
     key: 'heroBg',
+    category: 'hero',
     title: 'Hero Main Studio Background',
-    section: '1. Top Hero Section',
+    section: 'Section 1: Hero Showreel',
     recommendedSize: '1672 × 941 px',
+    description: 'The master top background image seen on the homepage hero banner.',
   },
   ludoBg: {
     key: 'ludoBg',
-    title: '3D Ludo Game Board Banner',
-    section: '2. Showcase Game: Ludo',
+    category: 'hero',
+    title: 'Showreel: 3D Ludo Game Board',
+    section: 'Section 1: Hero Showreel (Tab 1)',
     recommendedSize: '1280 × 800 px',
+    description: '3D Ludo board visual artwork displayed in the interactive showreel tab.',
   },
   pokerBg: {
     key: 'pokerBg',
-    title: 'Cards & Rummy Game Table',
-    section: '2. Showcase Game: Cards & Poker',
+    category: 'hero',
+    title: 'Showreel: Cards & Rummy Game Table',
+    section: 'Section 1: Hero Showreel (Tab 2)',
     recommendedSize: '1280 × 800 px',
+    description: 'Multi-table Poker and Rummy felt artwork displayed in the showreel.',
   },
   rouletteBg: {
     key: 'rouletteBg',
-    title: 'Live European Roulette Wheel',
-    section: '2. Showcase Game: Roulette',
+    category: 'hero',
+    title: 'Showreel: Live European Roulette Wheel',
+    section: 'Section 1: Hero Showreel (Tab 3)',
     recommendedSize: '1280 × 800 px',
+    description: '3D Roulette spinning wheel artwork in the interactive showreel.',
   },
   multiplayerBg: {
     key: 'multiplayerBg',
-    title: 'Crash Rocket & Multiplayer Engine',
-    section: '2. Showcase Game: Multiplayer Crash',
+    category: 'hero',
+    title: 'Showreel: Crash Multiplier / Rocket Engine',
+    section: 'Section 1: Hero Showreel (Tab 4)',
     recommendedSize: '1280 × 800 px',
+    description: 'Multiplier chart and high-speed multiplayer engine graphic in the showreel.',
   },
-  casinoBg: {
-    key: 'casinoBg',
-    title: 'Casino Studio & Platform Backdrop',
-    section: '3. What We Build: Studio Backdrop',
+  heroTrailerPoster: {
+    key: 'heroTrailerPoster',
+    category: 'hero',
+    title: 'Hero Video / Trailer Poster',
+    section: 'Section 1: Hero Showreel',
+    recommendedSize: '1280 × 720 px',
+    description: 'Preview poster thumbnail for the video showreel player.',
+  },
+  heroLudo: {
+    key: 'heroLudo',
+    category: 'hero',
+    title: 'Hero Ludo Showcase Asset',
+    section: 'Section 1: Hero Showreel',
+    recommendedSize: '1280 × 800 px',
+    description: 'Dedicated 3D Ludo graphic used in flagship hero showcases.',
+  },
+  heroCards: {
+    key: 'heroCards',
+    category: 'hero',
+    title: 'Hero Cards Showcase Asset',
+    section: 'Section 1: Hero Showreel',
+    recommendedSize: '1280 × 800 px',
+    description: 'Dedicated Card deck visual asset for hero showcases.',
+  },
+  heroRoulette: {
+    key: 'heroRoulette',
+    category: 'hero',
+    title: 'Hero Roulette Showcase Asset',
+    section: 'Section 1: Hero Showreel',
+    recommendedSize: '1280 × 800 px',
+    description: 'Dedicated Roulette wheel visual asset for hero showcases.',
+  },
+  heroCrash: {
+    key: 'heroCrash',
+    category: 'hero',
+    title: 'Hero Crash Rocket Showcase Asset',
+    section: 'Section 1: Hero Showreel',
+    recommendedSize: '1280 × 800 px',
+    description: 'Dedicated Crash multiplier visual asset for hero showcases.',
+  },
+
+  // 2. What We Build
+  whatWeBuild1: {
+    key: 'whatWeBuild1',
+    category: 'build',
+    title: 'What We Build: Multiplayer Games Banner',
+    section: 'Section 2: What We Build (Card 1)',
+    recommendedSize: '1280 × 800 px',
+    description: 'Image for the Multiplayer Games card (e.g. Ludo, room engine).',
+  },
+  whatWeBuild2: {
+    key: 'whatWeBuild2',
+    category: 'build',
+    title: 'What We Build: Card & Table Games Banner',
+    section: 'Section 2: What We Build (Card 2)',
+    recommendedSize: '1280 × 800 px',
+    description: 'Image for Card & Table Games card (e.g. Poker, Rummy tables).',
+  },
+  whatWeBuild3: {
+    key: 'whatWeBuild3',
+    category: 'build',
+    title: 'What We Build: Board & Casual Games Banner',
+    section: 'Section 2: What We Build (Card 3)',
+    recommendedSize: '1280 × 800 px',
+    description: 'Image for Board & Casual Games card (e.g. 3D Ludo, Dice).',
+  },
+  whatWeBuildBackdrop: {
+    key: 'whatWeBuildBackdrop',
+    category: 'build',
+    title: 'What We Build: Section Ambient Backdrop',
+    section: 'Section 2: What We Build (Backdrop)',
     recommendedSize: '1920 × 1080 px',
+    description: 'Ambient background glow and texture behind the What We Build section.',
   },
   whatWeBuildBg1: {
     key: 'whatWeBuildBg1',
-    title: 'Custom Games 3D Artwork',
-    section: '3. What We Build: Custom 3D Art',
-    recommendedSize: '800 × 600 px',
+    category: 'build',
+    title: 'What We Build: Left Floating Accent',
+    section: 'Section 2: What We Build (Accents)',
+    recommendedSize: '600 × 400 px',
+    description: 'Floating background card decor on the top left side of the section.',
   },
+  whatWeBuildBg2: {
+    key: 'whatWeBuildBg2',
+    category: 'build',
+    title: 'What We Build: Right Floating Accent',
+    section: 'Section 2: What We Build (Accents)',
+    recommendedSize: '600 × 400 px',
+    description: 'Floating background board decor on the bottom right side of the section.',
+  },
+  whatWeBuildBg3: {
+    key: 'whatWeBuildBg3',
+    category: 'build',
+    title: 'What We Build: Turnkey Platform Visual',
+    section: 'Section 2: What We Build (Accents)',
+    recommendedSize: '800 × 600 px',
+    description: 'Turnkey gaming platform visual texture.',
+  },
+  casinoBg: {
+    key: 'casinoBg',
+    category: 'build',
+    title: 'Casino Studio & Platform Master Backdrop',
+    section: 'Section 2: What We Build',
+    recommendedSize: '1920 × 1080 px',
+    description: 'High-res casino studio platform background image.',
+  },
+
+  // 3. Featured Games / Portfolio
+  portfolioBackdrop: {
+    key: 'portfolioBackdrop',
+    category: 'portfolio',
+    title: 'Portfolio Section Ambient Backdrop',
+    section: 'Section 3: Portfolio Bento Grid',
+    recommendedSize: '1920 × 1080 px',
+    description: 'Atmospheric ambient backdrop texture behind the portfolio bento grid.',
+  },
+  portfolioLudo: {
+    key: 'portfolioLudo',
+    category: 'portfolio',
+    title: 'Portfolio Left Accent Decor (Ludo)',
+    section: 'Section 3: Portfolio Bento Grid',
+    recommendedSize: '600 × 400 px',
+    description: 'Left floating backdrop decor behind the portfolio grid.',
+  },
+  portfolioCards: {
+    key: 'portfolioCards',
+    category: 'portfolio',
+    title: 'Portfolio Right Accent Decor (Cards)',
+    section: 'Section 3: Portfolio Bento Grid',
+    recommendedSize: '600 × 400 px',
+    description: 'Right floating backdrop decor behind the portfolio grid.',
+  },
+  portfolioRoulette: {
+    key: 'portfolioRoulette',
+    category: 'portfolio',
+    title: 'Portfolio Roulette Showcase',
+    section: 'Section 3: Portfolio Bento Grid',
+    recommendedSize: '1280 × 800 px',
+    description: 'Roulette showcase artwork for portfolio tile fallback.',
+  },
+  portfolioCrash: {
+    key: 'portfolioCrash',
+    category: 'portfolio',
+    title: 'Portfolio Crash Multiplier Showcase',
+    section: 'Section 3: Portfolio Bento Grid',
+    recommendedSize: '1280 × 800 px',
+    description: 'Crash multiplier showcase artwork for portfolio tile fallback.',
+  },
+
+  // 4. Why Oreng (6 Pillars)
+  whyOrengBg1: {
+    key: 'whyOrengBg1',
+    category: 'why',
+    title: 'Pillar 1: Built for Your Brand',
+    section: 'Section 4: Why Oreng (Pillar 01)',
+    recommendedSize: '1920 × 1080 px',
+    description: 'Background artwork displayed when Pillar 1 "Built for Your Brand" is active.',
+  },
+  whyOrengBg2: {
+    key: 'whyOrengBg2',
+    category: 'why',
+    title: 'Pillar 2: Custom Game Rules',
+    section: 'Section 4: Why Oreng (Pillar 02)',
+    recommendedSize: '1920 × 1080 px',
+    description: 'Background artwork displayed when Pillar 2 "Custom Game Rules" is active.',
+  },
+  whyOrengBg3: {
+    key: 'whyOrengBg3',
+    category: 'why',
+    title: 'Pillar 3: Play Together Online',
+    section: 'Section 4: Why Oreng (Pillar 03)',
+    recommendedSize: '1920 × 1080 px',
+    description: 'Background artwork displayed when Pillar 3 "Play Together Online" is active.',
+  },
+  whyOrengBg4: {
+    key: 'whyOrengBg4',
+    category: 'why',
+    title: 'Pillar 4: Easy to Connect',
+    section: 'Section 4: Why Oreng (Pillar 04)',
+    recommendedSize: '1920 × 1080 px',
+    description: 'Background artwork displayed when Pillar 4 "Easy to Connect" is active.',
+  },
+  whyOrengBg5: {
+    key: 'whyOrengBg5',
+    category: 'why',
+    title: 'Pillar 5: Handles Many Players',
+    section: 'Section 4: Why Oreng (Pillar 05)',
+    recommendedSize: '1920 × 1080 px',
+    description: 'Background artwork displayed when Pillar 5 "Handles Many Players" is active.',
+  },
+  whyOrengBg6: {
+    key: 'whyOrengBg6',
+    category: 'why',
+    title: 'Pillar 6: Complete Partner',
+    section: 'Section 4: Why Oreng (Pillar 06)',
+    recommendedSize: '1920 × 1080 px',
+    description: 'Background artwork displayed when Pillar 6 "Complete Partner" is active.',
+  },
+
+  // 5. System Architecture
   architectureDiagram: {
     key: 'architectureDiagram',
-    title: 'System Infrastructure Visual',
-    section: '4. System Architecture Section',
+    category: 'architecture',
+    title: 'System Netcode & Architecture Blueprint Banner',
+    section: 'Section 5: System Architecture',
     recommendedSize: '1600 × 900 px',
+    description: 'Wide banner illustrating authoritative netcode, WebSockets, Go loops, and Redis room manager.',
+  },
+
+  // 6. Floating Global Decors & Studio BTS
+  floatingDecor1: {
+    key: 'floatingDecor1',
+    category: 'decor',
+    title: 'Global Floating Decor 1 (Top-Right)',
+    section: 'Section 6: Ambient Global Background Decors',
+    recommendedSize: '600 × 400 px',
+    description: 'Floating ambient backdrop image positioned on the top-right of the homepage.',
+  },
+  floatingDecor2: {
+    key: 'floatingDecor2',
+    category: 'decor',
+    title: 'Global Floating Decor 2 (Mid-Left)',
+    section: 'Section 6: Ambient Global Background Decors',
+    recommendedSize: '600 × 400 px',
+    description: 'Floating ambient backdrop image positioned on the mid-left of the homepage.',
+  },
+  floatingDecor3: {
+    key: 'floatingDecor3',
+    category: 'decor',
+    title: 'Global Floating Decor 3 (Mid-Right)',
+    section: 'Section 6: Ambient Global Background Decors',
+    recommendedSize: '600 × 400 px',
+    description: 'Floating ambient backdrop image positioned on the mid-right of the homepage.',
+  },
+  floatingDecor4: {
+    key: 'floatingDecor4',
+    category: 'decor',
+    title: 'Global Floating Decor 4 (Bottom-Left)',
+    section: 'Section 6: Ambient Global Background Decors',
+    recommendedSize: '600 × 400 px',
+    description: 'Floating ambient backdrop image positioned on the lower-left of the homepage.',
   },
   studioBts1: {
     key: 'studioBts1',
-    title: 'Studio Tech Lab & 3D Math',
-    section: '5. Studio Behind The Scenes (Lab)',
+    category: 'decor',
+    title: 'Studio Tech Lab & 3D Modeling Photo',
+    section: 'Section 6: Studio Technology Behind The Scenes',
     recommendedSize: '1000 × 625 px',
+    description: 'Photo showing 3D game art modeling and mathematical simulation lab.',
   },
   studioBts2: {
     key: 'studioBts2',
-    title: 'Server Load & Telemetry Test',
-    section: '5. Studio Behind The Scenes (Stress Test)',
+    category: 'decor',
+    title: '100k CCU Server Stress Testing Telemetry',
+    section: 'Section 6: Studio Technology Behind The Scenes',
     recommendedSize: '1000 × 625 px',
+    description: 'Photo showing live server concurrency and telemetry dashboards.',
   },
 };
+
+const CATEGORIES: { id: SectionCategory; label: string; icon: React.FC<{ className?: string }> }[] = [
+  { id: 'all', label: 'All Sections (All Images)', icon: Layers },
+  { id: 'hero', label: '1. Hero Showreel', icon: Sparkles },
+  { id: 'build', label: '2. What We Build', icon: Gamepad2 },
+  { id: 'portfolio', label: '3. Portfolio / Bento', icon: Tv },
+  { id: 'why', label: '4. Why Oreng (6 Pillars)', icon: Shield },
+  { id: 'architecture', label: '5. System Architecture', icon: Cpu },
+  { id: 'decor', label: '6. Global Decors & Studio', icon: Camera },
+];
 
 export const HomeVisualEditor: React.FC = () => {
   const { homeAssets, updateHomeAsset, resetHomeAssets, navigate } = useAppState();
 
-  const [activeTab, setActiveTab] = useState<'ludo' | 'cards' | 'roulette' | 'multiplier'>('ludo');
+  const [selectedCategory, setSelectedCategory] = useState<SectionCategory>('all');
   const [editingKey, setEditingKey] = useState<keyof HomeAssetsConfig | null>(null);
   const [tempUrl, setTempUrl] = useState<string>('');
   const [uploading, setUploading] = useState<boolean>(false);
@@ -106,7 +365,7 @@ export const HomeVisualEditor: React.FC = () => {
   const saveCurrentSlot = () => {
     if (!editingKey) return;
     updateHomeAsset(editingKey, tempUrl);
-    showToast(`"${SLOT_CONFIGS[editingKey]?.title || editingKey}" updated live!`);
+    showToast(`"${SLOT_CONFIGS[editingKey]?.title || editingKey}" saved live!`);
     setEditingKey(null);
   };
 
@@ -118,7 +377,7 @@ export const HomeVisualEditor: React.FC = () => {
       const result = await adminApi.uploadImage(file, (pct: number) => setUploadProgress(pct));
       setTempUrl(result.url);
       updateHomeAsset(editingKey, result.url);
-      showToast(`Image uploaded to Cloudinary and saved!`);
+      showToast(`Image uploaded and applied live!`);
     } catch (err) {
       alert(err instanceof Error ? err.message : 'Upload failed. Please try again.');
     } finally {
@@ -128,6 +387,12 @@ export const HomeVisualEditor: React.FC = () => {
   };
 
   const currentMeta = editingKey ? SLOT_CONFIGS[editingKey] : null;
+
+  // Filter slot entries by category
+  const allSlotEntries = Object.entries(SLOT_CONFIGS) as [keyof HomeAssetsConfig, SlotMeta][];
+  const filteredSlots = selectedCategory === 'all'
+    ? allSlotEntries
+    : allSlotEntries.filter(([, meta]) => meta.category === selectedCategory);
 
   return (
     <div className="space-y-8 pb-20 relative">
@@ -140,11 +405,14 @@ export const HomeVisualEditor: React.FC = () => {
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="text-base sm:text-lg font-display font-extrabold text-white">
-                Interactive Visual Landing Page
+                All Homepage Images Admin Control
               </h3>
+              <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[11px] font-bold border border-emerald-500/30">
+                Live Cloudinary CDN
+              </span>
             </div>
             <p className="text-xs text-gray-300">
-              Scroll down the exact homepage below. Click the glowing <strong className="text-[#FF782D]">"✏️ Change Image"</strong> button on any photo to replace it.
+              Change any image across all 6 sections of the home screen. Upload directly or paste custom links.
             </p>
           </div>
         </div>
@@ -162,7 +430,7 @@ export const HomeVisualEditor: React.FC = () => {
           <button
             type="button"
             onClick={() => {
-              if (confirm('Reset all landing page images back to original studio artwork?')) {
+              if (confirm('Reset all homepage images back to original studio artwork?')) {
                 resetHomeAssets();
                 showToast('All images reset to original defaults!');
               }
@@ -175,9 +443,32 @@ export const HomeVisualEditor: React.FC = () => {
         </div>
       </div>
 
+      {/* Category Tabs Filter */}
+      <div className="flex items-center gap-2 overflow-x-auto no-scrollbar p-1.5 bg-[#0F121C] border border-white/10 rounded-2xl">
+        {CATEGORIES.map((cat) => {
+          const Icon = cat.icon;
+          const isActive = selectedCategory === cat.id;
+          return (
+            <button
+              key={cat.id}
+              type="button"
+              onClick={() => setSelectedCategory(cat.id)}
+              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-2 shrink-0 cursor-pointer ${
+                isActive
+                  ? 'bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white shadow-lg shadow-[#FF5B14]/30'
+                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Icon className="w-3.5 h-3.5" />
+              <span>{cat.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 p-4 rounded-2xl bg-emerald-500/90 text-white text-sm font-bold flex items-center gap-3 shadow-2xl animate-fade-in backdrop-blur-md border border-white/20">
+        <div className="fixed bottom-6 right-6 z-50 p-4 rounded-2xl bg-emerald-500/95 text-white text-sm font-bold flex items-center gap-3 shadow-2xl animate-fade-in backdrop-blur-md border border-white/20">
           <CheckCircle2 className="w-5 h-5 shrink-0" />
           <span>{toastMessage}</span>
           <button type="button" onClick={() => setToastMessage(null)} className="ml-2 hover:opacity-80">
@@ -186,385 +477,110 @@ export const HomeVisualEditor: React.FC = () => {
         </div>
       )}
 
-      {/* ========================================================================= */}
-      {/* 1. EXACT SECTION 1: HERO SECTION & SHOWREEL */}
-      {/* ========================================================================= */}
-      <div className="rounded-3xl border-2 border-white/10 overflow-hidden bg-[#0B0D13] relative shadow-2xl">
-        {/* Section Label */}
-        <div className="bg-[#161B28] px-6 py-3 border-b border-white/10 flex items-center justify-between">
-          <span className="text-xs font-bold text-[#FF782D] flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#FF5B14]" />
-            SECTION 1: HERO SHOWREEL &amp; MAIN BANNER
-          </span>
-          <span className="text-xs font-mono text-gray-400">Homepage Top</span>
-        </div>
+      {/* Grid of All Configurable Slots */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredSlots.map(([key, meta]) => {
+          const currentUrl = homeAssets[key] || defaultHomeAssets[key];
+          const isModified = Boolean(homeAssets[key] && homeAssets[key] !== defaultHomeAssets[key]);
 
-        {/* Hero Background with Edit Overlay */}
-        <div className="relative min-h-[480px] sm:min-h-[580px] flex flex-col justify-between p-6 sm:p-10 overflow-hidden">
-          {/* Main Hero Image */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src={homeAssets.heroBg || defaultHomeAssets.heroBg}
-              alt="Hero Backdrop"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-[#0B0D13]" />
+          return (
+            <div
+              key={key}
+              className="bg-[#121622] border-2 border-white/10 hover:border-[#FF5B14]/70 rounded-3xl overflow-hidden p-5 flex flex-col justify-between space-y-4 shadow-xl group transition-all duration-300"
+            >
+              <div className="space-y-3">
+                {/* Header Badge */}
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-[#FF5B14]/15 border border-[#FF5B14]/30 text-[#FF782D]">
+                    {meta.section}
+                  </span>
+                  {isModified ? (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                      Customized
+                    </span>
+                  ) : (
+                    <span className="text-[10px] text-gray-500 font-mono">Default</span>
+                  )}
+                </div>
 
-            {/* Direct Edit Button for Hero Background */}
-            <div className="absolute top-4 right-4 z-20">
-              <button
-                type="button"
-                onClick={() => openEditor('heroBg')}
-                className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border-2 border-white/30 animate-pulse hover:animate-none"
-              >
-                <Camera className="w-4 h-4" />
-                <span>✏️ Change Hero Background (1672×941)</span>
-              </button>
-            </div>
-          </div>
+                {/* Title & Desc */}
+                <div>
+                  <h4 className="font-display font-bold text-white text-base group-hover:text-[#FF782D] transition-colors line-clamp-1">
+                    {meta.title}
+                  </h4>
+                  <p className="text-xs text-gray-400 line-clamp-2 mt-1">
+                    {meta.description}
+                  </p>
+                </div>
 
-          {/* Hero Headlines */}
-          <div className="relative z-10 text-center max-w-3xl mx-auto space-y-4 pt-8">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/60 border border-white/20 text-xs text-white">
-              <span className="w-2 h-2 rounded-full bg-[#FF5B14] animate-ping" />
-              <span>We Build Custom Games for Platforms &amp; Businesses</span>
-            </div>
+                {/* Image Preview Box */}
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-black/80 border border-white/10 shadow-inner group/img">
+                  <img
+                    src={currentUrl}
+                    alt={meta.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-105"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = defaultHomeAssets[key] || '/assets/ludo_3d_gameplay.jpg';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center gap-2 p-3">
+                    <button
+                      type="button"
+                      onClick={() => openEditor(key)}
+                      className="px-4 py-2 rounded-xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs flex items-center gap-1.5 shadow-xl cursor-pointer"
+                    >
+                      <Camera className="w-3.5 h-3.5" />
+                      <span>Replace</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => void downloadImage(currentUrl, `${key}.png`)}
+                      className="p-2 rounded-xl bg-black/70 hover:bg-black text-white text-xs flex items-center justify-center cursor-pointer border border-white/20"
+                      title="Download Image"
+                    >
+                      <Download className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
 
-            <h1 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight leading-tight">
-              We Build Custom Games for Gaming Platforms
-            </h1>
-            <p className="text-sm text-gray-300 max-w-xl mx-auto">
-              Real-time multiplayer engines, deterministic math, and sub-45ms responsive gameplay.
-            </p>
-          </div>
+                  <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/75 backdrop-blur-sm text-[10px] font-mono text-gray-300 border border-white/10">
+                    {meta.recommendedSize}
+                  </span>
+                </div>
+              </div>
 
-          {/* Interactive Showreel Card */}
-          <div className="relative z-10 max-w-4xl mx-auto w-full mt-6 bg-[#121622]/95 border-2 border-white/20 rounded-3xl overflow-hidden shadow-2xl">
-            {/* Showreel Tabs */}
-            <div className="flex border-b border-white/10 bg-black/40 p-2 gap-2 overflow-x-auto no-scrollbar">
-              {[
-                { id: 'ludo', label: '🎲 3D Ludo Game', key: 'ludoBg' as const },
-                { id: 'cards', label: '🃏 Cards & Rummy Table', key: 'pokerBg' as const },
-                { id: 'roulette', label: '🎡 Live Roulette Wheel', key: 'rouletteBg' as const },
-                { id: 'multiplier', label: '🚀 Crash Multiplier', key: 'multiplayerBg' as const },
-              ].map((tab) => (
+              {/* Action Buttons */}
+              <div className="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
                 <button
-                  key={tab.id}
                   type="button"
-                  onClick={() => setActiveTab(tab.id as any)}
-                  className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer shrink-0 ${
-                    activeTab === tab.id
-                      ? 'bg-[#FF5B14] text-white shadow-md'
-                      : 'bg-white/5 text-gray-400 hover:text-white'
-                  }`}
+                  onClick={() => openEditor(key)}
+                  className="flex-1 py-2.5 px-3 rounded-xl bg-gradient-to-r from-[#FF5B14] to-[#FF782D] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-[#FF5B14]/25 hover:opacity-95 transition cursor-pointer"
                 >
-                  {tab.label}
+                  <Camera className="w-3.5 h-3.5" />
+                  <span>✏️ Change Image</span>
                 </button>
-              ))}
+
+                {isModified && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      updateHomeAsset(key, defaultHomeAssets[key]);
+                      showToast(`Reset "${meta.title}" to default!`);
+                    }}
+                    className="p-2.5 rounded-xl bg-white/5 hover:bg-red-500/20 text-gray-400 hover:text-red-400 border border-white/10 transition cursor-pointer"
+                    title="Reset to default image"
+                  >
+                    <RotateCcw className="w-3.5 h-3.5" />
+                  </button>
+                )}
+              </div>
             </div>
-
-            {/* Showreel Active Viewport */}
-            <div className="p-6">
-              {activeTab === 'ludo' && (
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                  <div className="md:col-span-6 relative rounded-2xl overflow-hidden border-2 border-[#FF5B14] shadow-2xl group">
-                    <img
-                      src={homeAssets.ludoBg || defaultHomeAssets.ludoBg}
-                      alt="Ludo"
-                      className="w-full aspect-[16/10] object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4">
-                      <button
-                        type="button"
-                        onClick={() => openEditor('ludoBg')}
-                        className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-                      >
-                        <Camera className="w-4 h-4" />
-                        <span>✏️ Change Ludo Image</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="md:col-span-6 space-y-2 text-left">
-                    <span className="px-2.5 py-0.5 rounded bg-[#FF5B14]/15 text-[#FF782D] text-xs font-bold">ONLINE MULTIPLAYER</span>
-                    <h3 className="text-2xl font-display font-bold text-white">3D Ludo Game Board</h3>
-                    <p className="text-xs text-gray-300 leading-relaxed">
-                      Custom 3D dice physics, private rooms, turn timers, and auto-play offline protection.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'cards' && (
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                  <div className="md:col-span-6 relative rounded-2xl overflow-hidden border-2 border-[#FF5B14] shadow-2xl group">
-                    <img
-                      src={homeAssets.pokerBg || defaultHomeAssets.pokerBg}
-                      alt="Cards & Rummy"
-                      className="w-full aspect-[16/10] object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4">
-                      <button
-                        type="button"
-                        onClick={() => openEditor('pokerBg')}
-                        className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-                      >
-                        <Camera className="w-4 h-4" />
-                        <span>✏️ Change Cards &amp; Rummy Image</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="md:col-span-6 space-y-2 text-left">
-                    <span className="px-2.5 py-0.5 rounded bg-emerald-500/15 text-emerald-400 text-xs font-bold">FAIR &amp; TRUSTED</span>
-                    <h3 className="text-2xl font-display font-bold text-white">Card &amp; Rummy Games</h3>
-                    <p className="text-xs text-gray-300 leading-relaxed">
-                      Certified RNG shuffling, multi-table seat layouts, and smooth card dealing animations.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'roulette' && (
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                  <div className="md:col-span-6 relative rounded-2xl overflow-hidden border-2 border-[#FF5B14] shadow-2xl group">
-                    <img
-                      src={homeAssets.rouletteBg || defaultHomeAssets.rouletteBg}
-                      alt="Roulette"
-                      className="w-full aspect-[16/10] object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4">
-                      <button
-                        type="button"
-                        onClick={() => openEditor('rouletteBg')}
-                        className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-                      >
-                        <Camera className="w-4 h-4" />
-                        <span>✏️ Change Roulette Image</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="md:col-span-6 space-y-2 text-left">
-                    <span className="px-2.5 py-0.5 rounded bg-amber-500/15 text-amber-400 text-xs font-bold">LIVE CASINO</span>
-                    <h3 className="text-2xl font-display font-bold text-white">Live Roulette Engine</h3>
-                    <p className="text-xs text-gray-300 leading-relaxed">
-                      European 37-pocket roulette wheel with real-time wheel ball physics and synchronized betting grid.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {activeTab === 'multiplier' && (
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-                  <div className="md:col-span-6 relative rounded-2xl overflow-hidden border-2 border-[#FF5B14] shadow-2xl group">
-                    <img
-                      src={homeAssets.multiplayerBg || defaultHomeAssets.multiplayerBg}
-                      alt="Crash Multiplier"
-                      className="w-full aspect-[16/10] object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-4">
-                      <button
-                        type="button"
-                        onClick={() => openEditor('multiplayerBg')}
-                        className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-                      >
-                        <Camera className="w-4 h-4" />
-                        <span>✏️ Change Crash Multiplier Image</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="md:col-span-6 space-y-2 text-left">
-                    <span className="px-2.5 py-0.5 rounded bg-purple-500/15 text-purple-400 text-xs font-bold">HIGH SPEED MULTIPLAYER</span>
-                    <h3 className="text-2xl font-display font-bold text-white">Crash Rocket Engine</h3>
-                    <p className="text-xs text-gray-300 leading-relaxed">
-                      Exponential multiplier curve with sub-20ms instant auto cash-out.
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
 
       {/* ========================================================================= */}
-      {/* 2. EXACT SECTION 2: WHAT WE BUILD & PLATFORM */}
-      {/* ========================================================================= */}
-      <div className="rounded-3xl border-2 border-white/10 overflow-hidden bg-[#0D111A] p-6 sm:p-8 space-y-6 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-          <div>
-            <span className="text-xs font-bold text-[#FF782D] uppercase tracking-wider">
-              SECTION 2: WHAT WE BUILD
-            </span>
-            <h3 className="text-2xl font-display font-extrabold text-white mt-0.5">
-              Turnkey Gaming Platforms &amp; Custom 3D Art
-            </h3>
-          </div>
-          <span className="text-xs text-gray-400 font-mono">Homepage Section 2</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Card 1: Casino Studio Backdrop */}
-          <div className="bg-[#141926] border-2 border-white/10 hover:border-[#FF5B14] rounded-2xl overflow-hidden p-5 space-y-4 relative group">
-            <div className="relative aspect-video rounded-xl overflow-hidden bg-black/60 border border-white/10">
-              <img
-                src={homeAssets.casinoBg || defaultHomeAssets.casinoBg}
-                alt="Casino Studio"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-3">
-                <button
-                  type="button"
-                  onClick={() => openEditor('casinoBg')}
-                  className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-                >
-                  <Camera className="w-4 h-4" />
-                  <span>✏️ Change Casino Backdrop (1920×1080)</span>
-                </button>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-bold text-white text-base">Casino Platform &amp; Live Studio Backdrop</h4>
-              <p className="text-xs text-gray-400 mt-1">Used as the primary backdrop texture behind turnkey platform offerings.</p>
-            </div>
-          </div>
-
-          {/* Card 2: Custom 3D Artwork */}
-          <div className="bg-[#141926] border-2 border-white/10 hover:border-[#FF5B14] rounded-2xl overflow-hidden p-5 space-y-4 relative group">
-            <div className="relative aspect-video rounded-xl overflow-hidden bg-black/60 border border-white/10">
-              <img
-                src={homeAssets.whatWeBuildBg1 || defaultHomeAssets.whatWeBuildBg1}
-                alt="Custom 3D Art"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-3">
-                <button
-                  type="button"
-                  onClick={() => openEditor('whatWeBuildBg1')}
-                  className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-                >
-                  <Camera className="w-4 h-4" />
-                  <span>✏️ Change Custom 3D Art (800×600)</span>
-                </button>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-bold text-white text-base">Custom Games 3D Artwork</h4>
-              <p className="text-xs text-gray-400 mt-1">Showcase artwork for customized bespoke client game builds.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 3. EXACT SECTION 3: SYSTEM ARCHITECTURE */}
-      {/* ========================================================================= */}
-      <div className="rounded-3xl border-2 border-white/10 overflow-hidden bg-[#0D111A] p-6 sm:p-8 space-y-6 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-          <div>
-            <span className="text-xs font-bold text-[#FF782D] uppercase tracking-wider">
-              SECTION 3: SYSTEM ARCHITECTURE
-            </span>
-            <h3 className="text-2xl font-display font-extrabold text-white mt-0.5">
-              Sub-45ms Real-Time Authoritative Architecture
-            </h3>
-          </div>
-          <span className="text-xs text-gray-400 font-mono">Homepage Section 3</span>
-        </div>
-
-        <div className="bg-[#141926] border-2 border-white/10 hover:border-[#FF5B14] rounded-2xl overflow-hidden p-5 space-y-4 relative group">
-          <div className="relative aspect-[21/9] rounded-xl overflow-hidden bg-black/60 border border-white/10">
-            <img
-              src={homeAssets.architectureDiagram || defaultHomeAssets.architectureDiagram}
-              alt="Architecture Diagram"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-3">
-              <button
-                type="button"
-                onClick={() => openEditor('architectureDiagram')}
-                className="px-5 py-3 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-              >
-                <Camera className="w-4 h-4" />
-                <span>✏️ Change Architecture Diagram (1600×900)</span>
-              </button>
-            </div>
-          </div>
-          <p className="text-xs text-gray-300">
-            This diagram showcases the authoritative Go game loop, WebSocket synchronization, and Redis room manager.
-          </p>
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 4. EXACT SECTION 4: STUDIO BEHIND THE SCENES */}
-      {/* ========================================================================= */}
-      <div className="rounded-3xl border-2 border-white/10 overflow-hidden bg-[#0D111A] p-6 sm:p-8 space-y-6 shadow-2xl">
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-          <div>
-            <span className="text-xs font-bold text-[#FF782D] uppercase tracking-wider">
-              SECTION 4: STUDIO BEHIND THE SCENES
-            </span>
-            <h3 className="text-2xl font-display font-extrabold text-white mt-0.5">
-              Live Game Technology Lab &amp; Stress Testing
-            </h3>
-          </div>
-          <span className="text-xs text-gray-400 font-mono">Homepage Section 4</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* BTS 1: Studio Math & Rigging */}
-          <div className="bg-[#141926] border-2 border-white/10 hover:border-[#FF5B14] rounded-2xl overflow-hidden p-5 space-y-4 relative group">
-            <div className="relative aspect-video rounded-xl overflow-hidden bg-black/60 border border-white/10">
-              <img
-                src={homeAssets.studioBts1 || defaultHomeAssets.studioBts1}
-                alt="Studio BTS 1"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-3">
-                <button
-                  type="button"
-                  onClick={() => openEditor('studioBts1')}
-                  className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-                >
-                  <Camera className="w-4 h-4" />
-                  <span>✏️ Change Studio Lab Photo (1000×625)</span>
-                </button>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-bold text-white text-base">Game Math &amp; 3D Modeling Lab</h4>
-              <p className="text-xs text-gray-400 mt-1">Showcases certified mathematical modeling and 3D character design.</p>
-            </div>
-          </div>
-
-          {/* BTS 2: Server Telemetry */}
-          <div className="bg-[#141926] border-2 border-white/10 hover:border-[#FF5B14] rounded-2xl overflow-hidden p-5 space-y-4 relative group">
-            <div className="relative aspect-video rounded-xl overflow-hidden bg-black/60 border border-white/10">
-              <img
-                src={homeAssets.studioBts2 || defaultHomeAssets.studioBts2}
-                alt="Studio BTS 2"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-3">
-                <button
-                  type="button"
-                  onClick={() => openEditor('studioBts2')}
-                  className="px-4 py-2.5 rounded-2xl bg-[#FF5B14] hover:bg-[#FF782D] text-white font-extrabold text-xs sm:text-sm flex items-center gap-2 shadow-2xl cursor-pointer border border-white/30"
-                >
-                  <Camera className="w-4 h-4" />
-                  <span>✏️ Change Server Testing Photo (1000×625)</span>
-                </button>
-              </div>
-            </div>
-            <div>
-              <h4 className="font-bold text-white text-base">100k CCU Server Stress Testing</h4>
-              <p className="text-xs text-gray-400 mt-1">Live telemetry and real-time multiplayer server load testing.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ========================================================================= */}
-      {/* 5. POPUP MODAL FOR DIRECT FILE UPLOAD */}
+      {/* POPUP MODAL FOR DIRECT FILE UPLOAD OR URL REPLACEMENT */}
       {/* ========================================================================= */}
       {editingKey && currentMeta && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">

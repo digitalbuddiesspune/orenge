@@ -6,7 +6,7 @@ import { CardSuitPattern, GamingDecor, SuitStrip } from './GamingDecor';
 import { BgAccentImage, HOME_BG_IMAGES, SectionBgImage } from './SectionBgImage';
 
 export const FeaturedGames: React.FC = () => {
-  const { games, navigate, openConsultationModal } = useAppState();
+  const { games, navigate, openConsultationModal, homeAssets } = useAppState();
   const featured = games.filter((g) => g.isFeatured);
   const hero = featured[0];
   const rest = featured.slice(1, 4);
@@ -15,14 +15,14 @@ export const FeaturedGames: React.FC = () => {
 
   return (
     <section className="py-20 sm:py-28 border-t border-white/[0.06] relative z-10 overflow-hidden">
-      <SectionBgImage src={HOME_BG_IMAGES.roulette} opacity={0.12} overlay="bottom" />
+      <SectionBgImage src={homeAssets.portfolioBackdrop || HOME_BG_IMAGES.roulette} opacity={0.12} overlay="bottom" />
       <BgAccentImage
-        src={HOME_BG_IMAGES.ludo}
+        src={homeAssets.portfolioLudo || HOME_BG_IMAGES.ludo}
         className="top-20 -left-20 w-96 h-56 hidden xl:block"
         opacity={0.08}
       />
       <BgAccentImage
-        src={HOME_BG_IMAGES.poker}
+        src={homeAssets.portfolioCards || HOME_BG_IMAGES.poker}
         className="bottom-10 -right-16 w-80 h-48 hidden xl:block rotate-[-4deg]"
         opacity={0.09}
       />

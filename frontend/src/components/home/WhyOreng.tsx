@@ -92,12 +92,12 @@ export const WhyOreng: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   const pillarBgs = [
-    homeAssets.casinoBg || HOME_BG_IMAGES.casino,
-    homeAssets.pokerBg || HOME_BG_IMAGES.poker,
-    homeAssets.multiplayerBg || HOME_BG_IMAGES.multiplayer,
-    homeAssets.heroBg || HOME_BG_IMAGES.hero,
-    homeAssets.ludoBg || HOME_BG_IMAGES.ludo,
-    homeAssets.rouletteBg || HOME_BG_IMAGES.roulette,
+    homeAssets.whyOrengBg1 || homeAssets.casinoBg || HOME_BG_IMAGES.casino,
+    homeAssets.whyOrengBg2 || homeAssets.pokerBg || HOME_BG_IMAGES.poker,
+    homeAssets.whyOrengBg3 || homeAssets.multiplayerBg || HOME_BG_IMAGES.multiplayer,
+    homeAssets.whyOrengBg4 || homeAssets.heroBg || HOME_BG_IMAGES.hero,
+    homeAssets.whyOrengBg5 || homeAssets.ludoBg || HOME_BG_IMAGES.ludo,
+    homeAssets.whyOrengBg6 || homeAssets.rouletteBg || HOME_BG_IMAGES.roulette,
   ];
 
   const current = pillars[active];

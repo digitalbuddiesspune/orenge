@@ -42,22 +42,22 @@ export const HomePage: React.FC = () => {
 
         <div aria-hidden="true" className="pointer-events-none select-none overflow-hidden absolute inset-0 z-0">
           <BgAccentImage
-            src={homeAssets.ludoBg || HOME_BG_IMAGES.ludo}
+            src={homeAssets.floatingDecor1 || homeAssets.ludoBg || HOME_BG_IMAGES.ludo}
             className="top-[55vh] -right-24 w-[520px] h-[300px] hidden md:block"
             opacity={0.07}
           />
           <BgAccentImage
-            src={homeAssets.pokerBg || HOME_BG_IMAGES.poker}
+            src={homeAssets.floatingDecor2 || homeAssets.pokerBg || HOME_BG_IMAGES.poker}
             className="top-[95vh] -left-20 w-[480px] h-[280px] hidden md:block rotate-[5deg]"
             opacity={0.06}
           />
           <BgAccentImage
-            src={homeAssets.rouletteBg || HOME_BG_IMAGES.roulette}
+            src={homeAssets.floatingDecor3 || homeAssets.rouletteBg || HOME_BG_IMAGES.roulette}
             className="top-[145vh] right-0 w-[440px] h-[260px] hidden lg:block rotate-[-3deg]"
             opacity={0.06}
           />
           <BgAccentImage
-            src={homeAssets.casinoBg || HOME_BG_IMAGES.casino}
+            src={homeAssets.floatingDecor4 || homeAssets.casinoBg || HOME_BG_IMAGES.casino}
             className="top-[200vh] -left-16 w-[500px] h-[290px] hidden lg:block"
             opacity={0.05}
           />
